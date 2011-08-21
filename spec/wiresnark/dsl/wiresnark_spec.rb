@@ -3,7 +3,6 @@ require_relative '../../spec_helper'
 module Wiresnark describe DSL::Wiresnark do
 
   describe '#send_to, #send_to_blocks' do
-
     it 'stores the passed interface and block for future execution' do
       env = Object.new.extend DSL::Wiresnark
       block_a = -> { count 7 }
@@ -15,7 +14,6 @@ module Wiresnark describe DSL::Wiresnark do
         { interface: 'iface_b', block: block_b },
       ]
     end
-
   end
 
 end end
