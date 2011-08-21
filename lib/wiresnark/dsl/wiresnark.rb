@@ -1,11 +1,11 @@
 module Wiresnark module DSL module Wiresnark
 
-  def send_to interface, &block
-    send_to_blocks << { interface: interface, block: block }
+  def generator &block
+    generator_blocks << block
   end
 
-  def send_to_blocks
-    @send_to_blocks ||= []
+  def generator_blocks
+    @generator_blocks ||= []
   end
 
 end end end
