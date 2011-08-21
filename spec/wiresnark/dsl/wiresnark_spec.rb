@@ -13,4 +13,15 @@ module Wiresnark describe DSL::Wiresnark do
     end
   end
 
+  describe '#monitor, #monitor_blocks' do
+    it 'stores the passed block for future execution' do
+      env = Object.new.extend DSL::Wiresnark
+      block_a = -> { interface 'iface_a' }
+      block_b = -> { interface 'iface_b' }
+      env.monitor &block_a
+      env.monitor &block_b
+      env.monitor_blocks.must_equal [block_a, block_b]
+    end
+  end
+
 end end

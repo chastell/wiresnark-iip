@@ -8,4 +8,12 @@ module Wiresnark module DSL module Wiresnark
     @generator_blocks ||= []
   end
 
+  def monitor &block
+    monitor_blocks << block
+  end
+
+  def monitor_blocks
+    @monitor_blocks ||= []
+  end
+
 end end end
