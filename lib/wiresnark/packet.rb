@@ -12,6 +12,11 @@ module Wiresnark class Packet
     @bin[0..5] = mac.split(':').pack 'H2H2H2H2H2H2'
   end
 
+  def payload= payload
+    payload += "\x00" * (46 - payload.size) if payload.size < 46
+    @bin[14..-1] = payload
+  end
+
   def source_mac= mac
     @bin[6..11] = mac.split(':').pack 'H2H2H2H2H2H2'
   end

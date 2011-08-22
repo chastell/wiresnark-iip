@@ -22,6 +22,27 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#payload=' do
+    it 'sets its payload' do
+      packet = Packet.new
+      packet.payload = 'foo'
+      packet.to_bin[14..-1].must_equal 'foo' + "\x00" * 43
+    end
+
+    it 'sets the payload even when its bigger than 46 bytes' do
+      packet = Packet.new
+      packet.payload = 'foo' * 16
+      packet.to_bin[14..-1].must_equal 'foo' * 16
+    end
+
+    it 'truncates the previous payload if needed' do
+      packet = Packet.new
+      packet.payload = 'foo' * 20
+      packet.payload = 'bar' * 16
+      packet.to_bin[14..-1].must_equal 'bar' * 16
+    end
+  end
+
   describe '#source_mac=' do
     it 'sets its source MAC' do
       packet = Packet.new
