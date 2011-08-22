@@ -1,5 +1,6 @@
 module Wiresnark module DSL end end
 
+require_relative 'wiresnark/dsl/common'
 require_relative 'wiresnark/dsl/generator'
 require_relative 'wiresnark/dsl/monitor'
 require_relative 'wiresnark/dsl/wiresnark'

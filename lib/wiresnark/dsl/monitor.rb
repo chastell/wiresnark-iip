@@ -1,7 +1,5 @@
 module Wiresnark module DSL::Monitor
 
-  def interface interface = nil
-    interface.nil? ? @interface : @interface = interface
-  end
+  include DSL::Common
 
 end end
