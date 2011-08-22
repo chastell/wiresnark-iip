@@ -60,6 +60,15 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#source_mac' do
+    it 'reads its source MAC' do
+      packet = Packet.new
+      packet.source_mac.must_equal '00:00:00:00:00:00'
+      packet.source_mac = '11:22:33:44:55:66'
+      packet.source_mac.must_equal '11:22:33:44:55:66'
+    end
+  end
+
   describe '#source_mac=' do
     it 'sets its source MAC' do
       packet = Packet.new
