@@ -11,4 +11,13 @@ module Wiresnark describe DSL::Common do
     end
   end
 
+  describe '#verbose, #verbose?' do
+    it 'turns on and reads the verbose flag' do
+      env = Object.new.extend DSL::Common
+      refute env.verbose?
+      env.verbose
+      assert env.verbose?
+    end
+  end
+
 end end
