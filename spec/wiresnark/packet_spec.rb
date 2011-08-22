@@ -52,11 +52,11 @@ module Wiresnark describe Packet do
       packet.to_bin[14..-1].must_equal 'foo' * 16
     end
 
-    it 'truncates the previous payload if needed' do
+    it 'truncates the previous payload and pads the new one if needed' do
       packet = Packet.new
-      packet.payload = 'foo' * 20
-      packet.payload = 'bar' * 16
-      packet.to_bin[14..-1].must_equal 'bar' * 16
+      packet.payload = 'foo' * 100
+      packet.payload = 'bar' * 10
+      packet.to_bin[14..-1].must_equal 'bar' * 10 + "\x00" * 16
     end
   end
 
