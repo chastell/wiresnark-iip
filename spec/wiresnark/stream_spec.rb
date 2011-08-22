@@ -9,6 +9,10 @@ module Wiresnark describe Stream do
       Stream.for 'lo', pcap
       pcap.verify
     end
+
+    it 'returns an empty Array if no lib specified' do
+      Stream.for('lo').must_equal []
+    end
   end
 
 end end
