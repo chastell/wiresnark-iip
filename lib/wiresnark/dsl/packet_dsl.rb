@@ -1,4 +1,4 @@
-module Wiresnark module DSL::Packet
+module Wiresnark module DSL::PacketDSL
 
   def destination_mac mac = nil
     mac.nil? ? @destination_mac : @destination_mac = mac

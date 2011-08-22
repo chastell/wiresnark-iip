@@ -1,4 +1,4 @@
-module Wiresnark module DSL::Wiresnark
+module Wiresnark module DSL::WiresnarkDSL
 
   def generator &block
     generator_blocks << block

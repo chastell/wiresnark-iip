@@ -1,6 +1,6 @@
-module Wiresnark module DSL::Generator
+module Wiresnark module DSL::GeneratorDSL
 
-  include DSL::Common
+  include DSL::CommonDSL
 
   def count count = nil
     count.nil? ? @count : @count = count

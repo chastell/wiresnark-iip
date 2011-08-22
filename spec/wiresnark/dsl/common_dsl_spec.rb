@@ -1,9 +1,9 @@
 require_relative '../../spec_helper'
 
-module Wiresnark describe DSL::Common do
+module Wiresnark describe DSL::CommonDSL do
 
   before do
-    @env = Object.new.extend DSL::Common
+    @env = Object.new.extend DSL::CommonDSL
   end
 
   describe '#interface' do

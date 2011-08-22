@@ -1,10 +1,10 @@
 require_relative '../../spec_helper'
 
-module Wiresnark describe DSL::Packet do
+module Wiresnark describe DSL::PacketDSL do
 
   describe '#destination_mac, #payload, #source_mac, #type' do
     it 'stores the passed packet param' do
-      env = Object.new.extend DSL::Packet
+      env = Object.new.extend DSL::PacketDSL
 
       env.destination_mac.must_be_nil
       env.payload.must_be_nil
