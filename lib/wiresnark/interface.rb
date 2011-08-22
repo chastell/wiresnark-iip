@@ -9,4 +9,10 @@ module Wiresnark class Interface
     @stream = pcap.open_live(name, 0xffff, true, 0) if pcap.respond_to? :open_live
   end
 
+  def inject packets
+    packets.each do |packet|
+      @stream.inject packet.to_bin
+    end
+  end
+
 end end
