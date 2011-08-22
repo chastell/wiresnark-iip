@@ -11,26 +11,13 @@ module Wiresnark describe Interface do
       Interface.new('foo').must_be_same_as Interface.new 'foo'
       Interface.new('foo').wont_be_same_as Interface.new 'bar'
     end
-
-    it 'hooks to the inteface using the provided interface' do
-      pcap = MiniTest::Mock.new
-      pcap.expect :open_live, nil, ['lo', 0xffff, true, 0]
-      Interface.new 'lo', pcap
-      pcap.verify
-    end
   end
 
   describe '#inject' do
     it 'injects the given packets to the interface' do
-      pcap   = MiniTest::Mock.new
       stream = MiniTest::Mock.new
-
-      pcap.expect   :open_live, stream, ['lo', 0xffff, true, 0]
-      stream.expect :inject,    nil,    [Packet.new.to_bin]
-
-      Interface.new('lo', pcap).inject [Packet.new]
-
-      pcap.verify
+      stream.expect :inject, nil, [Packet.new.to_bin]
+      Interface.new('lo').inject [Packet.new], stream
       stream.verify
     end
   end

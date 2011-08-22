@@ -1,17 +1,17 @@
 module Wiresnark class Interface
 
-  def self.new name, pcap = nil
+  def self.new name
     @interfaces       ||= {}
     @interfaces[name] ||= super
   end
 
-  def initialize name, pcap
-    @stream = pcap.open_live(name, 0xffff, true, 0) if pcap.respond_to? :open_live
+  def initialize name
+    @stream = Stream.for name
   end
 
-  def inject packets
+  def inject packets, stream
     packets.each do |packet|
-      @stream.inject packet.to_bin
+      stream.inject packet.to_bin
     end
   end
 
