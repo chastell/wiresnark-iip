@@ -22,6 +22,15 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#destination_mac' do
+    it 'reads its destination MAC' do
+      packet = Packet.new
+      packet.destination_mac.must_equal '00:00:00:00:00:00'
+      packet.destination_mac = 'aa:bb:cc:dd:ee:ff'
+      packet.destination_mac.must_equal 'aa:bb:cc:dd:ee:ff'
+    end
+  end
+
   describe '#destination_mac=' do
     it 'sets its destination MAC' do
       packet = Packet.new
