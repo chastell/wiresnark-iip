@@ -39,6 +39,15 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#payload' do
+    it 'reads its payload' do
+      packet = Packet.new
+      packet.payload.must_equal "\x00" * 46
+      packet.payload = 'foo'
+      packet.payload.must_equal 'foo' + "\x00" * 43
+    end
+  end
+
   describe '#payload=' do
     it 'sets its payload' do
       packet = Packet.new
