@@ -28,15 +28,19 @@ module Wiresnark describe Packet do
   describe '#==' do
     it 'compares packets based on their binary representation' do
       Packet.new.must_equal Packet.new
+      spec = Object.new.extend DSL::PacketDSL
+      spec.destination_mac 'aa:bb:cc:dd:ee:ff'
+      spec.source_mac '11:22:33:44:55:66'
+      spec.payload 'foo'
+      spec.type 'CAN'
+      Packet.new(spec).must_equal Packet.new spec
     end
   end
 
   describe '#destination_mac' do
     it 'reads its destination MAC' do
-      packet = Packet.new
-      packet.destination_mac.must_equal '00:00:00:00:00:00'
-      packet.destination_mac = 'aa:bb:cc:dd:ee:ff'
-      packet.destination_mac.must_equal 'aa:bb:cc:dd:ee:ff'
+      Packet.new.destination_mac.must_equal '00:00:00:00:00:00'
+      Packet.new("\xaa\xbb\xcc\xdd\xee\xff" + "\x00" * 6 + "\x08\x00" + "\x00" * 46).destination_mac.must_equal 'aa:bb:cc:dd:ee:ff'
     end
   end
 
@@ -50,10 +54,8 @@ module Wiresnark describe Packet do
 
   describe '#payload' do
     it 'reads its payload' do
-      packet = Packet.new
-      packet.payload.must_equal "\x00" * 46
-      packet.payload = 'foo'
-      packet.payload.must_equal 'foo' + "\x00" * 43
+      Packet.new.payload.must_equal "\x00" * 46
+      Packet.new("\x00" * 12 + "\x08\x00" + 'foo' + "\x00" * 43).payload.must_equal 'foo' + "\x00" * 43
     end
   end
 
@@ -80,10 +82,8 @@ module Wiresnark describe Packet do
 
   describe '#source_mac' do
     it 'reads its source MAC' do
-      packet = Packet.new
-      packet.source_mac.must_equal '00:00:00:00:00:00'
-      packet.source_mac = '11:22:33:44:55:66'
-      packet.source_mac.must_equal '11:22:33:44:55:66'
+      Packet.new.source_mac.must_equal '00:00:00:00:00:00'
+      Packet.new("\x00" * 6 + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x00" * 46).source_mac.must_equal '11:22:33:44:55:66'
     end
   end
 
