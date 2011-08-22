@@ -34,12 +34,12 @@ module Wiresnark class Packet
   end
 
   def payload
-    @bin[14..-1]
+    @bin[(14 + TypeBytes[type].size)..-1]
   end
 
   def payload= payload
-    payload += "\x00" * (46 - payload.size) if payload.size < 46
-    @bin[14..-1] = payload
+    @bin[(14 + TypeBytes[type].size)..-1] = payload
+    pad_if_needed
   end
 
   def source_mac
@@ -56,6 +56,17 @@ module Wiresnark class Packet
 
   def type
     TypeBytes.invert[@bin[14]] or 'Eth'
+  end
+
+  def type= type
+    TypeBytes[self.type].size.zero? ? @bin.insert(14, TypeBytes[type]) : @bin[14] = TypeBytes[type]
+    pad_if_needed
+  end
+
+  private
+
+  def pad_if_needed
+    @bin << "\x00" * (60 - @bin.size) if @bin.size < 60
   end
 
 end end

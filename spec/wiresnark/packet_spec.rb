@@ -115,4 +115,34 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#type=' do
+    it 'sets its type, preserving payload on type changes (Eth -> non-Eth -> non-Eth -> Eth -> Eth)' do
+      packet = Packet.new
+      packet.payload = 'foo' * 10
+
+      packet.type.must_equal 'Eth'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+
+      packet.type = 'QoS'
+      packet.type.must_equal 'QoS'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+
+      packet.payload = 'foo' * 10
+      packet.type.must_equal 'QoS'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
+
+      packet.type = 'DSS'
+      packet.type.must_equal 'DSS'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
+
+      packet.type = 'Eth'
+      packet.type.must_equal 'Eth'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+
+      packet.type = 'Eth'
+      packet.type.must_equal 'Eth'
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+    end
+  end
+
 end end
