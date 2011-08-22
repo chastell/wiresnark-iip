@@ -1,5 +1,13 @@
 module Wiresnark class Packet
 
+  TypeBytes = {
+    'Eth' => '',
+    'QoS' => "\x01",
+    'CAN' => "\x02",
+    'DSS' => "\x03",
+    'MGT' => "\x04",
+  }
+
   def initialize arg = Object.new.extend(DSL::PacketDSL)
     case arg
     when String
@@ -44,6 +52,10 @@ module Wiresnark class Packet
 
   def to_bin
     @bin
+  end
+
+  def type
+    TypeBytes.invert[@bin[14]] or 'Eth'
   end
 
 end end

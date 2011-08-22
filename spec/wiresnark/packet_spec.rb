@@ -93,4 +93,26 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#type' do
+    it 'reads its type' do
+      Packet.new.type.must_equal 'Eth'
+
+      qos_bin = Packet.new.to_bin
+      qos_bin[14] = "\x01"
+      Packet.new(qos_bin).type.must_equal 'QoS'
+
+      can_bin = Packet.new.to_bin
+      can_bin[14] = "\x02"
+      Packet.new(can_bin).type.must_equal 'CAN'
+
+      dss_bin = Packet.new.to_bin
+      dss_bin[14] = "\x03"
+      Packet.new(dss_bin).type.must_equal 'DSS'
+
+      mgt_bin = Packet.new.to_bin
+      mgt_bin[14] = "\x04"
+      Packet.new(mgt_bin).type.must_equal 'MGT'
+    end
+  end
+
 end end
