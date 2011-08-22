@@ -22,4 +22,12 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#source_mac=' do
+    it 'sets its source MAC' do
+      packet = Packet.new
+      packet.source_mac = '11:22:33:44:55:66'
+      packet.to_bin[6..11].must_equal "\x11\x22\x33\x44\x55\x66"
+    end
+  end
+
 end end

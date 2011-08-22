@@ -12,6 +12,10 @@ module Wiresnark class Packet
     @bin[0..5] = mac.split(':').pack 'H2H2H2H2H2H2'
   end
 
+  def source_mac= mac
+    @bin[6..11] = mac.split(':').pack 'H2H2H2H2H2H2'
+  end
+
   def to_bin
     @bin
   end
