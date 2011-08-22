@@ -8,6 +8,10 @@ module Wiresnark class Packet
     to_bin == other.to_bin
   end
 
+  def destination_mac= mac
+    @bin[0..5] = mac.split(':').pack 'H2H2H2H2H2H2'
+  end
+
   def to_bin
     @bin
   end

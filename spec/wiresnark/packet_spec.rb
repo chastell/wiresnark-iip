@@ -14,4 +14,12 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#destination_mac=' do
+    it 'sets its destination MAC' do
+      packet = Packet.new
+      packet.destination_mac = 'aa:bb:cc:dd:ee:ff'
+      packet.to_bin[0..5].must_equal "\xaa\xbb\xcc\xdd\xee\xff"
+    end
+  end
+
 end end
