@@ -17,6 +17,7 @@ module Wiresnark class Packet
 
       self.destination_mac = arg.destination_mac if arg.destination_mac
       self.source_mac      = arg.source_mac      if arg.source_mac
+      self.type            = arg.type            if arg.type
       self.payload         = arg.payload         if arg.payload
     end
   end

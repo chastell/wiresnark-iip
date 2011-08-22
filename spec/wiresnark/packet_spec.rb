@@ -12,14 +12,16 @@ module Wiresnark describe Packet do
       spec.destination_mac 'aa:bb:cc:dd:ee:ff'
       spec.source_mac '11:22:33:44:55:66'
       spec.payload 'foo'
-      Packet.new(spec).to_bin.must_equal "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + 'foo' + "\x00" * 43
+      spec.type 'CAN'
+      Packet.new(spec).to_bin.must_equal "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x02" + 'foo' + "\x00" * 42
     end
 
     it 'creates a packet based on the passed binary String' do
-      packet = Packet.new "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + 'foo' + "\x00" * 43
+      packet = Packet.new "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x02" + 'foo' + "\x00" * 42
       packet.destination_mac.must_equal 'aa:bb:cc:dd:ee:ff'
       packet.source_mac.must_equal '11:22:33:44:55:66'
-      packet.payload.must_equal 'foo' + "\x00" * 43
+      packet.payload.must_equal 'foo' + "\x00" * 42
+      packet.type.must_equal 'CAN'
     end
   end
 
