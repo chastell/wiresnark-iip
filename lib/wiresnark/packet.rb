@@ -1,11 +1,16 @@
 module Wiresnark class Packet
 
   def initialize arg = Object.new.extend(DSL::PacketDSL)
-    @bin = "\x00" * 6 + "\x00" * 6 + "\x08\x00" + "\x00" * 46
+    case arg
+    when String
+      @bin = arg
+    else
+      @bin = "\x00" * 6 + "\x00" * 6 + "\x08\x00" + "\x00" * 46
 
-    self.destination_mac = arg.destination_mac if arg.destination_mac
-    self.source_mac      = arg.source_mac      if arg.source_mac
-    self.payload         = arg.payload         if arg.payload
+      self.destination_mac = arg.destination_mac if arg.destination_mac
+      self.source_mac      = arg.source_mac      if arg.source_mac
+      self.payload         = arg.payload         if arg.payload
+    end
   end
 
   def == other
