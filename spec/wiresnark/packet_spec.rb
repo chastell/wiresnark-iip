@@ -8,4 +8,10 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#==' do
+    it 'compares packets based on their binary representation' do
+      Packet.new.must_equal Packet.new
+    end
+  end
+
 end end
