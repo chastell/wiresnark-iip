@@ -11,9 +11,8 @@ module Wiresnark class Interface
   end
 
   def inject packets, output = nil, stream = @stream
-    output.puts "injecting into #{@name}:" if output
     packets.each do |packet|
-      output.puts "\t#{packet}" if output
+      output.puts "\t-> #{@name}\t#{packet}" if output
       stream.inject packet.to_bin
     end
   end
