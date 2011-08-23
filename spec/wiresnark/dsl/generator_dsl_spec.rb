@@ -11,6 +11,15 @@ module Wiresnark describe DSL::GeneratorDSL do
     end
   end
 
+  describe '#cycles' do
+    it 'stores the passed cycles' do
+      env = Object.new.extend DSL::GeneratorDSL
+      env.cycles.must_be_nil
+      env.cycles 3
+      env.cycles.must_equal 3
+    end
+  end
+
   describe '#phase_types' do
     it 'stores the passed types as array' do
       env = Object.new.extend DSL::GeneratorDSL

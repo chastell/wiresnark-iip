@@ -6,6 +6,10 @@ module Wiresnark module DSL::GeneratorDSL
     count.nil? ? @count : @count = count
   end
 
+  def cycles cycles = nil
+    cycles.nil? ? @cycles : @cycles = cycles
+  end
+
   def phase_types *phase_types
     phase_types.empty? ? @phase_types : @phase_types = phase_types
   end
