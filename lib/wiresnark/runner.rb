@@ -7,18 +7,20 @@ module Wiresnark module Runner
       gen = Object.new.extend DSL::GeneratorDSL
       gen.instance_eval &block
 
+      iface  = Interface.new gen.interface
+      output = gen.verbose ? $stdout : nil
+
       case
       when gen.count
-        Interface.new(gen.interface).inject Generator.generate(gen), (gen.verbose ? $stdout : nil)
+        iface.inject Generator.generate(gen), output
       when gen.phase_usecs
-        iface = Interface.new gen.interface
         phase_times = Hash[gen.phase_types.zip gen.phase_usecs]
         phase_pckts = Hash[gen.phase_types.map { |type| [gen.type(type), Generator.generate(gen, phase_times[type])] }]
         phase_times.cycle(gen.cycles) do |type, time|
           stop = Time.now + (time / 1_000_000.0)
           catch :next_type do
             phase_pckts[type].cycle do |packet|
-              iface.inject [packet], (gen.verbose ? $stdout : nil)
+              iface.inject [packet], output
               throw :next_type if Time.now > stop
             end
           end
