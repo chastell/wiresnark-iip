@@ -12,7 +12,7 @@ module Wiresnark class Interface
 
   def inject packets, output = nil, stream = @stream
     packets.each do |packet|
-      output.puts "\t-> #{@name}\t#{packet}" if output
+      output.puts "-> #{@name}\t#{packet}" if output
       stream.inject packet.to_bin
     end
   end
