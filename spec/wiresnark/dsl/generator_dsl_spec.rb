@@ -38,4 +38,13 @@ module Wiresnark describe DSL::GeneratorDSL do
     end
   end
 
+  describe '#sequence, #sequence?' do
+    it 'turns on and reads the sequence flag' do
+      refute @env.sequence?
+      @env.sequence
+      assert @env.sequence?
+    end
+  end
+
+
 end end

@@ -18,4 +18,12 @@ module Wiresnark module DSL::GeneratorDSL
     phase_usecs.empty? ? @phase_usecs : @phase_usecs = phase_usecs
   end
 
+  def sequence
+    @sequence = true
+  end
+
+  def sequence?
+    @sequence
+  end
+
 end end
