@@ -1,19 +1,19 @@
 module Wiresnark class Interface
 
-  def self.new name
+  def self.new name, stream = nil
     @interfaces       ||= {}
     @interfaces[name] ||= super
   end
 
-  def initialize name
+  def initialize name, stream
     @name = name
-    @stream = Stream.for name
+    @stream = stream || Stream.for(name)
   end
 
-  def inject packets, output = nil, stream = @stream
+  def inject packets, output = nil
     packets.each do |packet|
       output.puts "-> #{@name}\t#{packet}" if output
-      stream.inject packet.to_bin
+      @stream << packet.to_bin
     end
   end
 

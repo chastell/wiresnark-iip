@@ -14,11 +14,10 @@ module Wiresnark describe Interface do
   end
 
   describe '#inject' do
-    it 'injects the given packets to the interface' do
-      stream = MiniTest::Mock.new
-      stream.expect :inject, nil, [Packet.new.to_bin]
-      Interface.new('lo').inject [Packet.new], nil, stream
-      stream.verify
+    it 'injects the given packets to the given stream' do
+      stream = []
+      Interface.new('lo', stream).inject [Packet.new, Packet.new]
+      stream.must_equal [Packet.new.to_bin, Packet.new.to_bin]
     end
 
     it 'prints the injected packets to the output' do
