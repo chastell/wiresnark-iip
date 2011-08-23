@@ -11,11 +11,11 @@ module Wiresnark describe Stream do
       pcap.verify
     end
 
-    it 'returns an empty Array if no lib specified' do
+    it 'returns an empty Array if not root and no lib specified' do
       Stream.for('lo').must_equal []
     end
 
-    it 'returned object responds to #<<' do
+    it 'returns an object which responds to <<' do
       Stream.for('lo').must_respond_to :<<
     end
   end
