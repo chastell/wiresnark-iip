@@ -17,8 +17,22 @@ module Wiresnark describe Interface do
     it 'injects the given packets to the interface' do
       stream = MiniTest::Mock.new
       stream.expect :inject, nil, [Packet.new.to_bin]
-      Interface.new('lo').inject [Packet.new], stream
+      Interface.new('lo').inject [Packet.new], nil, stream
       stream.verify
+    end
+
+    it 'prints the injected packets to the output' do
+      foo = Object.new.extend DSL::PacketDSL
+      bar = Object.new.extend DSL::PacketDSL
+      foo.payload 'foo'
+      bar.payload 'bar'
+      Interface.new('lo').inject [Packet.new(foo), Packet.new(bar)], output = StringIO.new
+      output.rewind
+      output.read.must_equal <<-END
+injecting into lo:
+\tEth  00:00:00:00:00:00 00:00:00:00:00:00 08 00 66 6f 6f#{' 00' * 43}
+\tEth  00:00:00:00:00:00 00:00:00:00:00:00 08 00 62 61 72#{' 00' * 43}
+      END
     end
   end
 

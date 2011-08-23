@@ -6,11 +6,14 @@ module Wiresnark class Interface
   end
 
   def initialize name
+    @name = name
     @stream = Stream.for name
   end
 
-  def inject packets, stream
+  def inject packets, output = nil, stream = @stream
+    output.puts "injecting into #{@name}:" if output
     packets.each do |packet|
+      output.puts "\t#{packet}" if output
       stream.inject packet.to_bin
     end
   end
