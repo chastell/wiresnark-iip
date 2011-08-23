@@ -2,10 +2,6 @@ require_relative '../spec_helper'
 
 module Wiresnark describe Interface do
 
-  before do
-    Interface.instance_variable_set :@interfaces, {}
-  end
-
   describe '.new' do
     it 'returns the same interface on subsequent calls' do
       Interface.new('foo').must_be_same_as Interface.new 'foo'

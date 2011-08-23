@@ -2,10 +2,6 @@ require_relative '../spec_helper'
 
 module Wiresnark describe Runner do
 
-  before do
-    Interface.instance_variable_set :@interfaces, {}
-  end
-
   describe '.run' do
     it 'evaluates the passed file and sends packets as per spec' do
       env = MiniTest::Mock.new
