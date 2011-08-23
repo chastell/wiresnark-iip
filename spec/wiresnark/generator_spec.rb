@@ -25,6 +25,12 @@ module Wiresnark describe Generator do
       env.instance_eval { count 3 }
       Generator.generate(env, 2).must_equal [Packet.new, Packet.new]
     end
+
+    it 'overrides payload with sequence (if requested)' do
+      env = Object.new.extend DSL::GeneratorDSL
+      env.instance_eval { count 3; sequence }
+      Generator.generate(env).map(&:payload).must_equal ["\x00\x00\x00\x00" + "\x00" * 42, "\x00\x00\x00\x01" + "\x00" * 42, "\x00\x00\x00\x02" + "\x00" * 42]
+    end
   end
 
 end end
