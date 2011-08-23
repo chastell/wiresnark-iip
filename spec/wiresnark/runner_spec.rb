@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-module Wiresnark module Runner
+module Wiresnark describe Runner do
 
   describe '.run' do
     it 'evaluates the passed file and sends packets as per spec' do
