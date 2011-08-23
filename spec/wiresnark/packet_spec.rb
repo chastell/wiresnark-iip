@@ -95,6 +95,19 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#to_s' do
+    it 'returns a human-readable packet representation' do
+      Packet.new.to_s.must_equal 'Eth  00:00:00:00:00:00 00:00:00:00:00:00 08 00' + ' 00' * 46
+
+      spec = Object.new.extend DSL::PacketDSL
+      spec.destination_mac 'aa:bb:cc:dd:ee:ff'
+      spec.payload 'foo'
+      spec.source_mac '11:22:33:44:55:66'
+      spec.type 'DSS'
+      Packet.new(spec).to_s.must_equal 'DSS  aa:bb:cc:dd:ee:ff 11:22:33:44:55:66 08 00 03 66 6f 6f' + ' 00' * 42
+    end
+  end
+
   describe '#type' do
     it 'reads its type' do
       Packet.new.type.must_equal 'Eth'

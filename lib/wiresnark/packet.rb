@@ -55,6 +55,10 @@ module Wiresnark class Packet
     @bin
   end
 
+  def to_s
+    "#{type}  #{destination_mac} #{source_mac} #{@bin[12..-1].unpack('H2' * (@bin.size - 12)).join ' '}"
+  end
+
   def type
     TypeBytes.invert[@bin[14]] or 'Eth'
   end
