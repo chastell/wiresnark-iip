@@ -1,5 +1,7 @@
 module Wiresnark class Interface
 
+  attr_reader :stream
+
   def self.new name, stream = nil
     @interfaces       ||= {}
     @interfaces[name] ||= super

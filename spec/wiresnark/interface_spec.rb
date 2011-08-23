@@ -34,4 +34,14 @@ module Wiresnark describe Interface do
     end
   end
 
+  describe '#stream' do
+    it 'returns the related stream' do
+      stream = []
+      lo = Interface.new 'lo', stream
+      lo.stream.must_be_same_as stream
+      lo.inject [Packet.new, Packet.new]
+      lo.stream.must_equal [Packet.new.to_bin, Packet.new.to_bin]
+    end
+  end
+
 end end
