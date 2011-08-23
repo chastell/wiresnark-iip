@@ -11,4 +11,13 @@ module Wiresnark describe DSL::GeneratorDSL do
     end
   end
 
+  describe '#phase_usecs' do
+    it 'stores the passed times as array' do
+      env = Object.new.extend DSL::GeneratorDSL
+      env.phase_usecs.must_be_nil
+      env.phase_usecs 100, 200, 300, 400
+      env.phase_usecs.must_equal [100, 200, 300, 400]
+    end
+  end
+
 end end

@@ -6,4 +6,8 @@ module Wiresnark module DSL::GeneratorDSL
     count.nil? ? @count : @count = count
   end
 
+  def phase_usecs *phase_usecs
+    phase_usecs.empty? ? @phase_usecs : @phase_usecs = phase_usecs
+  end
+
 end end
