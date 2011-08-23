@@ -3,3 +3,8 @@ generator do
   interface 'lo'
   verbose
 end
+
+monitor do
+  interface 'lo'
+  verbose
+end
