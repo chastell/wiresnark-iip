@@ -1,3 +1,5 @@
+require 'pcaprub'
+
 module Wiresnark module DSL end end
 
 require_relative 'wiresnark/dsl/common_dsl'
