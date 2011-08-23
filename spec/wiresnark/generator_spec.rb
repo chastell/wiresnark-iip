@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 module Wiresnark describe Generator do
 
   describe '.generate' do
-    it 'generates packages based on the passed block' do
+    it 'generates packets based on the passed spec' do
       env = Object.new.extend DSL::GeneratorDSL
       env.instance_eval { count 3 }
       Generator.generate(env).must_equal [Packet.new, Packet.new, Packet.new]
@@ -18,6 +18,12 @@ module Wiresnark describe Generator do
         type 'CAN'
       end
       Generator.generate(env).must_equal [packet, packet, packet, packet, packet]
+    end
+
+    it 'generates the explicit number of packets (if present)' do
+      env = Object.new.extend DSL::GeneratorDSL
+      env.instance_eval { count 3 }
+      Generator.generate(env, 2).must_equal [Packet.new, Packet.new]
     end
   end
 
