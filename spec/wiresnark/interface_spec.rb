@@ -14,7 +14,7 @@ module Wiresnark describe Interface do
   end
 
   describe '#inject' do
-    it 'injects the given packets to the given stream' do
+    it 'injects the given packets to its stream' do
       stream = []
       Interface.new('lo', stream).inject [Packet.new, Packet.new]
       stream.must_equal [Packet.new.to_bin, Packet.new.to_bin]
