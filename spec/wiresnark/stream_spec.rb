@@ -12,7 +12,7 @@ module Wiresnark describe Stream do
     end
 
     it 'returns an empty Array if not root and no lib specified' do
-      Stream.for('lo').must_equal []
+      Stream.for('lo').must_equal [] unless Process.uid.zero?
     end
 
     it 'returns an object which responds to <<' do
