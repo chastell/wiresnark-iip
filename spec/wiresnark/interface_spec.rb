@@ -4,8 +4,8 @@ module Wiresnark describe Interface do
 
   describe '.new' do
     it 'returns the same interface on subsequent calls' do
-      Interface.new('foo').must_be_same_as Interface.new 'foo'
-      Interface.new('foo').wont_be_same_as Interface.new 'bar'
+      Interface.new('lo').must_be_same_as Interface.new 'lo'
+      Interface.new('lo').wont_be_same_as Interface.new 'eth0'
     end
   end
 
