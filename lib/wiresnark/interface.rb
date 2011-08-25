@@ -2,12 +2,7 @@ module Wiresnark class Interface
 
   attr_reader :stream
 
-  def self.new name, stream = nil
-    @interfaces       ||= {}
-    @interfaces[name] ||= super
-  end
-
-  def initialize name, stream
+  def initialize name, stream = nil
     @name = name
     @stream = stream || Stream.for(name)
   end

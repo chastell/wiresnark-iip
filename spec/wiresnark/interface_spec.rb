@@ -2,13 +2,6 @@ require_relative '../spec_helper'
 
 module Wiresnark describe Interface do
 
-  describe '.new' do
-    it 'returns the same interface on subsequent calls' do
-      Interface.new('lo').must_be_same_as Interface.new 'lo'
-      Interface.new('lo').wont_be_same_as Interface.new 'eth0'
-    end
-  end
-
   describe '#inject' do
     it 'injects the given packets to its stream' do
       stream = []
