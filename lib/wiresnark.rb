@@ -2,6 +2,7 @@ require 'pcaprub'
 
 module Wiresnark module DSL end end
 
+require_relative 'wiresnark/configuration'
 require_relative 'wiresnark/dsl/common_dsl'
 require_relative 'wiresnark/dsl/packet_dsl'
 require_relative 'wiresnark/dsl/generator_dsl'
