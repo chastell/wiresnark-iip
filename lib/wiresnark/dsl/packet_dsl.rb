@@ -4,6 +4,10 @@ module Wiresnark module DSL::PacketDSL
     mac.nil? ? @destination_mac : @destination_mac = mac
   end
 
+  def min_size size = nil
+    size.nil? ? @min_size || 60 : @min_size = size
+  end
+
   def payload payload = nil
     payload.nil? ? @payload : @payload = payload
   end
