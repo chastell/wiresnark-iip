@@ -58,7 +58,7 @@ module Wiresnark class Packet
   end
 
   def to_s payload_bytes = Configuration.payload_bytes
-    "#{type}\t#{@bin.size}\t#{destination_mac} #{source_mac} #{@bin[12..13].unpack('H2H2').join '.'} #{@bin[14..-1].unpack('H2' * (payload_bytes || @bin.size - 14)).join ' '}"
+    "#{type}\t#{@bin.size}\t[#{destination_mac}] [#{source_mac}] [#{@bin[12..13].unpack('H2H2').join '.'}] [#{@bin[14].unpack('H2').join}] #{@bin[15..-1].unpack('H2' * (payload_bytes || @bin.size - 14)).join ' '}"
   end
 
   def type

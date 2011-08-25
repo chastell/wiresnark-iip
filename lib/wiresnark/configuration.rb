@@ -7,3 +7,5 @@ module Wiresnark module Configuration
   end
 
 end end
+
+Wiresnark::Configuration.payload_bytes = 5
