@@ -98,18 +98,18 @@ module Wiresnark describe Packet do
 
   describe '#to_s' do
     it 'returns a human-readable packet representation' do
-      Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00]" + ' [00]' + ' 00' * 5
+      Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [00 00 00 00 00]"
 
       spec = Object.new.extend DSL::PacketDSL
       spec.destination_mac 'aa:bb:cc:dd:ee:ff'
       spec.payload 'foo'
       spec.source_mac '11:22:33:44:55:66'
       spec.type 'DSS'
-      Packet.new(spec).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] 66 6f 6f 00 00"
+      Packet.new(spec).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] [66 6f 6f 00 00]"
     end
 
     it 'truncates the payload after the specified byte' do
-      Packet.new.to_s(7).must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00]" + ' [00]' + ' 00' * 7
+      Packet.new.to_s(7).must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [00 00 00 00 00 00 00]"
     end
   end
 
