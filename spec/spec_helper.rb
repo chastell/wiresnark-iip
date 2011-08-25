@@ -7,4 +7,5 @@ require_relative '../lib/wiresnark'
 
 MiniTest::Spec.before do
   Wiresnark::Interface.instance_variable_set :@interfaces, {}
+  Wiresnark::Stream.instance_variable_set :@streams, {}
 end

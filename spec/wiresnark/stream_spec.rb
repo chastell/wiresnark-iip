@@ -18,6 +18,11 @@ module Wiresnark describe Stream do
     it 'returns an object which responds to <<' do
       Stream.for('lo').must_respond_to :<<
     end
+
+    it 'returns the same stream for the same interface' do
+      Stream.for('lo').must_be_same_as Stream.for 'lo'
+      Stream.for('lo').wont_be_same_as Stream.for 'eth0'
+    end
   end
 
 end end
