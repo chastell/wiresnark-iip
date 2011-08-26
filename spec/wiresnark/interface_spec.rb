@@ -17,8 +17,8 @@ module Wiresnark describe Interface do
       Interface.new('lo').inject [Packet.new(foo), Packet.new(bar)], output = StringIO.new
       output.rewind
       output.read.must_equal <<-END
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [66] [6f 6f 00 00 00]
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [62] [61 72 00 00 00]
+-> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [66 6f 6f 00 00]
+-> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [62 61 72 00 00]
       END
     end
   end

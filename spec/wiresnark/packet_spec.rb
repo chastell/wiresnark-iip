@@ -55,8 +55,8 @@ module Wiresnark describe Packet do
 
   describe '#payload' do
     it 'reads its payload' do
-      Packet.new.payload.must_equal "\x00" * 46
-      Packet.new("\x00" * 12 + "\x08\x00" + 'foo' + "\x00" * 43).payload.must_equal 'foo' + "\x00" * 43
+      Packet.new.payload.must_equal "\x00" * 45
+      Packet.new("\x00" * 12 + "\x08\x00" + "\x00" + 'foo' + "\x00" * 42).payload.must_equal 'foo' + "\x00" * 42
     end
   end
 
@@ -64,20 +64,20 @@ module Wiresnark describe Packet do
     it 'sets its payload' do
       packet = Packet.new
       packet.payload = 'foo'
-      packet.to_bin[14..-1].must_equal 'foo' + "\x00" * 43
+      packet.to_bin[15..-1].must_equal 'foo' + "\x00" * 42
     end
 
     it 'sets the payload even when its bigger than 46 bytes' do
       packet = Packet.new
       packet.payload = 'foo' * 16
-      packet.to_bin[14..-1].must_equal 'foo' * 16
+      packet.to_bin[15..-1].must_equal 'foo' * 16
     end
 
     it 'truncates the previous payload and pads the new one if needed' do
       packet = Packet.new
       packet.payload = 'foo' * 100
       packet.payload = 'bar' * 10
-      packet.to_bin[14..-1].must_equal 'bar' * 10 + "\x00" * 16
+      packet.to_bin[15..-1].must_equal 'bar' * 10 + "\x00" * 15
     end
   end
 
@@ -141,11 +141,11 @@ module Wiresnark describe Packet do
       packet.payload = 'foo' * 10
 
       packet.type.must_equal 'Eth'
-      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.type = 'QoS'
       packet.type.must_equal 'QoS'
-      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.payload = 'foo' * 10
       packet.type.must_equal 'QoS'
@@ -157,11 +157,11 @@ module Wiresnark describe Packet do
 
       packet.type = 'Eth'
       packet.type.must_equal 'Eth'
-      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.type = 'Eth'
       packet.type.must_equal 'Eth'
-      packet.payload.must_equal 'foo' * 10 + "\x00" * 16
+      packet.payload.must_equal 'foo' * 10 + "\x00" * 15
     end
   end
 

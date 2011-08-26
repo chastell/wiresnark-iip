@@ -1,7 +1,7 @@
 module Wiresnark class Packet
 
   TypeBytes = {
-    'Eth' => '',
+    'Eth' => "\x00",
     'QoS' => "\x01",
     'CAN' => "\x02",
     'DSS' => "\x03",
@@ -37,11 +37,11 @@ module Wiresnark class Packet
   end
 
   def payload
-    @bin[(14 + TypeBytes[type].size)..-1]
+    @bin[15..-1]
   end
 
   def payload= payload
-    @bin[(14 + TypeBytes[type].size)..-1] = payload
+    @bin[15..-1] = payload
     pad_if_needed
   end
 
@@ -58,7 +58,7 @@ module Wiresnark class Packet
   end
 
   def to_s payload_bytes = Configuration.payload_bytes
-    "#{type}\t#{@bin.size}\t[#{destination_mac}] [#{source_mac}] [#{@bin[12..13].unpack('H2H2').join '.'}] [#{@bin[14].unpack('H2').join}] [#{@bin[15..-1].unpack('H2' * (payload_bytes || @bin.size - 14)).join ' '}]"
+    "#{type}\t#{@bin.size}\t[#{destination_mac}] [#{source_mac}] [#{@bin[12..13].unpack('H2H2').join '.'}] [#{@bin[14].unpack('H2').join}] [#{@bin[15..-1].unpack('H2' * (payload_bytes || @bin.size - 15)).join ' '}]"
   end
 
   def type
@@ -66,8 +66,7 @@ module Wiresnark class Packet
   end
 
   def type= type
-    TypeBytes[self.type].size.zero? ? @bin.insert(14, TypeBytes[type]) : @bin[14] = TypeBytes[type]
-    pad_if_needed
+    @bin[14] = TypeBytes[type]
   end
 
   private
