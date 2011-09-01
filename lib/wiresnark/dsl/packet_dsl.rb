@@ -12,6 +12,10 @@ module Wiresnark module DSL::PacketDSL
     payload.nil? ? @payload : @payload = payload
   end
 
+  def random_size range = nil
+    range.nil? ? @random_size : @random_size = range
+  end
+
   def source_mac mac = nil
     mac.nil? ? @source_mac : @source_mac = mac
   end
