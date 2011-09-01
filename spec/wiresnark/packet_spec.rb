@@ -81,6 +81,15 @@ module Wiresnark describe Packet do
     end
   end
 
+  describe '#size' do
+    it 'returns its size' do
+      Packet.new.size.must_equal 60
+      env = Object.new.extend DSL::PacketDSL
+      env.min_size 100
+      Packet.new(env).size.must_equal 100
+    end
+  end
+
   describe '#source_mac' do
     it 'reads its source MAC' do
       Packet.new.source_mac.must_equal '00:00:00:00:00:00'

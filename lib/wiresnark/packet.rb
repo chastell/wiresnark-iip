@@ -45,6 +45,10 @@ module Wiresnark class Packet
     pad_if_needed
   end
 
+  def size
+    @bin.size
+  end
+
   def source_mac
     @bin[6..11].unpack('H2H2H2H2H2H2').join ':'
   end
