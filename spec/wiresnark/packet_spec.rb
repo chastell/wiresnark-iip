@@ -17,6 +17,14 @@ module Wiresnark describe Packet do
       Packet.new(spec).to_bin.must_equal "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x02" + 'foo' + "\x00" * 82
     end
 
+    it 'creates packets of random sizes' do
+      spec = Object.new.extend DSL::PacketDSL
+      spec.random_size 70..700
+      sizes = (1..100).map { Packet.new(spec).size }
+      sizes.uniq.size.must_be :>, 1
+      sizes.each { |size| (70..700).must_include size }
+    end
+
     it 'creates a packet based on the passed binary String' do
       packet = Packet.new "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x02" + 'foo' + "\x00" * 42
       packet.destination_mac.must_equal 'aa:bb:cc:dd:ee:ff'
