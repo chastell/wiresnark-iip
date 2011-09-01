@@ -31,9 +31,24 @@ module Wiresnark module Runner
     env.monitor_blocks.each do |block|
       mon = Object.new.extend DSL::MonitorDSL
       mon.instance_eval &block
+
+      return unless mon.verbose?
+
+      # FIXME: deuglify the below
+      type, count, bytes = nil, 0, 0
       Interface.new(mon.interface).stream.each do |bin|
-        puts "#{mon.interface} ->\t#{Packet.new bin}" if mon.verbose?
+        packet = Packet.new bin
+        if type and packet.type != type
+          puts "\t#{count} #{type}\t#{bytes} bytes\n\n"
+          type, count, bytes = packet.type, 1, packet.size
+        else
+          type   = packet.type
+          count += 1
+          bytes += packet.size
+        end
+        puts "#{mon.interface} ->\t#{packet}"
       end
+      puts "\t#{count} #{type}\t#{bytes} bytes\n\n"
     end
   end
 
