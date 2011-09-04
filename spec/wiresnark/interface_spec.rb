@@ -10,11 +10,7 @@ module Wiresnark describe Interface do
     end
 
     it 'prints the injected packets to the output' do
-      foo = Object.new.extend DSL::PacketDSL
-      bar = Object.new.extend DSL::PacketDSL
-      foo.payload 'foo'
-      bar.payload 'bar'
-      Interface.new('lo').inject [Packet.new(foo), Packet.new(bar)], output = StringIO.new
+      Interface.new('lo').inject [Packet.new(payload: 'foo'), Packet.new(payload: 'bar')], output = StringIO.new
       output.rewind
       output.read.must_equal <<-END
 -> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [66 6f 6f 00 00]
