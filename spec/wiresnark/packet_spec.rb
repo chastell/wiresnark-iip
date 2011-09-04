@@ -28,9 +28,7 @@ module Wiresnark describe Packet do
     end
 
     it 'creates packets of random sizes' do
-      spec = Object.new.extend DSL::PacketDSL
-      spec.random_size 70..700
-      sizes = (1..100).map { Packet.new(spec).size }
+      sizes = (1..100).map { Packet.new(random_size: 70..700).size }
       sizes.uniq.size.must_be :>, 1
       sizes.each { |size| (70..700).must_include size }
     end
@@ -47,12 +45,13 @@ module Wiresnark describe Packet do
   describe '#==' do
     it 'compares packets based on their binary representation' do
       Packet.new.must_equal Packet.new
-      spec = Object.new.extend DSL::PacketDSL
-      spec.destination_mac 'aa:bb:cc:dd:ee:ff'
-      spec.source_mac '11:22:33:44:55:66'
-      spec.payload 'foo'
-      spec.type 'CAN'
-      Packet.new(spec).must_equal Packet.new spec
+      params = {
+        destination_mac: 'aa:bb:cc:dd:ee:ff',
+        source_mac: '11:22:33:44:55:66',
+        payload: 'foo',
+        type: 'CAN',
+      }
+      Packet.new(params).must_equal Packet.new params
     end
   end
 
@@ -101,10 +100,7 @@ module Wiresnark describe Packet do
 
   describe '#size' do
     it 'returns its size' do
-      Packet.new.size.must_equal 60
-      env = Object.new.extend DSL::PacketDSL
-      env.min_size 100
-      Packet.new(env).size.must_equal 100
+      Packet.new(min_size: 100).size.must_equal 100
     end
   end
 
@@ -127,12 +123,12 @@ module Wiresnark describe Packet do
     it 'returns a human-readable packet representation' do
       Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [00 00 00 00 00]"
 
-      spec = Object.new.extend DSL::PacketDSL
-      spec.destination_mac 'aa:bb:cc:dd:ee:ff'
-      spec.payload 'foo'
-      spec.source_mac '11:22:33:44:55:66'
-      spec.type 'DSS'
-      Packet.new(spec).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] [66 6f 6f 00 00]"
+      Packet.new(
+        destination_mac: 'aa:bb:cc:dd:ee:ff',
+        payload: 'foo',
+        source_mac: '11:22:33:44:55:66',
+        type: 'DSS',
+      ).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] [66 6f 6f 00 00]"
     end
 
     it 'truncates the payload after the specified byte' do

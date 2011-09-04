@@ -18,7 +18,7 @@ module Wiresnark class Packet
       self.type            = arg[:type]            if arg[:type]
       self.payload         = arg[:payload]         if arg[:payload]
 
-      pad_if_needed arg[:min_size]
+      pad_if_needed (arg[:min_size] || 60), arg[:random_size]
     when String
       @bin = arg
     else
