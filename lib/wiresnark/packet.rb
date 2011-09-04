@@ -10,6 +10,15 @@ module Wiresnark class Packet
 
   def initialize arg = Object.new.extend(DSL::PacketDSL)
     case arg
+    when Hash
+      @bin = "\x00" * 6 + "\x00" * 6 + "\x08\x00" + "\x00" * 46
+
+      self.destination_mac = arg[:destination_mac] if arg[:destination_mac]
+      self.source_mac      = arg[:source_mac]      if arg[:source_mac]
+      self.type            = arg[:type]            if arg[:type]
+      self.payload         = arg[:payload]         if arg[:payload]
+
+      pad_if_needed arg[:min_size]
     when String
       @bin = arg
     else
