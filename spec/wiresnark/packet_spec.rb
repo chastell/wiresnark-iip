@@ -7,16 +7,6 @@ module Wiresnark describe Packet do
       Packet.new.to_bin.must_equal "\x00" * 12 + "\x08\x00" + "\x00" * 46
     end
 
-    it 'creates a packet based on the passed object' do
-      spec = Object.new.extend DSL::PacketDSL
-      spec.destination_mac 'aa:bb:cc:dd:ee:ff'
-      spec.min_size 100
-      spec.source_mac '11:22:33:44:55:66'
-      spec.payload 'foo'
-      spec.type 'CAN'
-      Packet.new(spec).to_bin.must_equal "\xaa\xbb\xcc\xdd\xee\xff" + "\x11\x22\x33\x44\x55\x66" + "\x08\x00" + "\x02" + 'foo' + "\x00" * 82
-    end
-
     it 'creates a packet based on the passed Hash' do
       Packet.new(
         destination_mac: 'aa:bb:cc:dd:ee:ff',

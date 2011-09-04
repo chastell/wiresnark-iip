@@ -8,7 +8,7 @@ module Wiresnark class Packet
     'MGT' => "\x04",
   }
 
-  def initialize arg = Object.new.extend(DSL::PacketDSL)
+  def initialize arg = {}
     case arg
     when Hash
       @bin = "\x00" * 6 + "\x00" * 6 + "\x08\x00" + "\x00" * 46
@@ -21,15 +21,6 @@ module Wiresnark class Packet
       pad_if_needed (arg[:min_size] || 60), arg[:random_size]
     when String
       @bin = arg
-    else
-      @bin = "\x00" * 6 + "\x00" * 6 + "\x08\x00" + "\x00" * 46
-
-      self.destination_mac = arg.destination_mac if arg.destination_mac
-      self.source_mac      = arg.source_mac      if arg.source_mac
-      self.type            = arg.type            if arg.type
-      self.payload         = arg.payload         if arg.payload
-
-      pad_if_needed arg.min_size, arg.random_size
     end
   end
 
