@@ -29,4 +29,28 @@ module Wiresnark describe DSL::PacketDSL do
     end
   end
 
+  describe '#params' do
+    it 'stores the set packet params' do
+      env = Object.new.extend DSL::PacketDSL
+
+      env.params.must_equal({})
+
+      env.destination_mac 'aa:bb:cc:dd:ee:ff'
+      env.min_size 100
+      env.payload 'foo'
+      env.random_size 60..100
+      env.source_mac '11:22:33:44:55:66'
+      env.type 'QoS'
+
+      env.params.must_equal({
+        destination_mac: 'aa:bb:cc:dd:ee:ff',
+        min_size: 100,
+        random_size: 60..100,
+        payload: 'foo',
+        source_mac: '11:22:33:44:55:66',
+        type: 'QoS',
+      })
+    end
+  end
+
 end end
