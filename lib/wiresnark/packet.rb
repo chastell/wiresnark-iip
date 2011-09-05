@@ -18,7 +18,7 @@ module Wiresnark class Packet
       self.type            = arg[:type]            if arg[:type]
       self.payload         = arg[:payload]         if arg[:payload]
 
-      pad_if_needed (arg[:min_size] || 60), arg[:random_size]
+      pad_to arg[:random_size] ? Random.new.rand(arg[:random_size]) : arg[:min_size] || 60
     when String
       @bin = arg
     end
@@ -43,7 +43,7 @@ module Wiresnark class Packet
   def payload= payload
     orig_size = size
     @bin[15..-1] = payload
-    pad_if_needed orig_size
+    pad_to orig_size
   end
 
   def size
@@ -79,9 +79,8 @@ module Wiresnark class Packet
 
   private
 
-  def pad_if_needed min_size = 60, random_size = nil
-    min_size = Random.new.rand random_size if random_size
-    @bin << "\x00" * (min_size - @bin.size) if @bin.size < min_size
+  def pad_to min_size
+    @bin << "\x00" * (min_size - size) if size < min_size
   end
 
 end end
