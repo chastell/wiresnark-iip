@@ -84,7 +84,13 @@ module Wiresnark describe Packet do
       packet = Packet.new
       packet.payload = 'foo' * 100
       packet.payload = 'bar' * 10
-      packet.to_bin[15..-1].must_equal 'bar' * 10 + "\x00" * 15
+      packet.to_bin[15..-1].must_equal 'bar' * 10 + "\x00" * 270
+    end
+
+    it 'preserves the original size' do
+      packet = Packet.new min_size: 100
+      packet.payload = 'foo'
+      packet.size.must_equal 100
     end
   end
 

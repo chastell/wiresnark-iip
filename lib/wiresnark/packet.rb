@@ -41,8 +41,9 @@ module Wiresnark class Packet
   end
 
   def payload= payload
+    orig_size = size
     @bin[15..-1] = payload
-    pad_if_needed
+    pad_if_needed orig_size
   end
 
   def size
