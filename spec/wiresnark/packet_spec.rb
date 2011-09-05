@@ -118,14 +118,14 @@ module Wiresnark describe Packet do
 
   describe '#to_s' do
     it 'returns a human-readable packet representation' do
-      Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [00 00 00 00 00]"
+      Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]"
 
       Packet.new(
         destination_mac: 'aa:bb:cc:dd:ee:ff',
         payload: 'foo',
         source_mac: '11:22:33:44:55:66',
         type: 'DSS',
-      ).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] [66 6f 6f 00 00]"
+      ).to_s.must_equal "DSS\t60\t[aa:bb:cc:dd:ee:ff] [11:22:33:44:55:66] [08.00] [03] [666f6f0000]"
     end
   end
 
