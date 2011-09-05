@@ -62,10 +62,10 @@ module Wiresnark class Packet
     @bin
   end
 
-  def to_s payload_bytes = Configuration.payload_bytes
-    ethertype = @bin[12..13].unpack('H2H2').join '.'                               rescue '  .  '
-    type_byte = @bin[14].unpack('H*').first                                        rescue '  '
-    payload   = @bin[15..-1].unpack('H2' * (payload_bytes || size - 15)).join(' ') rescue '  '
+  def to_s
+    ethertype = @bin[12..13].unpack('H2H2').join '.'    rescue '  .  '
+    type_byte = @bin[14].unpack('H*').first             rescue '  '
+    payload   = @bin[15..19].unpack('H2' * 5).join(' ') rescue '  '
     "#{type}\t#{size}\t[#{destination_mac}] [#{source_mac}] [#{ethertype}] [#{type_byte}] [#{payload}]"
   end
 
