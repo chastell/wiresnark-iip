@@ -74,7 +74,7 @@ module Wiresnark describe Packet do
       packet.to_bin[15..-1].must_equal 'foo' + "\x00" * 42
     end
 
-    it 'sets the payload even when its bigger than 46 bytes' do
+    it 'sets the payload even when it is bigger than 45 bytes' do
       packet = Packet.new
       packet.payload = 'foo' * 16
       packet.to_bin[15..-1].must_equal 'foo' * 16
