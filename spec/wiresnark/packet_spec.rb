@@ -90,6 +90,7 @@ module Wiresnark describe Packet do
 
   describe '#size' do
     it 'returns its size' do
+      Packet.new.size.must_equal 60
       Packet.new(min_size: 100).size.must_equal 100
     end
   end
