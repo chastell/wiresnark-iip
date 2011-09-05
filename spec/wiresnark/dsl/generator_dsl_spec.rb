@@ -46,5 +46,4 @@ module Wiresnark describe DSL::GeneratorDSL do
     end
   end
 
-
 end end
