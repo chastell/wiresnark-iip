@@ -8,7 +8,7 @@ module Wiresnark module Runner
       gen.instance_eval &block
 
       iface  = Interface.new gen.interface
-      output = gen.verbose ? $stdout : nil
+      output = gen.verbose? ? $stdout : nil
 
       case
       when gen.count
@@ -32,8 +32,6 @@ module Wiresnark module Runner
       mon = Object.new.extend DSL::MonitorDSL
       mon.instance_eval &block
 
-      return unless mon.verbose?
-
       # FIXME: deuglify the below
       type, count, bytes = nil, 0, 0
       Interface.new(mon.interface).stream.each do |bin|
@@ -46,7 +44,7 @@ module Wiresnark module Runner
           count += 1
           bytes += packet.size
         end
-        puts "#{mon.interface} ->\t#{packet}"
+        puts "#{mon.interface} ->\t#{packet}" if mon.verbose?
       end
       puts "\t#{count} #{type}\t#{bytes} bytes\n\n"
     end

@@ -45,6 +45,15 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
 
       capture_io { Runner.run 'spec/fixtures/cycle-to-lo.rb' }.first.must_include "\t1 MGT\t60 bytes"
     end
+
+    it 'includes only packet counts and size sums in non-verbose mode' do
+      skip if Process.uid.zero?
+
+      out = capture_io { Runner.run 'spec/fixtures/quiet-lo.rb' }.first
+
+      out.wont_include "-> lo\tEth\t60"
+      out.must_include "\t3 Eth\t180 bytes"
+    end
   end
 
 end end
