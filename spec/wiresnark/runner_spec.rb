@@ -54,6 +54,14 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
       out.wont_include "-> lo\tEth\t60"
       out.must_include "\t3 Eth\t180 bytes"
     end
+
+    it 'includes per-type running tally in running_tally mode' do
+      skip if Process.uid.zero?
+
+      out = capture_io { Runner.run 'spec/fixtures/running-tally.rb' }.first
+
+      out.must_match 'Eth:     6 p,   360 b,    60 b/p    QoS:     2 p,   120 b,    60 b/p    CAN:     3 p,   180 b,    60 b/p    DSS:     4 p,   240 b,    60 b/p    MGT:     5 p,   300 b,    60 b/p'
+    end
   end
 
 end end

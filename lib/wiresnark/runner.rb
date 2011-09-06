@@ -33,20 +33,29 @@ module Wiresnark module Runner
       mon.instance_eval &block
 
       # FIXME: deuglify the below
-      type, count, bytes = nil, 0, 0
+      counts = Hash[Packet::TypeBytes.keys.map { |type| [type, { bytes: 0,  count: 0 }]}]
+      type = nil
       Interface.new(mon.interface).stream.each do |bin|
         packet = Packet.new bin
+
         if type and packet.type != type
-          puts "\t#{count} #{type}\t#{bytes} bytes\t#{bytes / count} bytes/packet\n\n"
-          type, count, bytes = packet.type, 1, packet.size
-        else
-          type   = packet.type
-          count += 1
-          bytes += packet.size
+          puts "\t#{counts[type][:count]} #{type}\t#{counts[type][:bytes]} bytes\t#{counts[type][:bytes] / counts[type][:count]} bytes/packet\n\n" unless mon.running_tally?
+          counts[packet.type] = { bytes: 0, count: 0 }
         end
+
+        type = packet.type
+        counts[type][:bytes] += packet.size
+        counts[type][:count] += 1
+
         puts "#{mon.interface} ->\t#{packet}" if mon.verbose?
+
+        if mon.running_tally?
+          print "\r" + counts.map { |type, values| "#{type}: #{values[:count].to_s.rjust 5} p, #{values[:bytes].to_s.rjust 5} b, #{(values[:bytes] / values[:count] rescue nil).to_s.rjust 5} b/p" }.join('    ')
+        end
       end
-      puts "\t#{count} #{type}\t#{bytes} bytes\t#{bytes / count} bytes/packet\n\n"
+
+      puts "\t#{counts[type][:count]} #{type}\t#{counts[type][:bytes]} bytes\t#{counts[type][:bytes] / counts[type][:count]} bytes/packet\n\n" unless mon.running_tally?
+      puts if mon.running_tally?
     end
   end
 
