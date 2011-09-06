@@ -34,7 +34,7 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
     it 'cycles through the packet types if so instructed' do
       skip if Process.uid.zero?
 
-      out, _ = capture_io { Runner.run 'spec/fixtures/cycle-to-lo.rb' }
+      out = capture_io { Runner.run 'spec/fixtures/cycle-to-lo.rb' }.first
 
       out.must_match /#{'QoS.*CAN.*DSS.*MGT.*' * 4}/m
       out.count('QoS').must_be :>, out.count('MGT')
@@ -43,9 +43,7 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
     it 'includes packet counts and size sums on packet type changes' do
       skip if Process.uid.zero?
 
-      out, _ = capture_io { Runner.run 'spec/fixtures/cycle-to-lo.rb' }
-
-      out.must_include "\t1 MGT\t60 bytes"
+      capture_io { Runner.run 'spec/fixtures/cycle-to-lo.rb' }.first.must_include "\t1 MGT\t60 bytes"
     end
   end
 
