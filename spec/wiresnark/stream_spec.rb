@@ -6,7 +6,7 @@ module Wiresnark describe Stream do
     it 'returns the stream for the given interface and pcap lib' do
       pcap = MiniTest::Mock.new
       pcap.expect :nil?,      false
-      pcap.expect :open_live, [], ['lo', 0xffff, false, 0]
+      pcap.expect :open_live, [], ['lo', 0xffff, true, 0]
       Stream.for 'lo', pcap
       pcap.verify
     end

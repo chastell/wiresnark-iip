@@ -4,7 +4,7 @@ module Wiresnark module Stream
     streams[name] ||= begin
       pcap = Pcap if pcap.nil? and Process.uid.zero?
       if pcap.respond_to? :open_live
-        stream = pcap.open_live name, 0xffff, false, 0
+        stream = pcap.open_live name, 0xffff, true, 0
         stream.instance_eval { alias << inject }
         stream
       else
