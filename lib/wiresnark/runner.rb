@@ -37,7 +37,7 @@ module Wiresnark module Runner
       Interface.new(mon.interface).stream.each do |bin|
         packet = Packet.new bin
         if type and packet.type != type
-          puts "\t#{count} #{type}\t#{bytes} bytes\n\n"
+          puts "\t#{count} #{type}\t#{bytes} bytes\t#{bytes / count} bytes/packet\n\n"
           type, count, bytes = packet.type, 1, packet.size
         else
           type   = packet.type
@@ -46,7 +46,7 @@ module Wiresnark module Runner
         end
         puts "#{mon.interface} ->\t#{packet}" if mon.verbose?
       end
-      puts "\t#{count} #{type}\t#{bytes} bytes\n\n"
+      puts "\t#{count} #{type}\t#{bytes} bytes\t#{bytes / count} bytes/packet\n\n"
     end
   end
 
