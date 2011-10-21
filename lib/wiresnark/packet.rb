@@ -2,10 +2,10 @@ module Wiresnark class Packet
 
   TypeBytes = {
     'Eth' => "\x00",
-    'QoS' => "\x01",
+    'DSS' => "\x01",
     'CAN' => "\x02",
-    'DSS' => "\x03",
-    'MGT' => "\x04",
+    'QoS' => "\x04",
+    'MGT' => "\x07",
   }
 
   def initialize arg = {}
