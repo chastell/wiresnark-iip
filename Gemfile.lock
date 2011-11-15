@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    wiresnark (0.0.0)
+      pcaprub
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    minitest (2.8.0)
+    pcaprub (0.11.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest (>= 2.3)
+  wiresnark!
