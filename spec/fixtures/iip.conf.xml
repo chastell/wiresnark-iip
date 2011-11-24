@@ -1,0 +1,194 @@
+<interfaces noNamespaceSchemaLocation="">
+  <interface name="eth0" type="ez">
+    <LinkLayerMACTransmitter>
+      <MACSourceAddress>ad:e3:3e:a4:23:00</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:00</MACDestinationAddress>
+      <MACType>01</MACType>
+      <MACVLAN-tag>ab</MACVLAN-tag>
+    </LinkLayerMACTransmitter>
+    <LinkLayerMACReceiver>
+      <SourceAddressfiltering>bd:e3:3e:a4:23:00</SourceAddressfiltering>
+      <DestinationAddressfiltering>ad:e3:3e:a4:24:00</DestinationAddressfiltering>
+      <Typefiltering>01</Typefiltering>
+      <VLAN-tagfiltering>ab</VLAN-tagfiltering>
+    </LinkLayerMACReceiver>
+    <MTU>
+      <MTUvalue>Tx</MTUvalue>
+    </MTU>
+    <Classifier>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Classifier>
+    <Marker>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Marker>
+    <RemovalPI>
+      <RemPIFlag pi="QoS">NO</RemPIFlag>
+      <RemPIFlag pi="CAN">NO</RemPIFlag>
+      <RemPIFlag pi="CSS">NO</RemPIFlag>
+      <RemPIFlag pi="MGT">NO</RemPIFlag>
+    </RemovalPI>
+    <SchedulerXENFPG>
+      <Cyclelength>1000</Cyclelength>
+      <NumberPhases>4</NumberPhases>
+      <PhaseLength pi="QoS">300</PhaseLength>
+      <PhaseLength pi="CAN">300</PhaseLength>
+      <PhaseLength pi="MGT">300</PhaseLength>
+    </SchedulerXENFPG>
+    <SchedulerEZ>
+      <WFQ>12</WFQ>
+      <CIR>32</CIR>
+      <BaseValue>234</BaseValue>
+      <CBS>23</CBS>
+    </SchedulerEZ>
+  </interface>
+  <interface name="eth1" type="ez">
+    <LinkLayerMACTransmitter>
+      <MACSourceAddress>ad:e3:3e:a4:23:00</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:00</MACDestinationAddress>
+      <MACType>01</MACType>
+      <MACVLAN-tag>ab</MACVLAN-tag>
+    </LinkLayerMACTransmitter>
+    <LinkLayerMACReceiver>
+      <SourceAddressfiltering>bd:e3:3e:a4:23:00</SourceAddressfiltering>
+      <DestinationAddressfiltering>ad:e3:3e:a4:24:00</DestinationAddressfiltering>
+      <Typefiltering>01</Typefiltering>
+      <VLAN-tagfiltering>ab</VLAN-tagfiltering>
+    </LinkLayerMACReceiver>
+    <MTU>
+      <MTUvalue>Tx</MTUvalue>
+    </MTU>
+    <Classifier>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Classifier>
+    <Marker>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Marker>
+    <RemovalPI>
+      <RemPIFlag pi="QoS">NO</RemPIFlag>
+      <RemPIFlag pi="CAN">NO</RemPIFlag>
+      <RemPIFlag pi="CSS">NO</RemPIFlag>
+      <RemPIFlag pi="MGT">NO</RemPIFlag>
+    </RemovalPI>
+    <SchedulerXENFPG>
+      <Cyclelength>1000</Cyclelength>
+      <NumberPhases>4</NumberPhases>
+      <PhaseLength pi="QoS">300</PhaseLength>
+      <PhaseLength pi="CAN">300</PhaseLength>
+      <PhaseLength pi="MGT">300</PhaseLength>
+    </SchedulerXENFPG>
+    <SchedulerEZ>
+      <WFQ>12</WFQ>
+      <CIR>32</CIR>
+      <BaseValue>234</BaseValue>
+      <CBS>23</CBS>
+    </SchedulerEZ>
+  </interface>
+  <interface name="eth2" type="ez">
+    <LinkLayerMACTransmitter>
+      <MACSourceAddress>ad:e3:3e:a4:23:00</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:00</MACDestinationAddress>
+      <MACType>01</MACType>
+      <MACVLAN-tag>ab</MACVLAN-tag>
+    </LinkLayerMACTransmitter>
+    <LinkLayerMACReceiver>
+      <SourceAddressfiltering>bd:e3:3e:a4:23:00</SourceAddressfiltering>
+      <DestinationAddressfiltering>ad:e3:3e:a4:24:00</DestinationAddressfiltering>
+      <Typefiltering>01</Typefiltering>
+      <VLAN-tagfiltering>ab</VLAN-tagfiltering>
+    </LinkLayerMACReceiver>
+    <MTU>
+      <MTUvalue>Tx</MTUvalue>
+    </MTU>
+    <Classifier>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Classifier>
+    <Marker>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Marker>
+    <RemovalPI>
+      <RemPIFlag pi="QoS">NO</RemPIFlag>
+      <RemPIFlag pi="CAN">NO</RemPIFlag>
+      <RemPIFlag pi="CSS">NO</RemPIFlag>
+      <RemPIFlag pi="MGT">NO</RemPIFlag>
+    </RemovalPI>
+    <SchedulerXENFPG>
+      <Cyclelength>1000</Cyclelength>
+      <NumberPhases>4</NumberPhases>
+      <PhaseLength pi="QoS">300</PhaseLength>
+      <PhaseLength pi="CAN">300</PhaseLength>
+      <PhaseLength pi="MGT">300</PhaseLength>
+    </SchedulerXENFPG>
+    <SchedulerEZ>
+      <WFQ>12</WFQ>
+      <CIR>32</CIR>
+      <BaseValue>234</BaseValue>
+      <CBS>23</CBS>
+    </SchedulerEZ>
+  </interface>
+  <interface name="eth3" type="ez">
+    <LinkLayerMACTransmitter>
+      <MACSourceAddress>ad:e3:3e:a4:23:00</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:00</MACDestinationAddress>
+      <MACType>01</MACType>
+      <MACVLAN-tag>ab</MACVLAN-tag>
+    </LinkLayerMACTransmitter>
+    <LinkLayerMACReceiver>
+      <SourceAddressfiltering>bd:e3:3e:a4:23:00</SourceAddressfiltering>
+      <DestinationAddressfiltering>ad:e3:3e:a4:24:00</DestinationAddressfiltering>
+      <Typefiltering>01</Typefiltering>
+      <VLAN-tagfiltering>ab</VLAN-tagfiltering>
+    </LinkLayerMACReceiver>
+    <MTU>
+      <MTUvalue>Tx</MTUvalue>
+    </MTU>
+    <Classifier>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Classifier>
+    <Marker>
+      <PIspecValues pi="QoS">1</PIspecValues>
+      <PIspecValues pi="CAN">1</PIspecValues>
+      <PIspecValues pi="CSS">1</PIspecValues>
+      <PIspecValues pi="MGT">1</PIspecValues>
+    </Marker>
+    <RemovalPI>
+      <RemPIFlag pi="QoS">NO</RemPIFlag>
+      <RemPIFlag pi="CAN">NO</RemPIFlag>
+      <RemPIFlag pi="CSS">NO</RemPIFlag>
+      <RemPIFlag pi="MGT">NO</RemPIFlag>
+    </RemovalPI>
+    <SchedulerXENFPG>
+      <Cyclelength>1000</Cyclelength>
+      <NumberPhases>4</NumberPhases>
+      <PhaseLength pi="QoS">300</PhaseLength>
+      <PhaseLength pi="CAN">300</PhaseLength>
+      <PhaseLength pi="MGT">300</PhaseLength>
+    </SchedulerXENFPG>
+    <SchedulerEZ>
+      <WFQ>12</WFQ>
+      <CIR>32</CIR>
+      <BaseValue>234</BaseValue>
+      <CBS>23</CBS>
+    </SchedulerEZ>
+  </interface>
+</interfaces>

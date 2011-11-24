@@ -1,3 +1,4 @@
+require 'nokogiri'
 require 'pcaprub'
 
 module Wiresnark module DSL end end
@@ -15,3 +16,4 @@ require_relative 'wiresnark/packet'
 require_relative 'wiresnark/reg_parser'
 require_relative 'wiresnark/runner'
 require_relative 'wiresnark/stream'
+require_relative 'wiresnark/xml_parser'
