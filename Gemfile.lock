@@ -2,12 +2,14 @@ PATH
   remote: .
   specs:
     wiresnark (0.0.0)
+      nokogiri
       pcaprub
 
 GEM
   remote: http://rubygems.org/
   specs:
     minitest (2.8.1)
+    nokogiri (1.5.0)
     pcaprub (0.11.0)
 
 PLATFORMS
