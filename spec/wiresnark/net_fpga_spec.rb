@@ -19,4 +19,14 @@ module Wiresnark describe NetFPGA do
       nf.registers['SCHEDULER_0_NUM_PHASES_REG'].must_equal 0x2000200
     end
   end
+
+  describe '#set' do
+    it 'sets the register contents (via the passed bridge)' do
+      regbridge = MiniTest::Mock.new
+      regbridge.expect :set, nil, [0x2000200, 7]
+      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
+      nf.set 'SCHEDULER_0_NUM_PHASES_REG', 7
+      regbridge.verify
+    end
+  end
 end end
