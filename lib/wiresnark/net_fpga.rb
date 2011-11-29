@@ -17,6 +17,12 @@ module Wiresnark class NetFPGA
     ints.map { |i| i.to_s(16).rjust 2, '0'}.join ':'
   end
 
+  def mac_set i, locality, mac
+    ints = mac.split(':').map { |hex| hex.to_i 16 }
+    set "MAC_RXTX_#{i}_#{locality.upcase}_MAC_HI_REG", ints[0] << 8 | ints[1]
+    set "MAC_RXTX_#{i}_#{locality.upcase}_MAC_LO_REG", ints[2] << 24 | ints[3] << 16 | ints[4] << 8 | ints[5]
+  end
+
   def set register, value
     @regbridge.set @registers[register], value
   end

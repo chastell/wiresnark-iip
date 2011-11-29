@@ -30,6 +30,17 @@ module Wiresnark describe NetFPGA do
     end
   end
 
+  describe '#mac_set' do
+    it 'sets the MAC of the given interface' do
+      regbridge = MiniTest::Mock.new
+      regbridge.expect :set, nil, [0x2000100, 0x0000ade3]
+      regbridge.expect :set, nil, [0x2000104, 0x3ea42300]
+      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
+      nf.mac_set 0, :local, 'ad:e3:3e:a4:23:00'
+      regbridge.verify
+    end
+  end
+
   describe '#registers' do
     it 'returns the given NetFPGA’s register map' do
       nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h'
