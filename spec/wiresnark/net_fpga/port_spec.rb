@@ -21,6 +21,17 @@ module Wiresnark describe NetFPGA::Port do
     end
   end
 
+  describe '#local_mac=' do
+    it 'sets the local MAC address' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['MAC_RXTX_0_LOCAL_MAC_HI_REG', 0x0000ade3]
+      net_fpga.expect :set, nil, ['MAC_RXTX_0_LOCAL_MAC_LO_REG', 0x3ea42300]
+      port = NetFPGA::Port.new net_fpga, 0
+      port.local_mac = 'ad:e3:3e:a4:23:00'
+      net_fpga.verify
+    end
+  end
+
   describe '#other_mac' do
     it 'gets the other MAC address' do
       port = NetFPGA::Port.new net_fpga, 1
