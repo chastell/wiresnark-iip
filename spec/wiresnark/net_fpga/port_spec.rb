@@ -38,4 +38,15 @@ module Wiresnark describe NetFPGA::Port do
       port.other_mac.must_equal 'a3:a3:45:23:34:00'
     end
   end
+
+  describe '#other_mac=' do
+    it 'sets the other MAC address' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['MAC_RXTX_1_OTHER_MAC_HI_REG', 0x0000a3a3]
+      net_fpga.expect :set, nil, ['MAC_RXTX_1_OTHER_MAC_LO_REG', 0x45233400]
+      port = NetFPGA::Port.new net_fpga, 1
+      port.other_mac = 'a3:a3:45:23:34:00'
+      net_fpga.verify
+    end
+  end
 end end
