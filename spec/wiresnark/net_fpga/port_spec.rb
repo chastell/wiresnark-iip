@@ -9,6 +9,7 @@ module Wiresnark describe NetFPGA::Port do
       when 'MAC_RXTX_0_LOCAL_MAC_LO_REG' then 0x3ea42300
       when 'MAC_RXTX_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'MAC_RXTX_1_OTHER_MAC_LO_REG' then 0x45233400
+      when 'SCHEDULER_0_NUM_PHASES_REG'  then 4
       end
     end
     net_fpga
@@ -29,6 +30,13 @@ module Wiresnark describe NetFPGA::Port do
       port = NetFPGA::Port.new net_fpga, 0
       port.local_mac = 'ad:e3:3e:a4:23:00'
       net_fpga.verify
+    end
+  end
+
+  describe '#number_of_phases' do
+    it 'gets the number of phases' do
+      port = NetFPGA::Port.new net_fpga, 0
+      port.number_of_phases.must_equal 4
     end
   end
 
