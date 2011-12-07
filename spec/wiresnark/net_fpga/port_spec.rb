@@ -40,6 +40,16 @@ module Wiresnark describe NetFPGA::Port do
     end
   end
 
+  describe '#number_of_phases=' do
+    it 'sets the number of phases' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['SCHEDULER_1_NUM_PHASES_REG', 3]
+      port = NetFPGA::Port.new net_fpga, 1
+      port.number_of_phases = 3
+      net_fpga.verify
+    end
+  end
+
   describe '#other_mac' do
     it 'gets the other MAC address' do
       port = NetFPGA::Port.new net_fpga, 1

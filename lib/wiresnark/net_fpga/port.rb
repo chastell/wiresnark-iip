@@ -16,6 +16,10 @@ module Wiresnark class NetFPGA::Port
     @net_fpga.get "SCHEDULER_#{@number}_NUM_PHASES_REG"
   end
 
+  def number_of_phases= number
+    @net_fpga.set "SCHEDULER_#{@number}_NUM_PHASES_REG", number
+  end
+
   def other_mac
     get_mac 'OTHER'
   end
