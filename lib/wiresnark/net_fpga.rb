@@ -10,6 +10,10 @@ module Wiresnark class NetFPGA
     @regbridge.get @registers[register]
   end
 
+  def ports
+    (0..3).map { |i| Port.new self, i }
+  end
+
   def set register, value
     @regbridge.set @registers[register], value
   end

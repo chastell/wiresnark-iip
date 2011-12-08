@@ -13,6 +13,14 @@ module Wiresnark describe NetFPGA do
     end
   end
 
+  describe '#ports' do
+    it 'returns the four NetFPGA’s ports' do
+      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h'
+      nf.ports.size.must_equal 4
+      nf.ports.each { |p| p.must_be_instance_of NetFPGA::Port }
+    end
+  end
+
   describe '#registers' do
     it 'returns the given NetFPGA’s register map' do
       nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h'
