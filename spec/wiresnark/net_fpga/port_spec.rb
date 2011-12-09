@@ -10,6 +10,10 @@ module Wiresnark describe NetFPGA::Port do
       when 'MAC_RXTX_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'MAC_RXTX_1_OTHER_MAC_LO_REG' then 0x45233400
       when 'SCHEDULER_0_NUM_PHASES_REG'  then 4
+      when 'SCHEDULER_0_PH_1_LENGTH_REG' then 300
+      when 'SCHEDULER_0_PH_2_LENGTH_REG' then 300
+      when 'SCHEDULER_0_PH_3_LENGTH_REG' then 300
+      when 'SCHEDULER_0_PH_4_LENGTH_REG' then 100
       end
     end
     net_fpga
@@ -65,6 +69,13 @@ module Wiresnark describe NetFPGA::Port do
       port = NetFPGA::Port.new net_fpga, 1
       port.other_mac = 'a3:a3:45:23:34:00'
       net_fpga.verify
+    end
+  end
+
+  describe '#phase_lengths' do
+    it 'gets the lenghts of the subsequent phases' do
+      port = NetFPGA::Port.new net_fpga, 0
+      port.phase_lengths.must_equal [300, 300, 300, 100]
     end
   end
 end end

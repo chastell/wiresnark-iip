@@ -28,6 +28,10 @@ module Wiresnark class NetFPGA::Port
     set_mac mac, 'OTHER'
   end
 
+  def phase_lengths
+    (1..4).map { |ph| @net_fpga.get "SCHEDULER_#{@port}_PH_#{ph}_LENGTH_REG" }
+  end
+
   private
 
   def get_mac locality
