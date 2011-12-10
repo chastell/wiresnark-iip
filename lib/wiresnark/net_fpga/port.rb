@@ -1,10 +1,10 @@
 module Wiresnark class NetFPGA::Port
   PhaseTypes = {
     0 => 'silent',
-    1 => 'QoS',
+    1 => 'DSS',
     2 => 'CAN',
-    3 => 'DSS',
-    4 => 'MGT',
+    4 => 'QoS',
+    7 => 'MGT',
   }
 
   def initialize net_fpga, port

@@ -14,9 +14,9 @@ module Wiresnark describe NetFPGA::Port do
       when 'SCHEDULER_2_PH_2_LENGTH_REG' then 200
       when 'SCHEDULER_2_PH_3_LENGTH_REG' then 300
       when 'SCHEDULER_2_PH_4_LENGTH_REG' then 400
-      when 'SCHEDULER_2_PH_1_TYPE_REG'   then 1
+      when 'SCHEDULER_2_PH_1_TYPE_REG'   then 4
       when 'SCHEDULER_2_PH_2_TYPE_REG'   then 2
-      when 'SCHEDULER_2_PH_3_TYPE_REG'   then 4
+      when 'SCHEDULER_2_PH_3_TYPE_REG'   then 7
       when 'SCHEDULER_2_PH_4_TYPE_REG'   then 0
       end
     end
