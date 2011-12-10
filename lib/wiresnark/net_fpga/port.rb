@@ -43,6 +43,14 @@ module Wiresnark class NetFPGA::Port
     end
   end
 
+  def phases= phases
+    @net_fpga.set "SCHEDULER_#{@port}_NUM_PHASES_REG", phases.size
+    phases.each.with_index do |phase, ph|
+      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG",   TypeNumbers[phase[:type]]
+      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG", phase[:length]
+    end
+  end
+
   private
 
   def get_mac locality

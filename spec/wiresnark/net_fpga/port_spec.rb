@@ -94,4 +94,27 @@ module Wiresnark describe NetFPGA::Port do
       ]
     end
   end
+
+  describe '#phases=' do
+    it 'sets the phases' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['SCHEDULER_3_NUM_PHASES_REG',  4]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_1_LENGTH_REG', 100]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_2_LENGTH_REG', 200]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_3_LENGTH_REG', 300]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_LENGTH_REG', 400]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_1_TYPE_REG',   1]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_2_TYPE_REG',   2]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_3_TYPE_REG',   4]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_TYPE_REG',   0]
+      port = NetFPGA::Port.new net_fpga, 3
+      port.phases = [
+        { type: 'QoS',    length: 100 },
+        { type: 'CAN',    length: 200 },
+        { type: 'MGT',    length: 300 },
+        { type: 'silent', length: 400 },
+      ]
+      net_fpga.verify
+    end
+  end
 end end
