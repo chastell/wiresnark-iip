@@ -1,4 +1,6 @@
 module Wiresnark class NetFPGA::Port
+  TypeNumbers = { 'silent' => 0, 'QoS' => 1, 'CAN' => 2, 'DSS' => 3, 'MGT' => 4 }
+
   def initialize net_fpga, port
     @net_fpga = net_fpga
     @port     = port
@@ -30,6 +32,15 @@ module Wiresnark class NetFPGA::Port
 
   def phase_lengths
     (1..4).map { |ph| @net_fpga.get "SCHEDULER_#{@port}_PH_#{ph}_LENGTH_REG" }
+  end
+
+  def phases
+    Array.new @net_fpga.get "SCHEDULER_#{@port}_NUM_PHASES_REG" do |ph|
+      {
+        type:   TypeNumbers.invert[@net_fpga.get "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG"],
+        length: @net_fpga.get("SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG"),
+      }
+    end
   end
 
   private

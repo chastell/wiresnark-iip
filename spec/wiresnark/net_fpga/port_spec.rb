@@ -9,11 +9,15 @@ module Wiresnark describe NetFPGA::Port do
       when 'MAC_RXTX_0_LOCAL_MAC_LO_REG' then 0x3ea42300
       when 'MAC_RXTX_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'MAC_RXTX_1_OTHER_MAC_LO_REG' then 0x45233400
-      when 'SCHEDULER_0_NUM_PHASES_REG'  then 4
-      when 'SCHEDULER_0_PH_1_LENGTH_REG' then 300
-      when 'SCHEDULER_0_PH_2_LENGTH_REG' then 300
-      when 'SCHEDULER_0_PH_3_LENGTH_REG' then 300
-      when 'SCHEDULER_0_PH_4_LENGTH_REG' then 100
+      when 'SCHEDULER_2_NUM_PHASES_REG'  then 4
+      when 'SCHEDULER_2_PH_1_LENGTH_REG' then 100
+      when 'SCHEDULER_2_PH_2_LENGTH_REG' then 200
+      when 'SCHEDULER_2_PH_3_LENGTH_REG' then 300
+      when 'SCHEDULER_2_PH_4_LENGTH_REG' then 400
+      when 'SCHEDULER_2_PH_1_TYPE_REG'   then 1
+      when 'SCHEDULER_2_PH_2_TYPE_REG'   then 2
+      when 'SCHEDULER_2_PH_3_TYPE_REG'   then 4
+      when 'SCHEDULER_2_PH_4_TYPE_REG'   then 0
       end
     end
     net_fpga
@@ -39,7 +43,7 @@ module Wiresnark describe NetFPGA::Port do
 
   describe '#number_of_phases' do
     it 'gets the number of phases' do
-      port = NetFPGA::Port.new net_fpga, 0
+      port = NetFPGA::Port.new net_fpga, 2
       port.number_of_phases.must_equal 4
     end
   end
@@ -47,8 +51,8 @@ module Wiresnark describe NetFPGA::Port do
   describe '#number_of_phases=' do
     it 'sets the number of phases' do
       net_fpga = MiniTest::Mock.new
-      net_fpga.expect :set, nil, ['SCHEDULER_1_NUM_PHASES_REG', 3]
-      port = NetFPGA::Port.new net_fpga, 1
+      net_fpga.expect :set, nil, ['SCHEDULER_2_NUM_PHASES_REG', 3]
+      port = NetFPGA::Port.new net_fpga, 2
       port.number_of_phases = 3
       net_fpga.verify
     end
@@ -74,8 +78,20 @@ module Wiresnark describe NetFPGA::Port do
 
   describe '#phase_lengths' do
     it 'gets the lenghts of the subsequent phases' do
-      port = NetFPGA::Port.new net_fpga, 0
-      port.phase_lengths.must_equal [300, 300, 300, 100]
+      port = NetFPGA::Port.new net_fpga, 2
+      port.phase_lengths.must_equal [100, 200, 300, 400]
+    end
+  end
+
+  describe '#phases' do
+    it 'gets the phases' do
+      port = NetFPGA::Port.new net_fpga, 2
+      port.phases.must_equal [
+        { type: 'QoS',    length: 100 },
+        { type: 'CAN',    length: 200 },
+        { type: 'MGT',    length: 300 },
+        { type: 'silent', length: 400 },
+      ]
     end
   end
 end end
