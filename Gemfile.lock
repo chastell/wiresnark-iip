@@ -2,12 +2,14 @@ PATH
   remote: .
   specs:
     wiresnark (0.0.0)
+      ffi
       nokogiri
       pcaprub
 
 GEM
   remote: http://rubygems.org/
   specs:
+    ffi (1.0.11)
     minitest (2.9.0)
     nokogiri (1.5.0)
     pcaprub (0.11.0)
