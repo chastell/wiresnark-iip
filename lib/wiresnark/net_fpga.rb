@@ -1,7 +1,7 @@
 module Wiresnark class NetFPGA
   attr_reader :registers
 
-  def initialize reg_path, regbridge = nil
+  def initialize reg_path, regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
     @registers = RegParser.parse reg_path
   end
