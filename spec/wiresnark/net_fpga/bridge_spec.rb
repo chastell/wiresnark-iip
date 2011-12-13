@@ -6,4 +6,8 @@ module Wiresnark describe NetFPGA::Bridge do
     assert bridge.respond_to? :get_register
     assert bridge.respond_to? :set_register
   end
+
+  it 'uses FFI' do
+    assert NetFPGA::Bridge.is_a? FFI::Library
+  end
 end end
