@@ -63,10 +63,10 @@ module Wiresnark describe NetFPGA::Port do
     it 'gets the phases' do
       port = NetFPGA::Port.new net_fpga, 2
       port.phases.must_equal [
-        { type: 'QoS',    length: 100 },
-        { type: 'CAN',    length: 200 },
-        { type: 'MGT',    length: 300 },
-        { type: 'silent', length: 400 },
+        { type: 'QoS', length: 100 },
+        { type: 'CAN', length: 200 },
+        { type: 'MGT', length: 300 },
+        { type: 'NIL', length: 400 },
       ]
     end
   end
@@ -85,10 +85,10 @@ module Wiresnark describe NetFPGA::Port do
       net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_TYPE_REG',   0]
       port = NetFPGA::Port.new net_fpga, 3
       port.phases = [
-        { type: 'QoS',    length: 100 },
-        { type: 'CAN',    length: 200 },
-        { type: 'MGT',    length: 300 },
-        { type: 'silent', length: 400 },
+        { type: 'QoS', length: 100 },
+        { type: 'CAN', length: 200 },
+        { type: 'MGT', length: 300 },
+        { type: 'NIL', length: 400 },
       ]
       net_fpga.verify
     end

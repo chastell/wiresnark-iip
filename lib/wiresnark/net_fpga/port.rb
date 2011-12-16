@@ -1,6 +1,6 @@
 module Wiresnark class NetFPGA::Port
   PhaseTypes = {
-    0 => 'silent',
+    0 => 'NIL',
     1 => 'DSS',
     2 => 'CAN',
     4 => 'QoS',
