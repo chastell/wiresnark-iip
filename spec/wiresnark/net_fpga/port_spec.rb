@@ -63,7 +63,7 @@ module Wiresnark describe NetFPGA::Port do
     it 'gets the phases' do
       port = NetFPGA::Port.new net_fpga, 2
       port.phases.must_equal [
-        { type: 'QoS', length: 100 },
+        { type: 'QOS', length: 100 },
         { type: 'CAN', length: 200 },
         { type: 'MGT', length: 300 },
         { type: 'NIL', length: 400 },

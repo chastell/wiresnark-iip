@@ -25,8 +25,8 @@ module Wiresnark describe DSL::GeneratorDSL do
   describe '#phase_types' do
     it 'stores the passed types as array' do
       @env.phase_types.must_be_nil
-      @env.phase_types 'QoS', 'CAN', 'DSS', 'MGT'
-      @env.phase_types.must_equal ['QoS', 'CAN', 'DSS', 'MGT']
+      @env.phase_types 'QOS', 'CAN', 'DSS', 'MGT'
+      @env.phase_types.must_equal ['QOS', 'CAN', 'DSS', 'MGT']
     end
   end
 

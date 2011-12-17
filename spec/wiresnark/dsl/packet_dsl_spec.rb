@@ -13,7 +13,7 @@ module Wiresnark describe DSL::PacketDSL do
       env.payload 'foo'
       env.random_size 60..100
       env.source_mac '11:22:33:44:55:66'
-      env.type 'QoS'
+      env.type 'QOS'
 
       env.params.must_equal({
         destination_mac: 'aa:bb:cc:dd:ee:ff',
@@ -21,7 +21,7 @@ module Wiresnark describe DSL::PacketDSL do
         random_size: 60..100,
         payload: 'foo',
         source_mac: '11:22:33:44:55:66',
-        type: 'QoS',
+        type: 'QOS',
       })
     end
   end

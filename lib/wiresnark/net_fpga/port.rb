@@ -3,7 +3,7 @@ module Wiresnark class NetFPGA::Port
     0 => 'NIL',
     1 => 'DSS',
     2 => 'CAN',
-    4 => 'QoS',
+    4 => 'QOS',
     7 => 'MGT',
   }
 

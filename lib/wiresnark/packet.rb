@@ -4,7 +4,7 @@ module Wiresnark class Packet
     'Eth' => "\x00",
     'DSS' => "\x01",
     'CAN' => "\x02",
-    'QoS' => "\x04",
+    'QOS' => "\x04",
     'MGT' => "\x07",
   }
 

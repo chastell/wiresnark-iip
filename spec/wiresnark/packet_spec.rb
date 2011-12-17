@@ -143,7 +143,7 @@ module Wiresnark describe Packet do
 
       qos_bin = Packet.new.to_bin
       qos_bin[14] = "\x04"
-      Packet.new(qos_bin).type.must_equal 'QoS'
+      Packet.new(qos_bin).type.must_equal 'QOS'
 
       mgt_bin = Packet.new.to_bin
       mgt_bin[14] = "\x07"
@@ -159,12 +159,12 @@ module Wiresnark describe Packet do
       packet.type.must_equal 'Eth'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
-      packet.type = 'QoS'
-      packet.type.must_equal 'QoS'
+      packet.type = 'QOS'
+      packet.type.must_equal 'QOS'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.payload = 'foo' * 10
-      packet.type.must_equal 'QoS'
+      packet.type.must_equal 'QOS'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.type = 'DSS'

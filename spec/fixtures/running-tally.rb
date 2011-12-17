@@ -7,7 +7,7 @@ end
 generator do
   count 2
   interface 'lo'
-  type 'QoS'
+  type 'QOS'
 end
 
 generator do
