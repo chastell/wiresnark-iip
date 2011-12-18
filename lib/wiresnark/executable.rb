@@ -1,11 +1,14 @@
 module Wiresnark class Executable
 
-  def initialize files = ARGV
-    @files = files
+  def initialize args = ARGV
+    @command = args.shift
+    @files   = args
   end
 
   def run runner = Runner
-    runner.run @files.first
+    case @command
+    when 'run' then runner.run @files.first
+    end
   end
 
 end end

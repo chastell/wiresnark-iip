@@ -6,7 +6,7 @@ module Wiresnark describe Executable do
     it 'passes the given file to the runner' do
       runner = MiniTest::Mock.new
       runner.expect :run, nil, ['spec/fixtures/three-to-lo.rb']
-      Executable.new(['spec/fixtures/three-to-lo.rb']).run runner
+      Executable.new(['run', 'spec/fixtures/three-to-lo.rb']).run runner
       runner.verify
     end
   end
