@@ -5,7 +5,7 @@ module Wiresnark module XMLParser
       other = interface.xpath('v_port/MACDestinationAddress').first.text
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
-      [interface.attr('name'), { local: local, other: other, phases: phases }]
+      [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
     end]
   end
 end end
