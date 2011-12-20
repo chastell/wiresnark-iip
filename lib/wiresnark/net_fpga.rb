@@ -6,6 +6,14 @@ module Wiresnark class NetFPGA
     @registers = RegParser.parse reg_path
   end
 
+  def config= config
+    config.each do |i, params|
+      ports[i].local_mac = params[:local]
+      ports[i].other_mac = params[:other]
+      ports[i].phases    = params[:phases]
+    end
+  end
+
   def get register
     @regbridge.get @registers[register]
   end
