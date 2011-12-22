@@ -5,9 +5,9 @@ module Wiresnark class Executable
     @files   = args
   end
 
-  def run runner = Runner
+  def run opts = { runner: Runner }
     case @command
-    when 'run' then runner.run @files.first
+    when 'run' then opts[:runner].run @files.first
     end
   end
 
