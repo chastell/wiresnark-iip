@@ -1,5 +1,5 @@
 module Wiresnark class Shower
-  def initialize net_fpga = NetFPGA
+  def initialize net_fpga = NetFPGA.new
     @net_fpga = net_fpga
   end
 
