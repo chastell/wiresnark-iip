@@ -8,9 +8,7 @@ module Wiresnark describe Shower do
       port.expect :other_mac, 'aa:bb:cc:dd:ee:ff'
       nf.expect :ports, [port]
 
-      capture_io do
-        Shower.new(nf).show({ 'interface' => 'eth0', 'param' => 'MACDA', 'vport' => 'v_1' })
-      end.first.must_equal "aa:bb:cc:dd:ee:ff\n"
+      Shower.new(nf).show({ 'interface' => 'eth0', 'param' => 'MACDA', 'vport' => 'v_1' }).must_equal 'aa:bb:cc:dd:ee:ff'
 
       port.verify
       nf.verify

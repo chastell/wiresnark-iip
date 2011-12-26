@@ -9,9 +9,9 @@ module Wiresnark class Executable
     case @command
     when 'run'  then opts[:runner].run @args.first
     when 'iip'
-      case @args.shift
-      when 'show' then opts[:shower].show Hash[@args.map { |a| a.split '=' }]
-      end
+      puts case @args.shift
+           when 'show' then opts[:shower].show Hash[@args.map { |a| a.split '=' }]
+           end
     end
   end
 

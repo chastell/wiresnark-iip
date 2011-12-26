@@ -12,8 +12,12 @@ module Wiresnark describe Executable do
 
     it 'executes IIP commands' do
       shower = MiniTest::Mock.new
-      shower.expect :show, nil, [{ 'interface' => 'eth0', 'param' => 'MACDA', 'vport' => 'v_1' }]
-      Executable.new(['iip', 'show', 'param=MACDA', 'interface=eth0', 'vport=v_1']).run shower: shower
+      shower.expect :show, 'aa:bb:cc:dd:ee:ff', [{ 'interface' => 'eth0', 'param' => 'MACDA', 'vport' => 'v_1' }]
+
+      capture_io do
+        Executable.new(['iip', 'show', 'param=MACDA', 'interface=eth0', 'vport=v_1']).run shower: shower
+      end.first.must_equal "aa:bb:cc:dd:ee:ff\n"
+
       shower.verify
     end
   end
