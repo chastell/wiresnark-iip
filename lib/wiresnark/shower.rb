@@ -8,6 +8,7 @@ module Wiresnark class Shower
 
     case opts['param']
     when 'MACDA' then @net_fpga.ports[port].other_mac
+    when 'MACSA' then @net_fpga.ports[port].local_mac
     end
   end
 end end
