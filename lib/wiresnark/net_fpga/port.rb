@@ -28,6 +28,10 @@ module Wiresnark class NetFPGA::Port
     set_mac mac, 'OTHER'
   end
 
+  def phase_number
+    @net_fpga.get "SCHEDULER_#{@port}_NUM_PHASES_REG"
+  end
+
   def phases
     Array.new @net_fpga.get "SCHEDULER_#{@port}_NUM_PHASES_REG" do |ph|
       {

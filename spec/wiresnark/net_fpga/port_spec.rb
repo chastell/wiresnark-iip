@@ -59,6 +59,13 @@ module Wiresnark describe NetFPGA::Port do
     end
   end
 
+  describe '#phase_number' do
+    it 'returns the number of phases' do
+      port = NetFPGA::Port.new net_fpga, 2
+      port.phase_number.must_equal 4
+    end
+  end
+
   describe '#phases' do
     it 'gets the phases' do
       port = NetFPGA::Port.new net_fpga, 2
