@@ -7,10 +7,10 @@ module Wiresnark class Shower
     port = @net_fpga.ports[opts['interface'][/\d$/].to_i]
 
     case opts['param']
-    when 'CL'    then port.phases.map { |p| p[:length] }.inject :+
+    when 'CL'    then port.cycle_length
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
-    when 'NP'    then port.phases.size
+    when 'NP'    then port.phase_number
     end
   end
 end end

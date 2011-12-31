@@ -10,7 +10,8 @@ module Wiresnark describe Shower do
       nf = MiniTest::Mock.new
       p0.expect :local_mac, '00:11:22:33:44:55'
       p1.expect :other_mac, 'aa:bb:cc:dd:ee:ff'
-      p2.expect :phases, [{ type: 'QOS', length: 100 }, { type: 'CAN', length: 200 }, { type: 'MGT', length: 300 }, { type: 'NIL', length: 400 }]
+      p2.expect :cycle_length, 1000
+      p2.expect :phase_number, 4
       nf.expect :ports, [p0, p1, p2]
 
       Shower.new(nf).show({ 'interface' => 'eth0', 'param' => 'MACSA', 'vport' => 'v_1' }).must_equal '00:11:22:33:44:55'
