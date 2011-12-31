@@ -12,6 +12,10 @@ module Wiresnark class NetFPGA::Port
     @port     = port
   end
 
+  def cycle_length
+    phases.map { |p| p[:length] }.inject :+
+  end
+
   def local_mac
     get_mac 'LOCAL'
   end

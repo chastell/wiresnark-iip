@@ -23,6 +23,13 @@ module Wiresnark describe NetFPGA::Port do
     net_fpga
   end
 
+  describe '#cycle_length' do
+    it 'returns the length of the cycle' do
+      port = NetFPGA::Port.new net_fpga, 2
+      port.cycle_length.must_equal 1000
+    end
+  end
+
   describe '#local_mac' do
     it 'gets the local MAC address' do
       port = NetFPGA::Port.new net_fpga, 0
