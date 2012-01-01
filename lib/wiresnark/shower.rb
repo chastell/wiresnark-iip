@@ -11,6 +11,7 @@ module Wiresnark class Shower
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
     when 'NP'    then port.phase_number
+    when 'PL'    then port.phases.find { |p| p[:type] == opts['pi'] }[:length]
     end
   end
 end end
