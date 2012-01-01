@@ -7,4 +7,4 @@ Wiresnark¹ is a [PacketFu](https://github.com/todb/packetfu)-inspired and [Pcap
 
 ---
 
-© MMXI Piotr Szotkowski <p.szotkowski@tele.pw.edu.pl>, licensed under AGPL 3 (see LICENCE)
+© MMXI-MMXII Piotr Szotkowski <p.szotkowski@tele.pw.edu.pl>, licensed under AGPL 3 (see LICENCE)
