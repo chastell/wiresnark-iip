@@ -20,13 +20,13 @@ module Wiresnark describe Runner do
       skip if Process.uid.zero?
 
       -> { Runner.run 'spec/fixtures/three-to-lo.rb' }.must_output <<-END
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000001]
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002]
-lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]
-lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000001]
-lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002]
-\t3 Eth\t180 bytes\t60 bytes/packet
+-> lo\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]
+-> lo\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000001]
+-> lo\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002]
+lo ->\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]
+lo ->\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000001]
+lo ->\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002]
+\t3 NIL\t180 bytes\t60 bytes/packet
 
       END
     end
@@ -51,8 +51,8 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
 
       out = capture_io { Runner.run 'spec/fixtures/quiet-lo.rb' }.first
 
-      out.wont_include "-> lo\tEth\t60"
-      out.must_include "\t3 Eth\t180 bytes"
+      out.wont_include "-> lo\tNIL\t60"
+      out.must_include "\t3 NIL\t180 bytes"
     end
 
     it 'includes per-type running tally in running_tally mode' do
@@ -60,7 +60,7 @@ lo ->\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
 
       out = capture_io { Runner.run 'spec/fixtures/running-tally.rb' }.first
 
-      out.must_match 'Eth:     6 p,   360 b,    60 b/p    DSS:     4 p,   240 b,    60 b/p    CAN:     3 p,   180 b,    60 b/p    QOS:     2 p,   120 b,    60 b/p    MGT:     5 p,   300 b,    60 b/p'
+      out.must_match 'NIL:     6 p,   360 b,    60 b/p    DSS:     4 p,   240 b,    60 b/p    CAN:     3 p,   180 b,    60 b/p    QOS:     2 p,   120 b,    60 b/p    MGT:     5 p,   300 b,    60 b/p'
     end
   end
 

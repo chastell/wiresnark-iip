@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 module Wiresnark describe Packet do
 
   describe '.new' do
-    it 'creates an empty Eth packet by default' do
+    it 'creates an empty NIL packet by default' do
       Packet.new.to_bin.must_equal "\x00" * 12 + "\x08\x00" + "\x00" * 46
     end
 
@@ -118,7 +118,7 @@ module Wiresnark describe Packet do
 
   describe '#to_s' do
     it 'returns a human-readable packet representation' do
-      Packet.new.to_s.must_equal "Eth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]"
+      Packet.new.to_s.must_equal "NIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000000]"
 
       Packet.new(
         destination_mac: 'aa:bb:cc:dd:ee:ff',
@@ -131,7 +131,7 @@ module Wiresnark describe Packet do
 
   describe '#type' do
     it 'reads its type' do
-      Packet.new.type.must_equal 'Eth'
+      Packet.new.type.must_equal 'NIL'
 
       dss_bin = Packet.new.to_bin
       dss_bin[14] = "\x01"
@@ -152,11 +152,11 @@ module Wiresnark describe Packet do
   end
 
   describe '#type=' do
-    it 'sets its type, preserving payload on type changes (Eth -> non-Eth -> non-Eth -> Eth -> Eth)' do
+    it 'sets its type, preserving payload on type changes (NIL -> non-NIL -> non-NIL -> NIL -> NIL)' do
       packet = Packet.new
       packet.payload = 'foo' * 10
 
-      packet.type.must_equal 'Eth'
+      packet.type.must_equal 'NIL'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
       packet.type = 'QOS'
@@ -171,12 +171,12 @@ module Wiresnark describe Packet do
       packet.type.must_equal 'DSS'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
-      packet.type = 'Eth'
-      packet.type.must_equal 'Eth'
+      packet.type = 'NIL'
+      packet.type.must_equal 'NIL'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
 
-      packet.type = 'Eth'
-      packet.type.must_equal 'Eth'
+      packet.type = 'NIL'
+      packet.type.must_equal 'NIL'
       packet.payload.must_equal 'foo' * 10 + "\x00" * 15
     end
   end

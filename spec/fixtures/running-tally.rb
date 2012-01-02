@@ -1,7 +1,7 @@
 generator do
   count 1
   interface 'lo'
-  type 'Eth'
+  type 'NIL'
 end
 
 generator do
@@ -31,7 +31,7 @@ end
 generator do
   count 6
   interface 'lo'
-  type 'Eth'
+  type 'NIL'
 end
 
 monitor do

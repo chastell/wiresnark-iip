@@ -1,7 +1,6 @@
 module Wiresnark class Packet
-
   TypeBytes = {
-    'Eth' => "\x00",
+    'NIL' => "\x00",
     'DSS' => "\x01",
     'CAN' => "\x02",
     'QOS' => "\x04",
@@ -70,7 +69,7 @@ module Wiresnark class Packet
   end
 
   def type
-    TypeBytes.invert[@bin[14]] or 'Eth'
+    TypeBytes.invert[@bin[14]] or 'NIL'
   end
 
   def type= type
@@ -82,5 +81,4 @@ module Wiresnark class Packet
   def pad_to min_size
     @bin << "\x00" * (min_size - size) if size < min_size
   end
-
 end end

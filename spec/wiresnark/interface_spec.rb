@@ -13,8 +13,8 @@ module Wiresnark describe Interface do
       Interface.new('lo').inject [Packet.new(payload: 'foo'), Packet.new(payload: 'bar')], output = StringIO.new
       output.rewind
       output.read.must_equal <<-END
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [666f6f0000]
--> lo\tEth\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [6261720000]
+-> lo\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [666f6f0000]
+-> lo\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [6261720000]
       END
     end
   end
