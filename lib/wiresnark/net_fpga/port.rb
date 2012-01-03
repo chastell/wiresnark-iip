@@ -1,12 +1,4 @@
 module Wiresnark class NetFPGA::Port
-  PhaseTypes = {
-    0 => 'NIL',
-    1 => 'DSS',
-    2 => 'CAN',
-    4 => 'QOS',
-    7 => 'MGT',
-  }
-
   def initialize net_fpga, port
     @net_fpga = net_fpga
     @port     = port
@@ -39,7 +31,7 @@ module Wiresnark class NetFPGA::Port
   def phases
     Array.new @net_fpga.get "SCHEDULER_#{@port}_NUM_PHASES_REG" do |ph|
       {
-        type:   PhaseTypes[@net_fpga.get "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG"],
+        type:   TypeBytes.invert[@net_fpga.get "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG"],
         length: @net_fpga.get("SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG"),
       }
     end
@@ -48,7 +40,7 @@ module Wiresnark class NetFPGA::Port
   def phases= phases
     @net_fpga.set "SCHEDULER_#{@port}_NUM_PHASES_REG", phases.size
     phases.each.with_index do |phase, ph|
-      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG",   PhaseTypes.invert[phase[:type]]
+      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG",   TypeBytes[phase[:type]]
       @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG", phase[:length]
     end
   end

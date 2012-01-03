@@ -2,7 +2,18 @@ require 'ffi'
 require 'nokogiri'
 require 'pcaprub'
 
-module Wiresnark module DSL end end
+module Wiresnark
+  module DSL
+  end
+
+  TypeBytes = {
+    'NIL' => 0,
+    'DSS' => 1,
+    'CAN' => 2,
+    'QOS' => 4,
+    'MGT' => 7,
+  }
+end
 
 require_relative 'wiresnark/configuration'
 require_relative 'wiresnark/dsl/common_dsl'
