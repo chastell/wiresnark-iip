@@ -1,12 +1,4 @@
 module Wiresnark class Packet
-  TypeBytes = {
-    'NIL' => "\x00",
-    'DSS' => "\x01",
-    'CAN' => "\x02",
-    'QOS' => "\x04",
-    'MGT' => "\x07",
-  }
-
   def initialize arg = {}
     case arg
     when Hash
@@ -69,11 +61,11 @@ module Wiresnark class Packet
   end
 
   def type
-    TypeBytes.invert[@bin[14]] or 'NIL'
+    TypeBytes.invert[@bin[14].ord] or 'NIL'
   end
 
   def type= type
-    @bin[14] = TypeBytes[type]
+    @bin[14] = TypeBytes[type].chr
   end
 
   private

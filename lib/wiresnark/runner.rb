@@ -33,7 +33,7 @@ module Wiresnark module Runner
       mon.instance_eval &block
 
       # FIXME: deuglify the below
-      counts = Hash[Packet::TypeBytes.keys.map { |type| [type, { bytes: 0,  count: 0 }]}]
+      counts = Hash[TypeBytes.keys.map { |type| [type, { bytes: 0,  count: 0 }]}]
       type = nil
       Interface.new(mon.interface).stream.each do |bin|
         packet = Packet.new bin
