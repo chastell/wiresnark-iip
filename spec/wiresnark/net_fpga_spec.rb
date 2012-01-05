@@ -10,11 +10,11 @@ module Wiresnark describe NetFPGA do
           local: 'ad:e3:3e:a4:23:aa',
           other: 'a3:a3:45:23:34:aa',
           phases: [
-            { type: 'QOS', length: 180 },
-            { type: 'CAN', length: 190 },
+            { type: 'QOS', length: 184 },
+            { type: 'CAN', length: 192 },
             { type: 'DSS', length: 200 },
-            { type: 'MGT', length: 210 },
-            { type: 'NIL', length: 220 },
+            { type: 'MGT', length: 208 },
+            { type: 'NIL', length: 216 },
           ],
         },
         1 => {
@@ -28,7 +28,7 @@ module Wiresnark describe NetFPGA do
       regbridge.expect :set, nil, [0x2000100, 0x0000ade3]
       regbridge.expect :set, nil, [0x200014c, 0x45233400]
       regbridge.expect :set, nil, [0x2000200, 4]
-      regbridge.expect :set, nil, [0x2000208, 100]
+      regbridge.expect :set, nil, [0x2000208, 24]
       regbridge.expect :set, nil, [0x2000234, 0]
       nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
       nf.config = config

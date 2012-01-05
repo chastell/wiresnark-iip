@@ -10,10 +10,10 @@ module Wiresnark describe NetFPGA::Port do
       when 'MAC_RXTX_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'MAC_RXTX_1_OTHER_MAC_LO_REG' then 0x45233400
       when 'SCHEDULER_2_NUM_PHASES_REG'  then 4
-      when 'SCHEDULER_2_PH_1_LENGTH_REG' then 100
-      when 'SCHEDULER_2_PH_2_LENGTH_REG' then 200
-      when 'SCHEDULER_2_PH_3_LENGTH_REG' then 300
-      when 'SCHEDULER_2_PH_4_LENGTH_REG' then 400
+      when 'SCHEDULER_2_PH_1_LENGTH_REG' then 23
+      when 'SCHEDULER_2_PH_2_LENGTH_REG' then 24
+      when 'SCHEDULER_2_PH_3_LENGTH_REG' then 25
+      when 'SCHEDULER_2_PH_4_LENGTH_REG' then 26
       when 'SCHEDULER_2_PH_1_TYPE_REG'   then 4
       when 'SCHEDULER_2_PH_2_TYPE_REG'   then 2
       when 'SCHEDULER_2_PH_3_TYPE_REG'   then 7
@@ -26,7 +26,7 @@ module Wiresnark describe NetFPGA::Port do
   describe '#cycle_length' do
     it 'returns the length of the cycle' do
       port = NetFPGA::Port.new net_fpga, 2
-      port.cycle_length.must_equal 1000
+      port.cycle_length.must_equal 784
     end
   end
 
@@ -77,10 +77,10 @@ module Wiresnark describe NetFPGA::Port do
     it 'gets the phases' do
       port = NetFPGA::Port.new net_fpga, 2
       port.phases.must_equal [
-        { type: 'QOS', length: 100 },
-        { type: 'CAN', length: 200 },
-        { type: 'MGT', length: 300 },
-        { type: 'NIL', length: 400 },
+        { type: 'QOS', length: 184 },
+        { type: 'CAN', length: 192 },
+        { type: 'MGT', length: 200 },
+        { type: 'NIL', length: 208 },
       ]
     end
   end
@@ -89,20 +89,20 @@ module Wiresnark describe NetFPGA::Port do
     it 'sets the phases' do
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :set, nil, ['SCHEDULER_3_NUM_PHASES_REG',  4]
-      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_1_LENGTH_REG', 100]
-      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_2_LENGTH_REG', 200]
-      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_3_LENGTH_REG', 300]
-      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_LENGTH_REG', 400]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_1_LENGTH_REG', 23]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_2_LENGTH_REG', 24]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_3_LENGTH_REG', 25]
+      net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_LENGTH_REG', 26]
       net_fpga.expect :set, nil, ['SCHEDULER_3_PH_1_TYPE_REG',   1]
       net_fpga.expect :set, nil, ['SCHEDULER_3_PH_2_TYPE_REG',   2]
       net_fpga.expect :set, nil, ['SCHEDULER_3_PH_3_TYPE_REG',   4]
       net_fpga.expect :set, nil, ['SCHEDULER_3_PH_4_TYPE_REG',   0]
       port = NetFPGA::Port.new net_fpga, 3
       port.phases = [
-        { type: 'QoS', length: 100 },
-        { type: 'CAN', length: 200 },
-        { type: 'MGT', length: 300 },
-        { type: 'NIL', length: 400 },
+        { type: 'QoS', length: 184 },
+        { type: 'CAN', length: 192 },
+        { type: 'MGT', length: 200 },
+        { type: 'NIL', length: 208 },
       ]
       net_fpga.verify
     end
