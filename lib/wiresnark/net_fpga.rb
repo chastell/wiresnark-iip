@@ -1,8 +1,7 @@
 module Wiresnark class NetFPGA
   attr_reader :registers
 
-  def initialize reg_path = nil, regbridge = NetFPGA::Bridge.new
-    reg_path ||= 'reg_defines_simple_system_iip.h'
+  def initialize reg_path = 'reg_defines_simple_system_iip.h', regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
     @registers = RegParser.parse reg_path
   end
