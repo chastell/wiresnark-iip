@@ -1,6 +1,6 @@
-module Wiresnark module Runner
+module Wiresnark class Runner
 
-  def self.run file, env = Object.new.extend(DSL::WiresnarkDSL)
+  def run file, env = Object.new.extend(DSL::WiresnarkDSL)
     env.instance_eval File.read file
 
     env.generator_blocks.each do |block|

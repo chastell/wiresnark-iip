@@ -5,7 +5,7 @@ module Wiresnark class Executable
     @args    = args
   end
 
-  def run opts = { runner: Runner, shower: Shower.new }
+  def run opts = { runner: Runner.new, shower: Shower.new }
     case @command
     when 'run'  then opts[:runner].run @args.first
     when 'iip'
