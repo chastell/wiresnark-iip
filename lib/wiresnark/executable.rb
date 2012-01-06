@@ -5,13 +5,14 @@ module Wiresnark class Executable
     @args    = args
   end
 
-  def run opts = { runner: Runner.new, shower: Shower.new }
+  def run opts = { nf_class: NetFPGA, runner: Runner.new, shower: Shower.new }
     case @command
     when 'run'  then opts[:runner].run @args.first
     when 'iip'
-      puts case @args.shift
-           when 'show' then opts[:shower].show Hash[@args.map { |a| a.split '=' }]
-           end
+      case @args.shift
+      when 'commit' then opts[:nf_class].new.config = XMLParser.parse(@args.first)
+      when 'show'   then puts opts[:shower].show Hash[@args.map { |a| a.split '=' }]
+      end
     end
   end
 

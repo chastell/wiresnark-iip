@@ -10,7 +10,35 @@ module Wiresnark describe Executable do
       runner.verify
     end
 
-    it 'executes IIP commands' do
+    it 'executes IIP commit command' do
+      config = {
+        0 => {
+          local: 'ad:e3:3e:a4:23:aa',
+          other: 'a3:a3:45:23:34:aa',
+          phases: [
+            { type: 'QOS', length: 180 },
+            { type: 'CAN', length: 190 },
+            { type: 'DSS', length: 200 },
+            { type: 'MGT', length: 210 },
+            { type: 'NIL', length: 220 },
+          ],
+        },
+        1 => {
+          local: 'ad:e3:3e:b4:23:aa',
+          other: 'a3:aa:45:23:34:aa',
+          phases: [],
+        },
+      }
+      nf_class = MiniTest::Mock.new
+      net_fpga = MiniTest::Mock.new
+      nf_class.expect :new, net_fpga
+      net_fpga.expect :config=, nil, [config]
+      Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run nf_class: nf_class
+      nf_class.verify
+      net_fpga.verify
+    end
+
+    it 'executes IIP show commands' do
       shower = MiniTest::Mock.new
       shower.expect :show, 'aa:bb:cc:dd:ee:ff', [{ 'interface' => 'eth0', 'param' => 'MACDA', 'vport' => 'v_1' }]
 
