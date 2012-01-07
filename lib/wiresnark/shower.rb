@@ -4,14 +4,16 @@ module Wiresnark class Shower
   end
 
   def show opts
-    port = @net_fpga.ports[opts['interface'][/\d$/].to_i]
+    param, iface, _, pi = *opts
 
-    case opts['param']
+    port = @net_fpga.ports[iface[/\d$/].to_i]
+
+    case param
     when 'CL'    then port.cycle_length
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
     when 'NP'    then port.phase_number
-    when 'PL'    then port.phases.find { |p| p[:type] == opts['pi'] }[:length]
+    when 'PL'    then port.phases.find { |p| p[:type] == pi }[:length]
     end
   end
 end end

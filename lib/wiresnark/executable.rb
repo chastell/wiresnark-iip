@@ -11,7 +11,7 @@ module Wiresnark class Executable
     when 'iip'
       case @args.shift
       when 'commit' then opts[:nf_class].new.config = XMLParser.parse(@args.first)
-      when 'show'   then puts opts[:shower].show Hash[@args.map { |a| a.split '=' }]
+      when 'show'   then puts opts[:shower].show @args
       end
     end
   end
