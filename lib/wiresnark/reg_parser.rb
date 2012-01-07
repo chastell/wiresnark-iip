@@ -1,5 +1,5 @@
-module Wiresnark module RegParser
-  def self.parse path
+module Wiresnark class RegParser
+  def parse path
     Hash[File.read(path).scan(/^#define\s+(\S+)\s+(\S+)$/).map do |reg, val|
       [
         reg,
