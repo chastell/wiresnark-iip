@@ -12,4 +12,14 @@ module Wiresnark class XMLParser
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
     end]
   end
+
+  def verify
+    whitelist = [
+      'interfaces', 'interface', 'v_port', 'Scheduler',
+      'MACDestinationAddress', 'MACSourceAddress',
+      'Cyclelength', 'NumberPhases', 'PhaseLength',
+    ]
+    elements = (@xml.xpath('//*').map(&:name) - whitelist).uniq.sort
+    elements.each { |name| warn "#{name} ignored" }
+  end
 end end
