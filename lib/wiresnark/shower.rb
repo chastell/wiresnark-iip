@@ -12,8 +12,10 @@ module Wiresnark class Shower
     when 'CL'    then port.cycle_length
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
+    when 'MTU'   then 2048
     when 'NP'    then port.phase_number
     when 'PL'    then port.phases.find { |p| p[:type] == pi }[:length]
+    when 'ifgap' then 24
     end
   end
 end end

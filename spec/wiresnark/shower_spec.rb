@@ -36,5 +36,11 @@ module Wiresnark describe Shower do
       p0.verify
       nf.verify
     end
+
+    it 'returns the proper constant params' do
+      nf = MiniTest::Mock.new.expect :ports, []
+      Shower.new(nf).show(['MTU',   'eth0', 'v_1']).must_equal 2048
+      Shower.new(nf).show(['ifgap', 'eth1', 'v_1']).must_equal 24
+    end
   end
 end end
