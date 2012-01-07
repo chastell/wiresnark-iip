@@ -1,5 +1,5 @@
-module Wiresnark module XMLParser
-  def self.parse path
+module Wiresnark class XMLParser
+  def parse path
     Hash[Nokogiri::XML(File.read path).xpath('/interfaces/interface').map do |interface|
       local = interface.xpath('v_port/MACSourceAddress').first.text
       other = interface.xpath('v_port/MACDestinationAddress').first.text

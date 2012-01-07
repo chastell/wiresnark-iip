@@ -10,7 +10,7 @@ module Wiresnark class Executable
     when 'run'  then opts[:runner].run @args.first
     when 'iip'
       case @args.shift
-      when 'commit' then opts[:nf_class].new.config = XMLParser.parse(@args.first)
+      when 'commit' then opts[:nf_class].new.config = XMLParser.new.parse(@args.first)
       when 'show'   then puts opts[:shower].show @args
       end
     end
