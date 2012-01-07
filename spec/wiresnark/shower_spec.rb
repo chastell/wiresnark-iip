@@ -42,5 +42,10 @@ module Wiresnark describe Shower do
       Shower.new(nf).show(['MTU',   'eth0', 'v_1']).must_equal 2048
       Shower.new(nf).show(['ifgap', 'eth1', 'v_1']).must_equal 24
     end
+
+    it 'raises on unknown params' do
+      nf = MiniTest::Mock.new.expect :ports, []
+      -> { Shower.new(nf).show(['foo', 'eth0', 'v_1']) }.must_raise RuntimeError
+    end
   end
 end end

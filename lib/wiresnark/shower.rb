@@ -16,6 +16,7 @@ module Wiresnark class Shower
     when 'NP'    then port.phase_number
     when 'PL'    then port.phases.find { |p| p[:type] == pi }[:length]
     when 'ifgap' then 24
+    else              raise "unknown parameter: #{param}"
     end
   end
 end end
