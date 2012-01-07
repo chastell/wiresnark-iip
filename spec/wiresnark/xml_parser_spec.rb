@@ -19,23 +19,12 @@ module Wiresnark describe XMLParser do
   end
 
   describe '#verify' do
-    it 'verfies that the config file is sane' do
-      -> { xml_parser.verify }.must_output '', <<-end.gsub(/^\s*/, '')
-        BaseValue ignored
-        CBS ignored
-        CIR ignored
-        DestinationAddressfiltering ignored
-        MACType ignored
-        MACVLAN-tag ignored
-        MTU ignored
-        PIH ignored
-        SourceAddressfiltering ignored
-        VLAN-TAG ignored
-        VLAN-tagfiltering ignored
-        WFQ ignored
-        ifgap ignored
-        pi ignored
-      end
+    it 'returns ignored elements' do
+      xml_parser.verify[:ignored].must_equal [
+        'BaseValue', 'CBS', 'CIR', 'DestinationAddressfiltering', 'MACType',
+        'MACVLAN-tag', 'MTU', 'PIH', 'SourceAddressfiltering', 'VLAN-TAG',
+        'VLAN-tagfiltering', 'WFQ', 'ifgap', 'pi',
+      ]
     end
   end
 end end

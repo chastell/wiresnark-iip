@@ -14,12 +14,11 @@ module Wiresnark class XMLParser
   end
 
   def verify
-    whitelist = [
+    parsed = [
       'interfaces', 'interface', 'v_port', 'Scheduler',
       'MACDestinationAddress', 'MACSourceAddress',
       'Cyclelength', 'NumberPhases', 'PhaseLength',
     ]
-    elements = (@xml.xpath('//*').map(&:name) - whitelist).uniq.sort
-    elements.each { |name| warn "#{name} ignored" }
+    { ignored: (@xml.xpath('//*').map(&:name) - parsed).uniq.sort }
   end
 end end
