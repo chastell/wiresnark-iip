@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 module Wiresnark describe Shower do
   describe '#show' do
-    it 'prints the proper Port params' do
+    it 'returns the proper Port params' do
       p0 = MiniTest::Mock.new
       p1 = MiniTest::Mock.new
       p2 = MiniTest::Mock.new
@@ -24,7 +24,7 @@ module Wiresnark describe Shower do
       nf.verify
     end
 
-    it 'prints the proper phase params' do
+    it 'returns the proper phase params' do
       p0 = MiniTest::Mock.new
       nf = MiniTest::Mock.new
       p0.expect :phases, [{ type: 'QOS', length: 100 }, { type: 'CAN', length: 200 }, { type: 'MGT', length: 300 }, { type: 'NIL', length: 400 }]
