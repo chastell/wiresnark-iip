@@ -38,6 +38,12 @@ module Wiresnark class XMLParser
       "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
     end
 
+    warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength').map do |pl|
+      pl      = pl.text.to_i
+      rounded = pl / 8 * 8
+      "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
+    end
+
     {
       ignored:  (@xml.xpath('//*').map(&:name) - parsed).uniq.sort,
       warnings: warnings.compact,

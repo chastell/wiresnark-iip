@@ -27,19 +27,20 @@ module Wiresnark describe XMLParser do
     end
 
     it 'warns on DAF not matching MACDA' do
-      xml_parser.verify[:warnings].must_equal [
-        'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)',
-        'DestinationAddressfiltering (cd:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:aa:45:23:34:aa)',
-      ]
+      warns = xml_parser.verify[:warnings]
+      warns.must_include 'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
     end
 
     it 'warns on Cyclelength and NumberPhases being out of sync with PhaseLength entries' do
-      XMLParser.new('spec/fixtures/iip.conf.bad-cyclelength.xml').verify[:warnings].must_equal [
-        'Cyclelength (900) =/= sum of PhaseLength (1000)'
-      ]
-      XMLParser.new('spec/fixtures/iip.conf.bad-numberphases.xml').verify[:warnings].must_equal [
-        'NumberPhases (4) =/= number of PhaseLengths (5)'
-      ]
+      warns = XMLParser.new('spec/fixtures/iip.conf.bad-cyclelength.xml').verify[:warnings]
+      warns.must_include 'Cyclelength (900) =/= sum of PhaseLength (1000)'
+
+      warns = XMLParser.new('spec/fixtures/iip.conf.bad-numberphases.xml').verify[:warnings]
+      warns.must_include 'NumberPhases (4) =/= number of PhaseLengths (5)'
+    end
+
+    it 'warns on PhaseLengths not being multiples of 8' do
+      xml_parser.verify[:warnings].must_include 'PhaseLength of 180 ns will be rounded to 176 ns'
     end
   end
 end end
