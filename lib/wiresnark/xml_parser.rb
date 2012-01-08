@@ -24,11 +24,23 @@ module Wiresnark class XMLParser
       daf   = v_port.at_xpath('DestinationAddressfiltering').text
       macda = v_port.at_xpath('MACDestinationAddress').text
       "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
-    end.compact
+    end
+
+    warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
+      cl     = scheduler.at_xpath('Cyclelength').text.to_i
+      pl_sum = scheduler.xpath('PhaseLength').map { |pl| pl.text.to_i }.inject :+
+      "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
+    end
+
+    warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
+      np     = scheduler.at_xpath('NumberPhases').text.to_i
+      pl_num = scheduler.xpath('PhaseLength').size
+      "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
+    end
 
     {
       ignored:  (@xml.xpath('//*').map(&:name) - parsed).uniq.sort,
-      warnings: warnings,
+      warnings: warnings.compact,
     }
   end
 end end

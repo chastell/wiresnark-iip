@@ -1,0 +1,13 @@
+<interfaces>
+  <interface name="eth0">
+    <Scheduler type="XenNet">
+      <Cyclelength>1000</Cyclelength>
+      <NumberPhases>4</NumberPhases>
+      <PhaseLength pi="QOS">180</PhaseLength>
+      <PhaseLength pi="CAN">190</PhaseLength>
+      <PhaseLength pi="DSS">200</PhaseLength>
+      <PhaseLength pi="MGT">210</PhaseLength>
+      <PhaseLength pi="NIL">220</PhaseLength>
+    </Scheduler>
+  </interface>
+</interfaces>
