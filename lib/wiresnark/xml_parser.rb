@@ -5,8 +5,8 @@ module Wiresnark class XMLParser
 
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
-      local = interface.xpath('v_port/MACSourceAddress').first.text
-      other = interface.xpath('v_port/MACDestinationAddress').first.text
+      local = interface.at_xpath('v_port/MACSourceAddress').text
+      other = interface.at_xpath('v_port/MACDestinationAddress').text
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
@@ -21,8 +21,8 @@ module Wiresnark class XMLParser
     ]
 
     warnings = @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      daf   = v_port.xpath('DestinationAddressfiltering').first.text
-      macda = v_port.xpath('MACDestinationAddress').first.text
+      daf   = v_port.at_xpath('DestinationAddressfiltering').text
+      macda = v_port.at_xpath('MACDestinationAddress').text
       "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
     end.compact
 
