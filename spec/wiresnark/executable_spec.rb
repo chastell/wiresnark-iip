@@ -10,7 +10,7 @@ module Wiresnark describe Executable do
       runner.verify
     end
 
-    it 'executes IIP commit command' do
+    it 'executes IIP commit command and prints warnings about the XML (if any)' do
       config = {
         0 => {
           local: 'ad:e3:3e:a4:23:aa',
@@ -29,11 +29,16 @@ module Wiresnark describe Executable do
           phases: [],
         },
       }
+
       nf_class = MiniTest::Mock.new
       net_fpga = MiniTest::Mock.new
       nf_class.expect :new, net_fpga
       net_fpga.expect :config=, nil, [config]
-      Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run nf_class: nf_class
+
+      capture_io do
+        Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run nf_class: nf_class
+      end.last.must_include 'BaseValue ignored'
+
       nf_class.verify
       net_fpga.verify
     end
