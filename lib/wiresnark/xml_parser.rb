@@ -19,6 +19,16 @@ module Wiresnark class XMLParser
       'MACDestinationAddress', 'MACSourceAddress',
       'Cyclelength', 'NumberPhases', 'PhaseLength',
     ]
-    { ignored: (@xml.xpath('//*').map(&:name) - parsed).uniq.sort }
+
+    warnings = @xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      daf   = v_port.xpath('DestinationAddressfiltering').first.text
+      macda = v_port.xpath('MACDestinationAddress').first.text
+      "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
+    end.compact
+
+    {
+      ignored:  (@xml.xpath('//*').map(&:name) - parsed).uniq.sort,
+      warnings: warnings,
+    }
   end
 end end

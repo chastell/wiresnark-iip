@@ -20,11 +20,17 @@ module Wiresnark describe XMLParser do
 
   describe '#verify' do
     it 'returns ignored elements' do
-      xml_parser.verify[:ignored].must_equal [
-        'BaseValue', 'CBS', 'CIR', 'DestinationAddressfiltering', 'MACType',
-        'MACVLAN-tag', 'MTU', 'PIH', 'SourceAddressfiltering', 'VLAN-TAG',
-        'VLAN-tagfiltering', 'WFQ', 'ifgap', 'pi',
-      ]
+      xml_parser.verify.must_equal({
+        ignored: [
+          'BaseValue', 'CBS', 'CIR', 'DestinationAddressfiltering', 'MACType',
+          'MACVLAN-tag', 'MTU', 'PIH', 'SourceAddressfiltering', 'VLAN-TAG',
+          'VLAN-tagfiltering', 'WFQ', 'ifgap', 'pi',
+        ],
+        warnings: [
+          'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)',
+          'DestinationAddressfiltering (cd:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:aa:45:23:34:aa)',
+        ]
+      })
     end
   end
 end end
