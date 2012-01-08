@@ -1,0 +1,17 @@
+<interfaces>
+  <interface name="eth0">
+    <v_port name="v_1">
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+    </v_port>
+    <Scheduler type="XenNet">
+      <Cyclelength>984</Cyclelength>
+      <NumberPhases>5</NumberPhases>
+      <PhaseLength pi="QOS">176</PhaseLength>
+      <PhaseLength pi="CAN">184</PhaseLength>
+      <PhaseLength pi="DSS">200</PhaseLength>
+      <PhaseLength pi="MGT">208</PhaseLength>
+      <PhaseLength pi="NIL">216</PhaseLength>
+    </Scheduler>
+  </interface>
+</interfaces>

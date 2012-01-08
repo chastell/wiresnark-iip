@@ -21,9 +21,11 @@ module Wiresnark class XMLParser
     ]
 
     warnings = @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      daf   = v_port.at_xpath('DestinationAddressfiltering').text
-      macda = v_port.at_xpath('MACDestinationAddress').text
-      "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
+      if v_port.at_xpath 'DestinationAddressfiltering'
+        daf   = v_port.at_xpath('DestinationAddressfiltering').text
+        macda = v_port.at_xpath('MACDestinationAddress').text
+        "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
+      end
     end
 
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|

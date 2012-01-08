@@ -42,5 +42,9 @@ module Wiresnark describe XMLParser do
     it 'warns on PhaseLengths not being multiples of 8' do
       xml_parser.verify[:warnings].must_include 'PhaseLength of 180 ns will be rounded to 176 ns'
     end
+
+    it 'returns no problems on a minimal, valid XML' do
+      XMLParser.new('spec/fixtures/iip.conf.minimal.xml').verify.must_equal({ ignored: [], warnings: [] })
+    end
   end
 end end
