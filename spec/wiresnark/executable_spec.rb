@@ -35,9 +35,12 @@ module Wiresnark describe Executable do
       nf_class.expect :new, net_fpga
       net_fpga.expect :config=, nil, [config]
 
-      capture_io do
+      stderr = capture_io do
         Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run nf_class: nf_class
-      end.last.must_include 'BaseValue ignored'
+      end.last
+
+      stderr.must_include 'BaseValue ignored'
+      stderr.must_include 'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
 
       nf_class.verify
       net_fpga.verify
