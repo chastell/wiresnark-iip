@@ -16,7 +16,7 @@ module Wiresnark class XMLParser
   def verify
     parsed = [
       'interfaces', 'interface', 'v_port', 'Scheduler',
-      'MACDestinationAddress', 'MACSourceAddress',
+      'DestinationAddressfiltering', 'MACDestinationAddress', 'MACSourceAddress',
       'Cyclelength', 'NumberPhases', 'PhaseLength',
     ]
 
