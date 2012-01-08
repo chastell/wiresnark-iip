@@ -1,4 +1,6 @@
 module Wiresnark class NetFPGA::Port
+  LengthUnit = 8
+
   def initialize net_fpga, port
     @net_fpga = net_fpga
     @port     = port
@@ -32,7 +34,7 @@ module Wiresnark class NetFPGA::Port
     Array.new @net_fpga.get "SCHEDULER_#{@port}_NUM_PHASES_REG" do |ph|
       {
         type:   TypeBytes.invert[@net_fpga.get "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG"],
-        length: @net_fpga.get("SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG") * 8,
+        length: @net_fpga.get("SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG") * LengthUnit,
       }
     end
   end
@@ -41,7 +43,7 @@ module Wiresnark class NetFPGA::Port
     @net_fpga.set "SCHEDULER_#{@port}_NUM_PHASES_REG", phases.size
     phases.each.with_index do |phase, ph|
       @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_TYPE_REG",   TypeBytes[phase[:type]]
-      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG", phase[:length] / 8
+      @net_fpga.set "SCHEDULER_#{@port}_PH_#{ph+1}_LENGTH_REG", phase[:length] / LengthUnit
     end
   end
 

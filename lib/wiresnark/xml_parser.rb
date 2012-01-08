@@ -42,7 +42,7 @@ module Wiresnark class XMLParser
 
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength').map do |pl|
       pl      = pl.text.to_i
-      rounded = pl / 8 * 8
+      rounded = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
     end
 
