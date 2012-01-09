@@ -29,7 +29,7 @@ module Wiresnark class XMLParser
     end
 
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
-      if v_port.at_xpath 'DestinationAddressfiltering'
+      if scheduler.at_xpath 'Cyclelength'
 	cl     = scheduler.at_xpath('Cyclelength').text.to_i
 	pl_sum = scheduler.xpath('PhaseLength').map { |pl| pl.text.to_i }.inject :+
 	"Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
@@ -37,7 +37,7 @@ module Wiresnark class XMLParser
     end
 
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
-      if v_port.at_xpath 'NumberPhases'
+      if scheduler.at_xpath 'NumberPhases'
 	np     = scheduler.at_xpath('NumberPhases').text.to_i
 	pl_num = scheduler.xpath('PhaseLength').size
 	"NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
