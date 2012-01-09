@@ -160,7 +160,7 @@
 #define CPU_QUEUE_REGS_DISABLE              0x00000001
 
 
-// ===== File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml =====
+// ===== File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml =====
 
 // TX queue disable bit
 #define MAC_GRP_TX_QUEUE_DISABLE_BIT_NUM    0
@@ -193,35 +193,34 @@
 /* ========= Modules ========= */
 
 // Module tags
-#define CORE_BASE_ADDR           0x0000000
-#define DEV_ID_BASE_ADDR         0x0400000
-#define MDIO_BASE_ADDR           0x0440000
-#define DMA_BASE_ADDR            0x0500000
-#define MAC_GRP_0_BASE_ADDR      0x0600000
-#define MAC_GRP_1_BASE_ADDR      0x0640000
-#define MAC_GRP_2_BASE_ADDR      0x0680000
-#define MAC_GRP_3_BASE_ADDR      0x06c0000
-#define CPU_QUEUE_0_BASE_ADDR    0x0700000
-#define CPU_QUEUE_1_BASE_ADDR    0x0740000
-#define CPU_QUEUE_2_BASE_ADDR    0x0780000
-#define CPU_QUEUE_3_BASE_ADDR    0x07c0000
-#define SRAM_BASE_ADDR           0x1000000
-#define UDP_BASE_ADDR            0x2000000
-#define STRIP_HEADERS_BASE_ADDR  0x2000000
-#define MAC_RXTX_0_BASE_ADDR     0x2000100
-#define MAC_RXTX_1_BASE_ADDR     0x2000140
-#define MAC_RXTX_2_BASE_ADDR     0x2000180
-#define MAC_RXTX_3_BASE_ADDR     0x20001c0
-#define SCHEDULER_0_BASE_ADDR    0x2000200
-#define SCHEDULER_1_BASE_ADDR    0x2000280
-#define SCHEDULER_2_BASE_ADDR    0x2000300
-#define SCHEDULER_3_BASE_ADDR    0x2000380
-#define DRAM_BASE_ADDR           0x4000000
+#define CORE_BASE_ADDR         0x0000000
+#define DEV_ID_BASE_ADDR       0x0400000
+#define MDIO_BASE_ADDR         0x0440000
+#define DMA_BASE_ADDR          0x0500000
+#define MAC_GRP_0_BASE_ADDR    0x0600000
+#define MAC_GRP_1_BASE_ADDR    0x0640000
+#define MAC_GRP_2_BASE_ADDR    0x0680000
+#define MAC_GRP_3_BASE_ADDR    0x06c0000
+#define CPU_QUEUE_0_BASE_ADDR  0x0700000
+#define CPU_QUEUE_1_BASE_ADDR  0x0740000
+#define CPU_QUEUE_2_BASE_ADDR  0x0780000
+#define CPU_QUEUE_3_BASE_ADDR  0x07c0000
+#define SRAM_BASE_ADDR         0x1000000
+#define UDP_BASE_ADDR          0x2000000
+#define MAC_RXTX_0_BASE_ADDR   0x2000000
+#define MAC_RXTX_1_BASE_ADDR   0x2000040
+#define MAC_RXTX_2_BASE_ADDR   0x2000080
+#define MAC_RXTX_3_BASE_ADDR   0x20000c0
+#define SCHEDULER_0_BASE_ADDR  0x2000100
+#define SCHEDULER_1_BASE_ADDR  0x2000180
+#define SCHEDULER_2_BASE_ADDR  0x2000200
+#define SCHEDULER_3_BASE_ADDR  0x2000280
+#define DRAM_BASE_ADDR         0x4000000
 
-#define CPU_QUEUE_OFFSET       0x0040000
-#define MAC_GRP_OFFSET         0x0040000
-#define MAC_RXTX_OFFSET        0x0000040
-#define SCHEDULER_OFFSET       0x0000080
+#define CPU_QUEUE_OFFSET   0x0040000
+#define MAC_GRP_OFFSET     0x0040000
+#define MAC_RXTX_OFFSET    0x0000040
+#define SCHEDULER_OFFSET   0x0000080
 
 
 /* ========== Registers ========== */
@@ -441,7 +440,7 @@
 
 // Name: nf2_mac_grp (MAC_GRP_0)
 // Description: Ethernet MAC group
-// File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml
+// File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml
 #define MAC_GRP_0_CONTROL_REG                          0x0600000
 #define MAC_GRP_0_RX_QUEUE_NUM_PKTS_IN_QUEUE_REG       0x0600004
 #define MAC_GRP_0_RX_QUEUE_NUM_PKTS_STORED_REG         0x0600008
@@ -458,7 +457,7 @@
 
 // Name: nf2_mac_grp (MAC_GRP_1)
 // Description: Ethernet MAC group
-// File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml
+// File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml
 #define MAC_GRP_1_CONTROL_REG                          0x0640000
 #define MAC_GRP_1_RX_QUEUE_NUM_PKTS_IN_QUEUE_REG       0x0640004
 #define MAC_GRP_1_RX_QUEUE_NUM_PKTS_STORED_REG         0x0640008
@@ -475,7 +474,7 @@
 
 // Name: nf2_mac_grp (MAC_GRP_2)
 // Description: Ethernet MAC group
-// File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml
+// File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml
 #define MAC_GRP_2_CONTROL_REG                          0x0680000
 #define MAC_GRP_2_RX_QUEUE_NUM_PKTS_IN_QUEUE_REG       0x0680004
 #define MAC_GRP_2_RX_QUEUE_NUM_PKTS_STORED_REG         0x0680008
@@ -492,7 +491,7 @@
 
 // Name: nf2_mac_grp (MAC_GRP_3)
 // Description: Ethernet MAC group
-// File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml
+// File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml
 #define MAC_GRP_3_CONTROL_REG                          0x06c0000
 #define MAC_GRP_3_RX_QUEUE_NUM_PKTS_IN_QUEUE_REG       0x06c0004
 #define MAC_GRP_3_RX_QUEUE_NUM_PKTS_STORED_REG         0x06c0008
@@ -590,145 +589,137 @@
 // Name: SRAM (SRAM)
 // Description: SRAM
 
-// Name: strip_headers (STRIP_HEADERS)
-// Description: Strip headers from data
-// File: lib/verilog/core/strip_headers/keep_length/xml/strip_headers.xml
-
 // Name: mac_rxtx (MAC_RXTX_0)
 // Description: MAC transciver registers
 // File: lib/verilog/contrib/iip/mac_filter/xml/mac_rxtx.xml
-#define MAC_RXTX_0_LOCAL_MAC_HI_REG      0x2000100
-#define MAC_RXTX_0_LOCAL_MAC_LO_REG      0x2000104
-#define MAC_RXTX_0_OTHER_MAC_HI_REG      0x2000108
-#define MAC_RXTX_0_OTHER_MAC_LO_REG      0x200010c
-#define MAC_RXTX_0_NUM_FRAMES_GOOD_REG   0x2000110
-#define MAC_RXTX_0_NUM_FRAMES_BAD_REG    0x2000114
+#define MAC_RXTX_0_LOCAL_MAC_HI_REG      0x2000000
+#define MAC_RXTX_0_LOCAL_MAC_LO_REG      0x2000004
+#define MAC_RXTX_0_OTHER_MAC_HI_REG      0x2000008
+#define MAC_RXTX_0_OTHER_MAC_LO_REG      0x200000c
+#define MAC_RXTX_0_NUM_FRAMES_GOOD_REG   0x2000010
+#define MAC_RXTX_0_NUM_FRAMES_BAD_REG    0x2000014
 
 // Name: mac_rxtx (MAC_RXTX_1)
 // Description: MAC transciver registers
 // File: lib/verilog/contrib/iip/mac_filter/xml/mac_rxtx.xml
-#define MAC_RXTX_1_LOCAL_MAC_HI_REG      0x2000140
-#define MAC_RXTX_1_LOCAL_MAC_LO_REG      0x2000144
-#define MAC_RXTX_1_OTHER_MAC_HI_REG      0x2000148
-#define MAC_RXTX_1_OTHER_MAC_LO_REG      0x200014c
-#define MAC_RXTX_1_NUM_FRAMES_GOOD_REG   0x2000150
-#define MAC_RXTX_1_NUM_FRAMES_BAD_REG    0x2000154
+#define MAC_RXTX_1_LOCAL_MAC_HI_REG      0x2000040
+#define MAC_RXTX_1_LOCAL_MAC_LO_REG      0x2000044
+#define MAC_RXTX_1_OTHER_MAC_HI_REG      0x2000048
+#define MAC_RXTX_1_OTHER_MAC_LO_REG      0x200004c
+#define MAC_RXTX_1_NUM_FRAMES_GOOD_REG   0x2000050
+#define MAC_RXTX_1_NUM_FRAMES_BAD_REG    0x2000054
 
 // Name: mac_rxtx (MAC_RXTX_2)
 // Description: MAC transciver registers
 // File: lib/verilog/contrib/iip/mac_filter/xml/mac_rxtx.xml
-#define MAC_RXTX_2_LOCAL_MAC_HI_REG      0x2000180
-#define MAC_RXTX_2_LOCAL_MAC_LO_REG      0x2000184
-#define MAC_RXTX_2_OTHER_MAC_HI_REG      0x2000188
-#define MAC_RXTX_2_OTHER_MAC_LO_REG      0x200018c
-#define MAC_RXTX_2_NUM_FRAMES_GOOD_REG   0x2000190
-#define MAC_RXTX_2_NUM_FRAMES_BAD_REG    0x2000194
+#define MAC_RXTX_2_LOCAL_MAC_HI_REG      0x2000080
+#define MAC_RXTX_2_LOCAL_MAC_LO_REG      0x2000084
+#define MAC_RXTX_2_OTHER_MAC_HI_REG      0x2000088
+#define MAC_RXTX_2_OTHER_MAC_LO_REG      0x200008c
+#define MAC_RXTX_2_NUM_FRAMES_GOOD_REG   0x2000090
+#define MAC_RXTX_2_NUM_FRAMES_BAD_REG    0x2000094
 
 // Name: mac_rxtx (MAC_RXTX_3)
 // Description: MAC transciver registers
 // File: lib/verilog/contrib/iip/mac_filter/xml/mac_rxtx.xml
-#define MAC_RXTX_3_LOCAL_MAC_HI_REG      0x20001c0
-#define MAC_RXTX_3_LOCAL_MAC_LO_REG      0x20001c4
-#define MAC_RXTX_3_OTHER_MAC_HI_REG      0x20001c8
-#define MAC_RXTX_3_OTHER_MAC_LO_REG      0x20001cc
-#define MAC_RXTX_3_NUM_FRAMES_GOOD_REG   0x20001d0
-#define MAC_RXTX_3_NUM_FRAMES_BAD_REG    0x20001d4
+#define MAC_RXTX_3_LOCAL_MAC_HI_REG      0x20000c0
+#define MAC_RXTX_3_LOCAL_MAC_LO_REG      0x20000c4
+#define MAC_RXTX_3_OTHER_MAC_HI_REG      0x20000c8
+#define MAC_RXTX_3_OTHER_MAC_LO_REG      0x20000cc
+#define MAC_RXTX_3_NUM_FRAMES_GOOD_REG   0x20000d0
+#define MAC_RXTX_3_NUM_FRAMES_BAD_REG    0x20000d4
 
 // Name: scheduler (SCHEDULER_0)
 // Description: Scheduler registers
 // File: lib/verilog/contrib/iip/scheduler/xml/scheduler.xml
-#define SCHEDULER_0_NUM_PHASES_REG           0x2000200
-#define SCHEDULER_0_PH_1_LENGTH_REG          0x2000204
-#define SCHEDULER_0_PH_2_LENGTH_REG          0x2000208
-#define SCHEDULER_0_PH_3_LENGTH_REG          0x200020c
-#define SCHEDULER_0_PH_4_LENGTH_REG          0x2000210
-#define SCHEDULER_0_PH_5_LENGTH_REG          0x2000214
-#define SCHEDULER_0_PH_6_LENGTH_REG          0x2000218
-#define SCHEDULER_0_PH_7_LENGTH_REG          0x200021c
-#define SCHEDULER_0_PH_8_LENGTH_REG          0x2000220
-#define SCHEDULER_0_PH_1_TYPE_REG            0x2000224
-#define SCHEDULER_0_PH_2_TYPE_REG            0x2000228
-#define SCHEDULER_0_PH_3_TYPE_REG            0x200022c
-#define SCHEDULER_0_PH_4_TYPE_REG            0x2000230
-#define SCHEDULER_0_PH_5_TYPE_REG            0x2000234
-#define SCHEDULER_0_PH_6_TYPE_REG            0x2000238
-#define SCHEDULER_0_PH_7_TYPE_REG            0x200023c
-#define SCHEDULER_0_PH_8_TYPE_REG            0x2000240
-#define SCHEDULER_0_FAME_OVERHAED_REG        0x2000244
-#define SCHEDULER_0_MINIMAL_FRAME_SIZE_REG   0x2000248
-#define SCHEDULER_0_PHASE_OVERLAP_REG        0x200024c
+#define SCHEDULER_0_NUM_PHASES_REG           0x2000100
+#define SCHEDULER_0_PH_1_LENGTH_REG          0x2000104
+#define SCHEDULER_0_PH_2_LENGTH_REG          0x2000108
+#define SCHEDULER_0_PH_3_LENGTH_REG          0x200010c
+#define SCHEDULER_0_PH_4_LENGTH_REG          0x2000110
+#define SCHEDULER_0_PH_5_LENGTH_REG          0x2000114
+#define SCHEDULER_0_PH_6_LENGTH_REG          0x2000118
+#define SCHEDULER_0_PH_7_LENGTH_REG          0x200011c
+#define SCHEDULER_0_PH_8_LENGTH_REG          0x2000120
+#define SCHEDULER_0_PH_1_TYPE_REG            0x2000124
+#define SCHEDULER_0_PH_2_TYPE_REG            0x2000128
+#define SCHEDULER_0_PH_3_TYPE_REG            0x200012c
+#define SCHEDULER_0_PH_4_TYPE_REG            0x2000130
+#define SCHEDULER_0_PH_5_TYPE_REG            0x2000134
+#define SCHEDULER_0_PH_6_TYPE_REG            0x2000138
+#define SCHEDULER_0_PH_7_TYPE_REG            0x200013c
+#define SCHEDULER_0_PH_8_TYPE_REG            0x2000140
+#define SCHEDULER_0_FAME_OVERHAED_REG        0x2000144
+#define SCHEDULER_0_MINIMAL_FRAME_SIZE_REG   0x2000148
 
 // Name: scheduler (SCHEDULER_1)
 // Description: Scheduler registers
 // File: lib/verilog/contrib/iip/scheduler/xml/scheduler.xml
-#define SCHEDULER_1_NUM_PHASES_REG           0x2000280
-#define SCHEDULER_1_PH_1_LENGTH_REG          0x2000284
-#define SCHEDULER_1_PH_2_LENGTH_REG          0x2000288
-#define SCHEDULER_1_PH_3_LENGTH_REG          0x200028c
-#define SCHEDULER_1_PH_4_LENGTH_REG          0x2000290
-#define SCHEDULER_1_PH_5_LENGTH_REG          0x2000294
-#define SCHEDULER_1_PH_6_LENGTH_REG          0x2000298
-#define SCHEDULER_1_PH_7_LENGTH_REG          0x200029c
-#define SCHEDULER_1_PH_8_LENGTH_REG          0x20002a0
-#define SCHEDULER_1_PH_1_TYPE_REG            0x20002a4
-#define SCHEDULER_1_PH_2_TYPE_REG            0x20002a8
-#define SCHEDULER_1_PH_3_TYPE_REG            0x20002ac
-#define SCHEDULER_1_PH_4_TYPE_REG            0x20002b0
-#define SCHEDULER_1_PH_5_TYPE_REG            0x20002b4
-#define SCHEDULER_1_PH_6_TYPE_REG            0x20002b8
-#define SCHEDULER_1_PH_7_TYPE_REG            0x20002bc
-#define SCHEDULER_1_PH_8_TYPE_REG            0x20002c0
-#define SCHEDULER_1_FAME_OVERHAED_REG        0x20002c4
-#define SCHEDULER_1_MINIMAL_FRAME_SIZE_REG   0x20002c8
-#define SCHEDULER_1_PHASE_OVERLAP_REG        0x20002cc
+#define SCHEDULER_1_NUM_PHASES_REG           0x2000180
+#define SCHEDULER_1_PH_1_LENGTH_REG          0x2000184
+#define SCHEDULER_1_PH_2_LENGTH_REG          0x2000188
+#define SCHEDULER_1_PH_3_LENGTH_REG          0x200018c
+#define SCHEDULER_1_PH_4_LENGTH_REG          0x2000190
+#define SCHEDULER_1_PH_5_LENGTH_REG          0x2000194
+#define SCHEDULER_1_PH_6_LENGTH_REG          0x2000198
+#define SCHEDULER_1_PH_7_LENGTH_REG          0x200019c
+#define SCHEDULER_1_PH_8_LENGTH_REG          0x20001a0
+#define SCHEDULER_1_PH_1_TYPE_REG            0x20001a4
+#define SCHEDULER_1_PH_2_TYPE_REG            0x20001a8
+#define SCHEDULER_1_PH_3_TYPE_REG            0x20001ac
+#define SCHEDULER_1_PH_4_TYPE_REG            0x20001b0
+#define SCHEDULER_1_PH_5_TYPE_REG            0x20001b4
+#define SCHEDULER_1_PH_6_TYPE_REG            0x20001b8
+#define SCHEDULER_1_PH_7_TYPE_REG            0x20001bc
+#define SCHEDULER_1_PH_8_TYPE_REG            0x20001c0
+#define SCHEDULER_1_FAME_OVERHAED_REG        0x20001c4
+#define SCHEDULER_1_MINIMAL_FRAME_SIZE_REG   0x20001c8
 
 // Name: scheduler (SCHEDULER_2)
 // Description: Scheduler registers
 // File: lib/verilog/contrib/iip/scheduler/xml/scheduler.xml
-#define SCHEDULER_2_NUM_PHASES_REG           0x2000300
-#define SCHEDULER_2_PH_1_LENGTH_REG          0x2000304
-#define SCHEDULER_2_PH_2_LENGTH_REG          0x2000308
-#define SCHEDULER_2_PH_3_LENGTH_REG          0x200030c
-#define SCHEDULER_2_PH_4_LENGTH_REG          0x2000310
-#define SCHEDULER_2_PH_5_LENGTH_REG          0x2000314
-#define SCHEDULER_2_PH_6_LENGTH_REG          0x2000318
-#define SCHEDULER_2_PH_7_LENGTH_REG          0x200031c
-#define SCHEDULER_2_PH_8_LENGTH_REG          0x2000320
-#define SCHEDULER_2_PH_1_TYPE_REG            0x2000324
-#define SCHEDULER_2_PH_2_TYPE_REG            0x2000328
-#define SCHEDULER_2_PH_3_TYPE_REG            0x200032c
-#define SCHEDULER_2_PH_4_TYPE_REG            0x2000330
-#define SCHEDULER_2_PH_5_TYPE_REG            0x2000334
-#define SCHEDULER_2_PH_6_TYPE_REG            0x2000338
-#define SCHEDULER_2_PH_7_TYPE_REG            0x200033c
-#define SCHEDULER_2_PH_8_TYPE_REG            0x2000340
-#define SCHEDULER_2_FAME_OVERHAED_REG        0x2000344
-#define SCHEDULER_2_MINIMAL_FRAME_SIZE_REG   0x2000348
-#define SCHEDULER_2_PHASE_OVERLAP_REG        0x200034c
+#define SCHEDULER_2_NUM_PHASES_REG           0x2000200
+#define SCHEDULER_2_PH_1_LENGTH_REG          0x2000204
+#define SCHEDULER_2_PH_2_LENGTH_REG          0x2000208
+#define SCHEDULER_2_PH_3_LENGTH_REG          0x200020c
+#define SCHEDULER_2_PH_4_LENGTH_REG          0x2000210
+#define SCHEDULER_2_PH_5_LENGTH_REG          0x2000214
+#define SCHEDULER_2_PH_6_LENGTH_REG          0x2000218
+#define SCHEDULER_2_PH_7_LENGTH_REG          0x200021c
+#define SCHEDULER_2_PH_8_LENGTH_REG          0x2000220
+#define SCHEDULER_2_PH_1_TYPE_REG            0x2000224
+#define SCHEDULER_2_PH_2_TYPE_REG            0x2000228
+#define SCHEDULER_2_PH_3_TYPE_REG            0x200022c
+#define SCHEDULER_2_PH_4_TYPE_REG            0x2000230
+#define SCHEDULER_2_PH_5_TYPE_REG            0x2000234
+#define SCHEDULER_2_PH_6_TYPE_REG            0x2000238
+#define SCHEDULER_2_PH_7_TYPE_REG            0x200023c
+#define SCHEDULER_2_PH_8_TYPE_REG            0x2000240
+#define SCHEDULER_2_FAME_OVERHAED_REG        0x2000244
+#define SCHEDULER_2_MINIMAL_FRAME_SIZE_REG   0x2000248
 
 // Name: scheduler (SCHEDULER_3)
 // Description: Scheduler registers
 // File: lib/verilog/contrib/iip/scheduler/xml/scheduler.xml
-#define SCHEDULER_3_NUM_PHASES_REG           0x2000380
-#define SCHEDULER_3_PH_1_LENGTH_REG          0x2000384
-#define SCHEDULER_3_PH_2_LENGTH_REG          0x2000388
-#define SCHEDULER_3_PH_3_LENGTH_REG          0x200038c
-#define SCHEDULER_3_PH_4_LENGTH_REG          0x2000390
-#define SCHEDULER_3_PH_5_LENGTH_REG          0x2000394
-#define SCHEDULER_3_PH_6_LENGTH_REG          0x2000398
-#define SCHEDULER_3_PH_7_LENGTH_REG          0x200039c
-#define SCHEDULER_3_PH_8_LENGTH_REG          0x20003a0
-#define SCHEDULER_3_PH_1_TYPE_REG            0x20003a4
-#define SCHEDULER_3_PH_2_TYPE_REG            0x20003a8
-#define SCHEDULER_3_PH_3_TYPE_REG            0x20003ac
-#define SCHEDULER_3_PH_4_TYPE_REG            0x20003b0
-#define SCHEDULER_3_PH_5_TYPE_REG            0x20003b4
-#define SCHEDULER_3_PH_6_TYPE_REG            0x20003b8
-#define SCHEDULER_3_PH_7_TYPE_REG            0x20003bc
-#define SCHEDULER_3_PH_8_TYPE_REG            0x20003c0
-#define SCHEDULER_3_FAME_OVERHAED_REG        0x20003c4
-#define SCHEDULER_3_MINIMAL_FRAME_SIZE_REG   0x20003c8
-#define SCHEDULER_3_PHASE_OVERLAP_REG        0x20003cc
+#define SCHEDULER_3_NUM_PHASES_REG           0x2000280
+#define SCHEDULER_3_PH_1_LENGTH_REG          0x2000284
+#define SCHEDULER_3_PH_2_LENGTH_REG          0x2000288
+#define SCHEDULER_3_PH_3_LENGTH_REG          0x200028c
+#define SCHEDULER_3_PH_4_LENGTH_REG          0x2000290
+#define SCHEDULER_3_PH_5_LENGTH_REG          0x2000294
+#define SCHEDULER_3_PH_6_LENGTH_REG          0x2000298
+#define SCHEDULER_3_PH_7_LENGTH_REG          0x200029c
+#define SCHEDULER_3_PH_8_LENGTH_REG          0x20002a0
+#define SCHEDULER_3_PH_1_TYPE_REG            0x20002a4
+#define SCHEDULER_3_PH_2_TYPE_REG            0x20002a8
+#define SCHEDULER_3_PH_3_TYPE_REG            0x20002ac
+#define SCHEDULER_3_PH_4_TYPE_REG            0x20002b0
+#define SCHEDULER_3_PH_5_TYPE_REG            0x20002b4
+#define SCHEDULER_3_PH_6_TYPE_REG            0x20002b8
+#define SCHEDULER_3_PH_7_TYPE_REG            0x20002bc
+#define SCHEDULER_3_PH_8_TYPE_REG            0x20002c0
+#define SCHEDULER_3_FAME_OVERHAED_REG        0x20002c4
+#define SCHEDULER_3_MINIMAL_FRAME_SIZE_REG   0x20002c8
 
 // Name: DRAM (DRAM)
 // Description: DRAM
@@ -829,7 +820,7 @@
 
 // Type: mac_grp_control
 // Description: MAC group control register
-// File: lib/verilog/core/io_queues/ethernet_mac/xml/ethernet_mac.xml
+// File: lib/verilog/core/io_queues/ethernet_queue/xml/ethernet_mac.xml
 
 // Part 1: bit positions
 #define MAC_GRP_CONTROL_TX_QUEUE_DISABLE_POS        0
