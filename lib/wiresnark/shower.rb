@@ -4,7 +4,7 @@ module Wiresnark class Shower
   end
 
   def show opts
-    param, iface, _, pi = *opts
+    param, iface, _, type = *opts
 
     port = @net_fpga.ports[iface[/\d$/].to_i]
 
@@ -14,7 +14,7 @@ module Wiresnark class Shower
     when 'MACSA' then port.local_mac
     when 'MTU'   then NetFPGA::ConstMTU
     when 'NP'    then port.phase_number
-    when 'PL'    then port.phases.find { |p| p[:type] == pi }[:length]
+    when 'PL'    then port.phases.find { |p| p[:type] == type }[:length]
     when 'ifgap' then NetFPGA::Constifgap
     else              warn "unknown parameter: #{param}"
     end
