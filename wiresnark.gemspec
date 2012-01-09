@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 'wiresnark'
-  gem.version  = '0.0.4'
+  gem.version  = '0.0.5'
   gem.summary  = 'Wiresnark: packet generator/monitor'
   gem.homepage = 'http://github.com/chastell/wiresnark'
   gem.author   = 'Piotr Szotkowski'
