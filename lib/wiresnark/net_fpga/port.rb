@@ -10,12 +10,20 @@ module Wiresnark class NetFPGA::Port
     phases.map { |p| p[:length] }.inject :+
   end
 
+  def ifgap
+    24
+  end
+
   def local_mac
     get_mac 'LOCAL'
   end
 
   def local_mac= mac
     set_mac mac, 'LOCAL'
+  end
+
+  def mtu
+    2048
   end
 
   def other_mac

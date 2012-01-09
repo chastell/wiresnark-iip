@@ -30,6 +30,13 @@ module Wiresnark describe NetFPGA::Port do
     end
   end
 
+  describe '#ifgap' do
+    it 'returns the ifgap size' do
+      port = NetFPGA::Port.new NetFPGA.new, 0
+      port.ifgap.must_equal 24
+    end
+  end
+
   describe '#local_mac' do
     it 'gets the local MAC address' do
       port = NetFPGA::Port.new net_fpga, 0
@@ -45,6 +52,13 @@ module Wiresnark describe NetFPGA::Port do
       port = NetFPGA::Port.new net_fpga, 0
       port.local_mac = 'ad:e3:3e:a4:23:00'
       net_fpga.verify
+    end
+  end
+
+  describe '#mtu' do
+    it 'returns the MTU size' do
+      port = NetFPGA::Port.new NetFPGA.new, 0
+      port.mtu.must_equal 2048
     end
   end
 
