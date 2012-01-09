@@ -43,6 +43,11 @@ module Wiresnark describe Shower do
       Shower.new(nf).show(['ifgap', 'eth1', 'v_1']).must_equal 24
     end
 
+    it 'warns on unhandled params' do
+      nf = MiniTest::Mock.new.expect :ports, []
+      -> { Shower.new(nf).show(['MACVLANT', 'eth0', 'v_1']) }.must_output '', "unhandled parameter: MACVLANT\n"
+    end
+
     it 'warns on unknown params' do
       nf = MiniTest::Mock.new.expect :ports, []
       -> { Shower.new(nf).show(['foo', 'eth0', 'v_1']) }.must_output '', "unknown parameter: foo\n"

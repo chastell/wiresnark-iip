@@ -16,7 +16,10 @@ module Wiresnark class Shower
     when 'NP'    then port.phase_number
     when 'PL'    then port.phases.find { |p| p[:type] == type }[:length]
     when 'ifgap' then NetFPGA::Constifgap
-    else              warn "unknown parameter: #{param}"
+    when 'BV', 'CBS', 'CIR', 'CLASS', 'DAF', 'MACT', 'MACVLANT', 'PIH', 'PIT', 'PIVT', 'SAF', 'VLANTF', 'VPTIin', 'VPTIout', 'WFQ'
+      warn "unhandled parameter: #{param}"
+    else
+      warn "unknown parameter: #{param}"
     end
   end
 end end
