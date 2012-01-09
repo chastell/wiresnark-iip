@@ -1,7 +1,4 @@
 module Wiresnark class NetFPGA
-  ConstMTU   = 2048
-  Constifgap = 24
-
   attr_reader :registers
 
   def initialize regbridge = NetFPGA::Bridge.new

@@ -12,10 +12,10 @@ module Wiresnark class Shower
     when 'CL'    then port.cycle_length
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
-    when 'MTU'   then NetFPGA::ConstMTU
+    when 'MTU'   then port.mtu
     when 'NP'    then port.phase_number
     when 'PL'    then port.phases.find { |p| p[:type] == type }[:length]
-    when 'ifgap' then NetFPGA::Constifgap
+    when 'ifgap' then port.ifgap
     when 'BV', 'CBS', 'CIR', 'CLASS', 'DAF', 'MACT', 'MACVLANT', 'PIH', 'PIT', 'PIVT', 'SAF', 'VLANTF', 'VPTIin', 'VPTIout', 'WFQ'
       warn "unhandled parameter: #{param}"
     else
