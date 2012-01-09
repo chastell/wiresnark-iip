@@ -15,7 +15,7 @@ module Wiresnark class NetFPGA
   end
 
   def get register
-    @regbridge.get @registers[register]
+    @regbridge.get_register @registers[register]
   end
 
   def ports
@@ -23,6 +23,6 @@ module Wiresnark class NetFPGA
   end
 
   def set register, value
-    @regbridge.set @registers[register], value
+    @regbridge.set_register @registers[register], value
   end
 end end

@@ -25,11 +25,11 @@ module Wiresnark describe NetFPGA do
       }
 
       regbridge = MiniTest::Mock.new
-      regbridge.expect :set, nil, [0x2000100, 0x0000ade3]
-      regbridge.expect :set, nil, [0x200014c, 0x45233400]
-      regbridge.expect :set, nil, [0x2000200, 4]
-      regbridge.expect :set, nil, [0x2000208, 24]
-      regbridge.expect :set, nil, [0x2000234, 0]
+      regbridge.expect :set_register, nil, [0x2000100, 0x0000ade3]
+      regbridge.expect :set_register, nil, [0x200014c, 0x45233400]
+      regbridge.expect :set_register, nil, [0x2000200, 4]
+      regbridge.expect :set_register, nil, [0x2000208, 24]
+      regbridge.expect :set_register, nil, [0x2000234, 0]
       nf = NetFPGA.new regbridge
       nf.config = config
 
@@ -40,7 +40,7 @@ module Wiresnark describe NetFPGA do
   describe '#get' do
     it 'gets the register contents (via the passed bridge)' do
       regbridge = MiniTest::Mock.new
-      regbridge.expect :get, 7, [0x2000200]
+      regbridge.expect :get_register, 7, [0x2000200]
       nf = NetFPGA.new regbridge
       nf.get('SCHEDULER_0_NUM_PHASES_REG').must_equal 7
       regbridge.verify
@@ -65,7 +65,7 @@ module Wiresnark describe NetFPGA do
   describe '#set' do
     it 'sets the register contents (via the passed bridge)' do
       regbridge = MiniTest::Mock.new
-      regbridge.expect :set, nil, [0x2000200, 7]
+      regbridge.expect :set_register, nil, [0x2000200, 7]
       nf = NetFPGA.new regbridge
       nf.set 'SCHEDULER_0_NUM_PHASES_REG', 7
       regbridge.verify
