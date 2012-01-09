@@ -1,4 +1,7 @@
 module Wiresnark class NetFPGA
+  ConstMTU   = 2048
+  Constifgap = 24
+
   attr_reader :registers
 
   def initialize reg_path = 'reg_defines_simple_system_iip.h', regbridge = NetFPGA::Bridge.new
