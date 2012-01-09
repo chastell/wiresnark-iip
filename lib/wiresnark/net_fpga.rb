@@ -4,9 +4,9 @@ module Wiresnark class NetFPGA
 
   attr_reader :registers
 
-  def initialize reg_path = 'reg_defines_simple_system_iip.h', regbridge = NetFPGA::Bridge.new
+  def initialize regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
-    @registers = RegParser.new.parse reg_path
+    @registers = RegParser.new.parse "#{File.dirname __FILE__}/../../ext/reg_defines_simple_system_iip.h"
   end
 
   def config= config

@@ -30,7 +30,7 @@ module Wiresnark describe NetFPGA do
       regbridge.expect :set, nil, [0x2000200, 4]
       regbridge.expect :set, nil, [0x2000208, 24]
       regbridge.expect :set, nil, [0x2000234, 0]
-      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
+      nf = NetFPGA.new regbridge
       nf.config = config
 
       regbridge.verify
@@ -41,7 +41,7 @@ module Wiresnark describe NetFPGA do
     it 'gets the register contents (via the passed bridge)' do
       regbridge = MiniTest::Mock.new
       regbridge.expect :get, 7, [0x2000200]
-      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
+      nf = NetFPGA.new regbridge
       nf.get('SCHEDULER_0_NUM_PHASES_REG').must_equal 7
       regbridge.verify
     end
@@ -49,7 +49,7 @@ module Wiresnark describe NetFPGA do
 
   describe '#ports' do
     it 'returns the four NetFPGA’s ports' do
-      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h'
+      nf = NetFPGA.new
       nf.ports.size.must_equal 4
       nf.ports.each { |p| p.must_be_instance_of NetFPGA::Port }
     end
@@ -57,7 +57,7 @@ module Wiresnark describe NetFPGA do
 
   describe '#registers' do
     it 'returns the given NetFPGA’s register map' do
-      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h'
+      nf = NetFPGA.new
       nf.registers['SCHEDULER_0_NUM_PHASES_REG'].must_equal 0x2000200
     end
   end
@@ -66,7 +66,7 @@ module Wiresnark describe NetFPGA do
     it 'sets the register contents (via the passed bridge)' do
       regbridge = MiniTest::Mock.new
       regbridge.expect :set, nil, [0x2000200, 7]
-      nf = NetFPGA.new 'spec/fixtures/reg_defines_simple_system_iip.h', regbridge
+      nf = NetFPGA.new regbridge
       nf.set 'SCHEDULER_0_NUM_PHASES_REG', 7
       regbridge.verify
     end
