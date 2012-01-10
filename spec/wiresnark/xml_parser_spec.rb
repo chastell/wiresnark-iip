@@ -16,6 +16,15 @@ module Wiresnark describe XMLParser do
         { type: 'NIL', length: 220 },
       ]
     end
+
+    it 'parses empty(ish) config files' do
+      empty = {
+        0 => { local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [] }
+      }
+      XMLParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml').parse.must_equal empty
+      XMLParser.new('spec/fixtures/iip.conf.empty-interface.xml').parse.must_equal empty
+      XMLParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').parse.must_equal({})
+    end
   end
 
   describe '#verify' do
@@ -45,6 +54,16 @@ module Wiresnark describe XMLParser do
 
     it 'returns no problems on a minimal, valid XML' do
       XMLParser.new('spec/fixtures/iip.conf.minimal.xml').verify.must_equal({ ignored: [], warnings: [] })
+    end
+
+    it 'verifies empty(ish) config files' do
+      warns = XMLParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml').verify[:warnings]
+      warns.must_include 'MACSourceAddress set to 00:00:00:00:00:00'
+      warns.must_include 'MACDestinationAddress set to 00:00:00:00:00:00'
+
+      empty = { ignored: [], warnings: [] }
+      XMLParser.new('spec/fixtures/iip.conf.empty-interface.xml').verify.must_equal empty
+      XMLParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').verify.must_equal empty
     end
   end
 end end

@@ -5,8 +5,10 @@ module Wiresnark class XMLParser
 
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
-      local = interface.at_xpath('v_port/MACSourceAddress').text
-      other = interface.at_xpath('v_port/MACDestinationAddress').text
+      macsa = interface.at_xpath 'v_port/MACSourceAddress'
+      macda = interface.at_xpath 'v_port/MACDestinationAddress'
+      local = macsa ? macsa.text : '00:00:00:00:00:00'
+      other = macda ? macda.text : '00:00:00:00:00:00'
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
@@ -28,19 +30,27 @@ module Wiresnark class XMLParser
       end
     end
 
+    warnings += @xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      'MACSourceAddress set to 00:00:00:00:00:00' unless v_port.at_xpath 'MACSourceAddress'
+    end
+
+    warnings += @xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      'MACDestinationAddress set to 00:00:00:00:00:00' unless v_port.at_xpath 'MACDestinationAddress'
+    end
+
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'Cyclelength'
-	cl     = scheduler.at_xpath('Cyclelength').text.to_i
-	pl_sum = scheduler.xpath('PhaseLength').map { |pl| pl.text.to_i }.inject :+
-	"Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
+        cl     = scheduler.at_xpath('Cyclelength').text.to_i
+        pl_sum = scheduler.xpath('PhaseLength').map { |pl| pl.text.to_i }.inject :+
+        "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
       end
     end
 
     warnings += @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'NumberPhases'
-	np     = scheduler.at_xpath('NumberPhases').text.to_i
-	pl_num = scheduler.xpath('PhaseLength').size
-	"NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
+        np     = scheduler.at_xpath('NumberPhases').text.to_i
+        pl_num = scheduler.xpath('PhaseLength').size
+        "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
       end
     end
 
