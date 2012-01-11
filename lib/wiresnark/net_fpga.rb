@@ -3,7 +3,7 @@ module Wiresnark class NetFPGA
 
   def initialize regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
-    @registers = RegParser.new.parse "#{File.dirname __FILE__}/../../ext/reg_defines_simple_system_iip.h"
+    @registers = RegParser.new("#{File.dirname __FILE__}/../../ext/reg_defines_simple_system_iip.h").parse
   end
 
   def config= config

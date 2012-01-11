@@ -1,6 +1,10 @@
 module Wiresnark class RegParser
-  def parse path
-    Hash[File.read(path).scan(/^#define\s+(\S+)\s+(\S+)$/).map do |reg, val|
+  def initialize path
+    @path = path
+  end
+
+  def parse
+    Hash[File.read(@path).scan(/^#define\s+(\S+)\s+(\S+)$/).map do |reg, val|
       [
         reg,
         case val
