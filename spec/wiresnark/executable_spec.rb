@@ -50,9 +50,9 @@ module Wiresnark describe Executable do
       shower = MiniTest::Mock.new
       shower.expect :show, 'aa:bb:cc:dd:ee:ff', [['MACDA', 'eth0', 'v_1']]
 
-      capture_io do
+      -> do
         Executable.new(['iip', 'show', 'MACDA', 'eth0', 'v_1']).run shower: shower
-      end.first.must_equal "aa:bb:cc:dd:ee:ff\n"
+      end.must_output "aa:bb:cc:dd:ee:ff\n"
 
       shower.verify
     end
