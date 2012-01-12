@@ -18,5 +18,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler
   minitest (>= 2.3)
   wiresnark!
