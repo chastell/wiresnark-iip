@@ -5,7 +5,7 @@ module Wiresnark class Executable
     @args    = args
   end
 
-  def run opts = { nf_class: NetFPGA, runner: Runner.new, shower: Shower.new }
+  def run opts = { net_fpga: NetFPGA.new, runner: Runner.new, shower: Shower.new }
     case @command
     when 'run'
       opts[:runner].run @args.first
@@ -15,7 +15,7 @@ module Wiresnark class Executable
         xml = XMLParser.new @args.first
         xml.verify[:ignored].each  { |element| warn "#{element} ignored" }
         xml.verify[:warnings].each { |warning| warn warning              }
-        opts[:nf_class].new.config = xml.parse
+        opts[:net_fpga].config = xml.parse
       when 'show'
         puts opts[:shower].show @args
       end
