@@ -15,14 +15,16 @@ module Wiresnark class XMLParser
     end]
   end
 
-  def verify
+  def warnings
     parsed = [
       'interfaces', 'interface', 'v_port', 'Scheduler',
       'DestinationAddressfiltering', 'MACDestinationAddress', 'MACSourceAddress',
       'Cyclelength', 'NumberPhases', 'PhaseLength',
     ]
 
-    warnings = @xml.xpath('/interfaces/interface/v_port').map do |v_port|
+    warnings = (@xml.xpath('//*').map(&:name) - parsed).map { |w| "#{w} ignored" }
+
+    warnings += @xml.xpath('/interfaces/interface/v_port').map do |v_port|
       if v_port.at_xpath 'DestinationAddressfiltering'
         daf   = v_port.at_xpath('DestinationAddressfiltering').text
         macda = v_port.at_xpath('MACDestinationAddress').text
@@ -60,9 +62,6 @@ module Wiresnark class XMLParser
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
     end
 
-    {
-      ignored:  (@xml.xpath('//*').map(&:name) - parsed).uniq.sort,
-      warnings: warnings.compact,
-    }
+    warnings.compact
   end
 end end

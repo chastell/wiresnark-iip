@@ -13,8 +13,7 @@ module Wiresnark class Executable
       case @args.shift
       when 'commit'
         xml = XMLParser.new @args.first
-        xml.verify[:ignored].each  { |element| warn "#{element} ignored" }
-        xml.verify[:warnings].each { |warning| warn warning              }
+        xml.warnings.each { |warning| warn warning }
         opts[:net_fpga].config = xml.parse
       when 'show'
         puts opts[:shower].show @args
