@@ -1,2 +1,2 @@
-ext/regset.o
-ext/regset.so
+ext/wiresnark/regset.o
+ext/wiresnark/regset.so
