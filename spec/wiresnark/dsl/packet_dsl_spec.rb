@@ -1,7 +1,6 @@
 require_relative '../../spec_helper'
 
 module Wiresnark describe DSL::PacketDSL do
-
   describe '#destination_mac, #min_size, #payload, #random_size, #source_mac, #type and #params' do
     it 'stores the set packet params' do
       env = Object.new.extend DSL::PacketDSL
@@ -25,5 +24,4 @@ module Wiresnark describe DSL::PacketDSL do
       })
     end
   end
-
 end end

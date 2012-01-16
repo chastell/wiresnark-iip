@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 module Wiresnark describe Stream do
-
   describe '.for' do
     it 'returns the stream for the given interface and pcap lib' do
       pcap = MiniTest::Mock.new
@@ -24,5 +23,4 @@ module Wiresnark describe Stream do
       Stream.for('lo').wont_be_same_as Stream.for 'eth0'
     end
   end
-
 end end

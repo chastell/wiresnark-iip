@@ -1,5 +1,4 @@
 module Wiresnark module Stream
-
   def self.for name, pcap = nil
     streams[name] ||= begin
       pcap = Pcap if pcap.nil? and Process.uid.zero?
@@ -18,5 +17,4 @@ module Wiresnark module Stream
   def self.streams
     @streams ||= {}
   end
-
 end end

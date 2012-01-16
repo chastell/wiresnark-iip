@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 module Wiresnark describe Runner do
-
   describe '#run' do
     it 'evaluates the passed file and sends packets as per spec' do
       skip if Process.uid.zero?
@@ -63,5 +62,4 @@ lo ->\tNIL\t60\t[00:00:00:00:00:00] [00:00:00:00:00:00] [08.00] [00] [0000000002
       out.must_match 'NIL:     6 p,   360 b,    60 b/p    DSS:     4 p,   240 b,    60 b/p    CAN:     3 p,   180 b,    60 b/p    QOS:     2 p,   120 b,    60 b/p    MGT:     5 p,   300 b,    60 b/p'
     end
   end
-
 end end

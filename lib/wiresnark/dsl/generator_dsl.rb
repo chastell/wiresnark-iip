@@ -1,5 +1,4 @@
 module Wiresnark module DSL::GeneratorDSL
-
   include DSL::CommonDSL, DSL::PacketDSL
 
   def count count = nil
@@ -25,5 +24,4 @@ module Wiresnark module DSL::GeneratorDSL
   def sequence?
     @sequence
   end
-
 end end

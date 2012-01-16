@@ -1,7 +1,6 @@
 require_relative '../../spec_helper'
 
 module Wiresnark describe DSL::GeneratorDSL do
-
   before do
     @env = Object.new.extend DSL::GeneratorDSL
   end
@@ -45,5 +44,4 @@ module Wiresnark describe DSL::GeneratorDSL do
       assert @env.sequence?
     end
   end
-
 end end

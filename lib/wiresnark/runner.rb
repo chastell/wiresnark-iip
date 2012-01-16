@@ -1,5 +1,4 @@
 module Wiresnark class Runner
-
   def run file, env = Object.new.extend(DSL::WiresnarkDSL)
     env.instance_eval File.read file
 
@@ -58,5 +57,4 @@ module Wiresnark class Runner
       puts if mon.running_tally?
     end
   end
-
 end end

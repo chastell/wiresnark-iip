@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 module Wiresnark describe Interface do
-
   describe '#inject' do
     it 'injects the given packets to its stream' do
       stream = []
@@ -28,5 +27,4 @@ module Wiresnark describe Interface do
       lo.stream.must_equal [Packet.new.to_bin, Packet.new.to_bin]
     end
   end
-
 end end

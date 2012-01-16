@@ -1,7 +1,6 @@
 require_relative '../../spec_helper'
 
 module Wiresnark describe DSL::CommonDSL do
-
   before do
     @env = Object.new.extend DSL::CommonDSL
   end
@@ -21,5 +20,4 @@ module Wiresnark describe DSL::CommonDSL do
       assert @env.verbose?
     end
   end
-
 end end

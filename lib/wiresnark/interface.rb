@@ -1,5 +1,4 @@
 module Wiresnark class Interface
-
   attr_reader :stream
 
   def initialize name, stream = nil
@@ -13,5 +12,4 @@ module Wiresnark class Interface
       @stream << packet.to_bin
     end
   end
-
 end end

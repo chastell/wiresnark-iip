@@ -1,5 +1,4 @@
 module Wiresnark class Executable
-
   def initialize args = ARGV
     @command = args.shift
     @args    = args
@@ -20,5 +19,4 @@ module Wiresnark class Executable
       end
     end
   end
-
 end end

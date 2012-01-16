@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 module Wiresnark describe Generator do
-
   describe '.generate' do
     it 'generates packets based on the passed spec' do
       env = Object.new.extend DSL::GeneratorDSL
@@ -32,5 +31,4 @@ module Wiresnark describe Generator do
       Generator.generate(env).map(&:payload).must_equal ["\x00\x00\x00\x00\x00" + "\x00" * 40, "\x00\x00\x00\x00\x01" + "\x00" * 40, "\x00\x00\x00\x00\x02" + "\x00" * 40]
     end
   end
-
 end end

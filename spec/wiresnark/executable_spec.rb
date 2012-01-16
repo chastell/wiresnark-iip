@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 module Wiresnark describe Executable do
-
   describe '#run' do
     it 'passes the given file to the runner' do
       runner = MiniTest::Mock.new
@@ -54,5 +53,4 @@ module Wiresnark describe Executable do
       shower.verify
     end
   end
-
 end end

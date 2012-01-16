@@ -1,5 +1,4 @@
 module Wiresnark module DSL::WiresnarkDSL
-
   def generator &block
     generator_blocks << block
   end
@@ -15,5 +14,4 @@ module Wiresnark module DSL::WiresnarkDSL
   def monitor_blocks
     @monitor_blocks ||= []
   end
-
 end end

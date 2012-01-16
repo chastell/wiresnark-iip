@@ -1,7 +1,6 @@
 require_relative '../../spec_helper'
 
 module Wiresnark describe DSL::WiresnarkDSL do
-
   describe '#generator, #generator_blocks' do
     it 'stores the passed block for future execution' do
       env = Object.new.extend DSL::WiresnarkDSL
@@ -23,5 +22,4 @@ module Wiresnark describe DSL::WiresnarkDSL do
       env.monitor_blocks.must_equal [block_a, block_b]
     end
   end
-
 end end

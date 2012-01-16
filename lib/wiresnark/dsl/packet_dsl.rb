@@ -1,5 +1,4 @@
 module Wiresnark module DSL::PacketDSL
-
   [
     :destination_mac,
     :min_size,
@@ -14,5 +13,4 @@ module Wiresnark module DSL::PacketDSL
   def params
     @params ||= {}
   end
-
 end end
