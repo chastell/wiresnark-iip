@@ -65,5 +65,11 @@ module Wiresnark describe XMLParser do
       XMLParser.new('spec/fixtures/iip.conf.empty-interface.xml').warnings.must_be :empty?
       XMLParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').warnings.must_be :empty?
     end
+
+    it 'verfies value formats' do
+      warns = XMLParser.new('spec/fixtures/iip.conf.bad-values.xml').warnings
+      warns.must_include 'bad MACSourceAddress: 11:22:33:44:55'
+      warns.must_include 'bad MACDestinationAddress: gg:hh:ii:jj:kk:ll'
+    end
   end
 end end

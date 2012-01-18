@@ -62,6 +62,10 @@ module Wiresnark class XMLParser
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
     end
 
+    warnings += @xml.xpath('//MACDestinationAddress | //MACSourceAddress').map do |element|
+      "bad #{element.name}: #{element.text}" unless element.text =~ /\A\h\h(:\h\h){5}\Z/
+    end
+
     warnings.compact
   end
 end end
