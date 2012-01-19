@@ -66,6 +66,10 @@ module Wiresnark class XMLParser
       "bad #{element.name}: #{element.text}" unless element.text =~ /\A\h\h(:\h\h){5}\Z/
     end
 
+    warnings += @xml.xpath('//Cyclelength | //NumberPhases | //PhaseLength').map do |element|
+      "bad #{element.name}: #{element.text}" unless element.text =~ /\A\d+\Z/
+    end
+
     warnings.compact
   end
 end end

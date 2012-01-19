@@ -70,6 +70,9 @@ module Wiresnark describe XMLParser do
       warns = XMLParser.new('spec/fixtures/iip.conf.bad-values.xml').warnings
       warns.must_include 'bad MACSourceAddress: 11:22:33:44:55'
       warns.must_include 'bad MACDestinationAddress: gg:hh:ii:jj:kk:ll'
+      warns.must_include 'bad Cyclelength: foo'
+      warns.must_include 'bad NumberPhases: bar'
+      warns.must_include 'bad PhaseLength: baz'
     end
   end
 end end
