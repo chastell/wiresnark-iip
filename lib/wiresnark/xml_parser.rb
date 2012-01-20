@@ -70,6 +70,10 @@ module Wiresnark class XMLParser
       "bad #{element.name}: #{element.text}" unless element.text =~ /\A\d+\Z/
     end
 
+    warnings += @xml.xpath('//PhaseLength').map do |pl|
+      "bad PhaseLength pi: #{pl.attr 'pi'}" unless TypeBytes.keys.include? pl.attr 'pi'
+    end
+
     warnings.compact
   end
 end end

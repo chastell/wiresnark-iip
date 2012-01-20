@@ -8,6 +8,7 @@
       <Cyclelength>foo</Cyclelength>
       <NumberPhases>bar</NumberPhases>
       <PhaseLength pi="QOS">baz</PhaseLength>
+      <PhaseLength pi="QUX">8</PhaseLength>
     </Scheduler>
   </interface>
 </interfaces>

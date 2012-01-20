@@ -73,6 +73,7 @@ module Wiresnark describe XMLParser do
       warns.must_include 'bad Cyclelength: foo'
       warns.must_include 'bad NumberPhases: bar'
       warns.must_include 'bad PhaseLength: baz'
+      warns.must_include 'bad PhaseLength pi: QUX'
     end
   end
 end end
