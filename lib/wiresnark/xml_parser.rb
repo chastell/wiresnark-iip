@@ -74,6 +74,10 @@ module Wiresnark class XMLParser
       "bad PhaseLength pi: #{pl.attr 'pi'}" unless TypeBytes.keys.include? pl.attr 'pi'
     end
 
+    warnings += @xml.xpath('//interface').map do |iface|
+      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ /\Aeth\d\Z/
+    end
+
     warnings.compact
   end
 end end
