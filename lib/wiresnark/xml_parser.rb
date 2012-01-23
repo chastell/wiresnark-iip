@@ -16,12 +16,9 @@ module Wiresnark class XMLParser
   end
 
   def warnings
-    warnings = warn_daf_macda + warn_cl_sum_of_pl + warn_iface_format +
-      warn_ignored + warn_mac_format + warn_macda_missing +
-      warn_macsa_missing + warn_np_number_of_pl + warn_number_format +
-      warn_pi_format + warn_pl_rounding
-
-    warnings.compact
+    warnings = private_methods.grep(/^warn_/).map do |method|
+      send method
+    end.flatten.compact
   end
 
   private
