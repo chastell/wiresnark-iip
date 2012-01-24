@@ -7,8 +7,8 @@ module Wiresnark class XMLParser
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
       macsa = interface.at_xpath 'v_port/MACSourceAddress'
       macda = interface.at_xpath 'v_port/MACDestinationAddress'
-      local = macsa ? macsa.text : '00:00:00:00:00:00'
-      other = macda ? macda.text : '00:00:00:00:00:00'
+      local = macsa && macsa.text =~ /\A\h\h(:\h\h){5}\Z/ ? macsa.text : '00:00:00:00:00:00'
+      other = macda && macda.text =~ /\A\h\h(:\h\h){5}\Z/ ? macda.text : '00:00:00:00:00:00'
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]

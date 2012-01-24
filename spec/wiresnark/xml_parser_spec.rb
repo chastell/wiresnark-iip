@@ -25,6 +25,12 @@ module Wiresnark describe XMLParser do
       XMLParser.new('spec/fixtures/iip.conf.empty-interface.xml').parse.must_equal empty
       XMLParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').parse.must_equal({})
     end
+
+    it 'zeroes bad MAC addresses' do
+      bad = XMLParser.new('spec/fixtures/iip.conf.bad-values.xml').parse
+      bad[0][:local].must_equal '00:00:00:00:00:00'
+      bad[0][:other].must_equal '00:00:00:00:00:00'
+    end
   end
 
   describe '#warnings' do
