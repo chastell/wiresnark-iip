@@ -1,4 +1,8 @@
 module Wiresnark class XMLParser
+  ValidIface  = /\Aeth\d\Z/
+  ValidMAC    = /\A\h\h(:\h\h){5}\Z/
+  ValidNumber = /\A\d+\Z/
+
   def initialize path
     @xml = Nokogiri::XML File.read path
   end
@@ -7,8 +11,8 @@ module Wiresnark class XMLParser
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
       macsa = interface.at_xpath 'v_port/MACSourceAddress'
       macda = interface.at_xpath 'v_port/MACDestinationAddress'
-      local = macsa && macsa.text =~ /\A\h\h(:\h\h){5}\Z/ ? macsa.text : '00:00:00:00:00:00'
-      other = macda && macda.text =~ /\A\h\h(:\h\h){5}\Z/ ? macda.text : '00:00:00:00:00:00'
+      local = macsa && macsa.text =~ ValidMAC ? macsa.text : '00:00:00:00:00:00'
+      other = macda && macda.text =~ ValidMAC ? macda.text : '00:00:00:00:00:00'
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
@@ -45,7 +49,7 @@ module Wiresnark class XMLParser
 
   def warn_iface_format
     @xml.xpath('//interface').map do |iface|
-      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ /\Aeth\d\Z/
+      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ ValidIface
     end
   end
 
@@ -60,7 +64,7 @@ module Wiresnark class XMLParser
 
   def warn_mac_format
     @xml.xpath('//MACDestinationAddress | //MACSourceAddress').map do |element|
-      "bad #{element.name}: #{element.text}" unless element.text =~ /\A\h\h(:\h\h){5}\Z/
+      "bad #{element.name}: #{element.text}" unless element.text =~ ValidMAC
     end
   end
 
@@ -88,7 +92,7 @@ module Wiresnark class XMLParser
 
   def warn_number_format
     @xml.xpath('//Cyclelength | //NumberPhases | //PhaseLength').map do |element|
-      "bad #{element.name}: #{element.text}" unless element.text =~ /\A\d+\Z/
+      "bad #{element.name}: #{element.text}" unless element.text =~ ValidNumber
     end
   end
 
