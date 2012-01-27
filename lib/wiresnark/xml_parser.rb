@@ -30,8 +30,8 @@ module Wiresnark class XMLParser
   def warn_daf_macda
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
       if v_port.at_xpath 'DestinationAddressfiltering'
-        daf   = v_port.at_xpath('DestinationAddressfiltering').text
-        macda = v_port.at_xpath('MACDestinationAddress').text
+        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
+        macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
         "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
       end
     end
@@ -40,8 +40,8 @@ module Wiresnark class XMLParser
   def warn_cl_sum_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'Cyclelength'
-        cl     = scheduler.at_xpath('Cyclelength').text.to_i
-        pl_sum = scheduler.xpath('PhaseLength').map { |pl| pl.text.to_i }.inject :+
+        cl     = scheduler.at_xpath('Cyclelength/text()').to_s.to_i
+        pl_sum = scheduler.xpath('PhaseLength/text()').map { |pl| pl.to_s.to_i }.inject :+
         "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
       end
     end
@@ -83,7 +83,7 @@ module Wiresnark class XMLParser
   def warn_np_number_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'NumberPhases'
-        np     = scheduler.at_xpath('NumberPhases').text.to_i
+        np     = scheduler.at_xpath('NumberPhases/text()').to_s.to_i
         pl_num = scheduler.xpath('PhaseLength').size
         "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
       end
@@ -103,8 +103,8 @@ module Wiresnark class XMLParser
   end
 
   def warn_pl_rounding
-    @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength').map do |pl|
-      pl      = pl.text.to_i
+    @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength/text()').map do |pl|
+      pl      = pl.to_s.to_i
       rounded = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
     end
