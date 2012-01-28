@@ -67,15 +67,11 @@ module Wiresnark class XMLParser
     end
   end
 
-  def warn_macda_missing
+  def warn_mac_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      "MACDestinationAddress set to #{DefaultMAC}" unless v_port.at_xpath 'MACDestinationAddress'
-    end
-  end
-
-  def warn_macsa_missing
-    @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      "MACSourceAddress set to #{DefaultMAC}" unless v_port.at_xpath 'MACSourceAddress'
+      ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
+        "#{mac} set to #{DefaultMAC}" unless v_port.at_xpath mac
+      end
     end
   end
 
