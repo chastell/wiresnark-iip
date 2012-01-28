@@ -1,4 +1,5 @@
 module Wiresnark class XMLParser
+  DefaultMAC  = '00:00:00:00:00:00'
   ValidIface  = /\Aeth\d\Z/
   ValidMAC    = /\A\h\h(:\h\h){5}\Z/
   ValidNumber = /\A\d+\Z/
@@ -11,8 +12,8 @@ module Wiresnark class XMLParser
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
       macsa = interface.at_xpath('v_port/MACSourceAddress/text()').to_s
       macda = interface.at_xpath('v_port/MACDestinationAddress/text()').to_s
-      local = macsa =~ ValidMAC ? macsa : '00:00:00:00:00:00'
-      other = macda =~ ValidMAC ? macda : '00:00:00:00:00:00'
+      local = macsa =~ ValidMAC ? macsa : DefaultMAC
+      other = macda =~ ValidMAC ? macda : DefaultMAC
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
@@ -68,13 +69,13 @@ module Wiresnark class XMLParser
 
   def warn_macda_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      'MACDestinationAddress set to 00:00:00:00:00:00' unless v_port.at_xpath 'MACDestinationAddress'
+      "MACDestinationAddress set to #{DefaultMAC}" unless v_port.at_xpath 'MACDestinationAddress'
     end
   end
 
   def warn_macsa_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      'MACSourceAddress set to 00:00:00:00:00:00' unless v_port.at_xpath 'MACSourceAddress'
+      "MACSourceAddress set to #{DefaultMAC}" unless v_port.at_xpath 'MACSourceAddress'
     end
   end
 
