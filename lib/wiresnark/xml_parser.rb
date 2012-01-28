@@ -20,9 +20,7 @@ module Wiresnark class XMLParser
   end
 
   def warnings
-    warnings = private_methods.grep(/^warn_/).map do |method|
-      send method
-    end.flatten.compact
+    private_methods.grep(/^warn_/).map { |meth| send meth }.flatten.compact
   end
 
   private
