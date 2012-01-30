@@ -10,10 +10,10 @@ module Wiresnark class XMLParser
 
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
-      macsa = interface.at_xpath('v_port/MACSourceAddress/text()').to_s
-      macda = interface.at_xpath('v_port/MACDestinationAddress/text()').to_s
-      local = macsa =~ ValidMAC ? macsa : DefaultMAC
-      other = macda =~ ValidMAC ? macda : DefaultMAC
+      local = interface.at_xpath('v_port/MACSourceAddress/text()').to_s
+      other = interface.at_xpath('v_port/MACDestinationAddress/text()').to_s
+      local = DefaultMAC unless local =~ ValidMAC
+      other = DefaultMAC unless other =~ ValidMAC
 
       phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
@@ -58,7 +58,7 @@ module Wiresnark class XMLParser
       'DestinationAddressfiltering', 'MACDestinationAddress', 'MACSourceAddress',
       'Cyclelength', 'NumberPhases', 'PhaseLength',
     ]
-    (@xml.xpath('//*').map(&:name) - parsed).map { |w| "#{w} ignored" }
+    (@xml.xpath('//*').map(&:name) - parsed).map { |element| "#{element} ignored" }
   end
 
   def warn_mac_format
