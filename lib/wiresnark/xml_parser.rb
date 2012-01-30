@@ -26,17 +26,7 @@ module Wiresnark class XMLParser
 
   private
 
-  def warn_daf_macda
-    @xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      if v_port.at_xpath 'DestinationAddressfiltering'
-        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
-        macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
-        "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
-      end
-    end
-  end
-
-  def warn_cl_sum_of_pl
+  def warn_cl_different_than_sum_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'Cyclelength'
         cl     = scheduler.at_xpath('Cyclelength/text()').to_s.to_i
@@ -46,13 +36,17 @@ module Wiresnark class XMLParser
     end
   end
 
-  def warn_iface_format
-    @xml.xpath('//interface').map do |iface|
-      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ ValidIface
+  def warn_daf_different_than_macda
+    @xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      if v_port.at_xpath 'DestinationAddressfiltering'
+        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
+        macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
+        "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
+      end
     end
   end
 
-  def warn_ignored
+  def warn_ignored_elements_exist
     parsed = [
       'interfaces', 'interface', 'v_port', 'Scheduler',
       'DestinationAddressfiltering', 'MACDestinationAddress', 'MACSourceAddress',
@@ -61,13 +55,19 @@ module Wiresnark class XMLParser
     (@xml.xpath('//*').map(&:name) - parsed).map { |element| "#{element} ignored" }
   end
 
-  def warn_mac_format
+  def warn_interface_name_in_wrong_format
+    @xml.xpath('//interface').map do |iface|
+      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ ValidIface
+    end
+  end
+
+  def warn_mac_in_wrong_format
     @xml.xpath('//MACDestinationAddress | //MACSourceAddress').map do |element|
       "bad #{element.name}: #{element.text}" unless element.text =~ ValidMAC
     end
   end
 
-  def warn_mac_missing
+  def warn_mac_is_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
       ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
         "#{mac} set to #{DefaultMAC}" unless v_port.at_xpath mac
@@ -75,7 +75,7 @@ module Wiresnark class XMLParser
     end
   end
 
-  def warn_np_number_of_pl
+  def warn_np_different_than_number_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'NumberPhases'
         np     = scheduler.at_xpath('NumberPhases/text()').to_s.to_i
@@ -85,19 +85,19 @@ module Wiresnark class XMLParser
     end
   end
 
-  def warn_number_format
+  def warn_number_in_wrong_format
     @xml.xpath('//Cyclelength | //NumberPhases | //PhaseLength').map do |element|
       "bad #{element.name}: #{element.text}" unless element.text =~ ValidNumber
     end
   end
 
-  def warn_pi_format
+  def warn_pi_in_wrong_format
     @xml.xpath('//PhaseLength').map do |pl|
       "bad PhaseLength pi: #{pl.attr 'pi'}" unless TypeBytes.keys.include? pl.attr 'pi'
     end
   end
 
-  def warn_pl_rounding
+  def warn_pl_will_be_rounded
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength/text()').map do |pl|
       pl      = pl.to_s.to_i
       rounded = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
