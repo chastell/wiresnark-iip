@@ -75,6 +75,12 @@ module Wiresnark class XMLParser
     end
   end
 
+  def warn_nameless_interfaces
+    @xml.xpath('//interface').map do |interface|
+      'nameless interface' unless interface.attr 'name'
+    end
+  end
+
   def warn_np_different_than_number_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'NumberPhases'

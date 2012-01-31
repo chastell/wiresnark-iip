@@ -1,0 +1,13 @@
+<interfaces>
+  <interface>
+    <v_port>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+    </v_port>
+    <Scheduler>
+      <Cyclelength>176</Cyclelength>
+      <NumberPhases>1</NumberPhases>
+      <PhaseLength>176</PhaseLength>
+    </Scheduler>
+  </interface>
+</interfaces>
