@@ -26,6 +26,13 @@ module Wiresnark class XMLParser
 
   private
 
+  def warn_attrless_elements
+    attr = { 'interface' => 'name', 'Scheduler' => 'type', 'PhaseLength' => 'pi' }
+    @xml.xpath('//interface | //Scheduler | //PhaseLength').map do |element|
+      "#{attr[element.name]}less #{element.name}" unless element.attr attr[element.name]
+    end
+  end
+
   def warn_cl_different_than_sum_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'Cyclelength'
@@ -72,12 +79,6 @@ module Wiresnark class XMLParser
       ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
         "#{mac} set to #{DefaultMAC}" unless v_port.at_xpath mac
       end
-    end
-  end
-
-  def warn_nameless_interfaces
-    @xml.xpath('//interface').map do |interface|
-      'nameless interface' unless interface.attr 'name'
     end
   end
 

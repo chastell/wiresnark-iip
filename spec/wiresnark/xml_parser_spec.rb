@@ -83,9 +83,11 @@ module Wiresnark describe XMLParser do
       warns.must_include 'bad interface name: ath0'
     end
 
-    it 'warns on nameless intefaces' do
+    it 'warns on attrless elements' do
       warns = XMLParser.new('spec/fixtures/iip.conf.nameless.xml').warnings
       warns.must_include 'nameless interface'
+      warns.must_include 'typeless Scheduler'
+      warns.must_include 'piless PhaseLength'
     end
   end
 end end
