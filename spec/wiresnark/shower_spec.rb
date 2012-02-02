@@ -37,6 +37,18 @@ module Wiresnark describe Shower do
       nf.verify
     end
 
+    it 'returns all phase params' do
+      p0 = MiniTest::Mock.new
+      nf = MiniTest::Mock.new
+      p0.expect :phases, [{ type: 'QOS', length: 100 }, { type: 'CAN', length: 200 }, { type: 'MGT', length: 300 }, { type: 'NIL', length: 400 }]
+      nf.expect :ports, [p0]
+
+      Shower.new(nf).show(['PL', 'eth0', 'v_1']).must_equal 'QOS=100,CAN=200,MGT=300,NIL=400'
+
+      p0.verify
+      nf.verify
+    end
+
     it 'returns the proper constant params' do
       Shower.new.show(['MTU',   'eth0', 'v_1']).must_equal 2048
       Shower.new.show(['ifgap', 'eth1', 'v_1']).must_equal 24
