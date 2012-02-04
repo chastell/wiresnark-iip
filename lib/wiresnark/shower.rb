@@ -15,7 +15,8 @@ module Wiresnark class Shower
     when 'MTU'   then port.mtu
     when 'NP'    then port.phase_number
     when 'PL'
-      type ? port.phases.find { |p| p[:type] == type }[:length] : port.phases.map { |p| "#{p[:type]}=#{p[:length]}" }.join(',')
+      pls = type ? port.phases.select { |p| p[:type] == type } : port.phases
+      pls.map { |p| "#{p[:type]}=#{p[:length]}" }.join(',')
     when 'ifgap' then port.ifgap
     when 'BV', 'CBS', 'CIR', 'CLASS', 'DAF', 'MACT', 'MACVLANT', 'PIH', 'PIT', 'PIVT', 'SAF', 'VLANTF', 'VPTIin', 'VPTIout', 'WFQ'
       warn "unhandled parameter: #{param}"
