@@ -30,8 +30,8 @@ module Wiresnark describe Shower do
       p0.expect :phases, [{ type: 'QOS', length: 100 }, { type: 'CAN', length: 200 }, { type: 'MGT', length: 300 }, { type: 'NIL', length: 400 }]
       nf.expect :ports, [p0]
 
-      Shower.new(nf).show(['PL', 'eth0', 'v_1', 'QOS']).must_equal 'QOS=100'
-      Shower.new(nf).show(['PL', 'eth0', 'v_1', 'NIL']).must_equal 'NIL=400'
+      Shower.new(nf).show(['PL', 'eth0', 'v_1', 'QOS']).must_equal 'QOS=100,,,'
+      Shower.new(nf).show(['PL', 'eth0', 'v_1', 'NIL']).must_equal ',,,NIL=400'
 
       p0.verify
       nf.verify
