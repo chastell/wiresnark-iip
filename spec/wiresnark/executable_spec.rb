@@ -52,5 +52,16 @@ module Wiresnark describe Executable do
 
       shower.verify
     end
+
+    it 'executes IIP get command' do
+      getter = MiniTest::Mock.new
+      getter.expect :get, 'XML with device configuration'
+
+      -> do
+        Executable.new(['iip', 'get']).run getter: getter
+      end.must_output "XML with device configuration\n"
+
+      getter.verify
+    end
   end
 end end

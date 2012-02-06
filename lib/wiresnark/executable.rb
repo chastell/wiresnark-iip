@@ -14,6 +14,8 @@ module Wiresnark class Executable
         xml = XMLParser.new @args.first
         xml.warnings.each { |warning| warn warning }
         opts[:net_fpga].config = xml.parse
+      when 'get'
+        puts opts[:getter].get
       when 'show'
         puts opts[:shower].show @args
       end
