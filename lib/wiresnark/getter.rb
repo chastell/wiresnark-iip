@@ -11,6 +11,7 @@ module Wiresnark class Getter
             xml.v_port name: 'v_1' do
               xml.MACSourceAddress port.local_mac
               xml.MACDestinationAddress port.other_mac
+              xml.MTU port.mtu
             end
             xml.Scheduler type: 'XenNet' do
               xml.Cyclelength port.cycle_length

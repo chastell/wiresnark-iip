@@ -17,6 +17,7 @@ module Wiresnark describe Getter do
         { type: 'MGT', length: 208 },
         { type: 'NIL', length: 216 },
       ]
+      port.expect :mtu, 2048
 
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :ports, [port]
