@@ -5,6 +5,7 @@
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
       <MTU>2048</MTU>
+      <ifgap>24</ifgap>
     </v_port>
     <Scheduler type="XenNet">
       <Cyclelength>984</Cyclelength>

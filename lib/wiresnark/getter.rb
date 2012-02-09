@@ -12,6 +12,7 @@ module Wiresnark class Getter
               xml.MACSourceAddress port.local_mac
               xml.MACDestinationAddress port.other_mac
               xml.MTU port.mtu
+              xml.ifgap port.ifgap
             end
             xml.Scheduler type: 'XenNet' do
               xml.Cyclelength port.cycle_length
