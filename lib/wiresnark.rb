@@ -15,6 +15,7 @@ module Wiresnark
   }
 end
 
+require_relative 'wiresnark/committer'
 require_relative 'wiresnark/configuration'
 require_relative 'wiresnark/dsl/common_dsl'
 require_relative 'wiresnark/dsl/packet_dsl'
