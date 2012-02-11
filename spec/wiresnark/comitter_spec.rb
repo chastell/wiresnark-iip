@@ -25,7 +25,7 @@ module Wiresnark describe Committer do
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :config=, nil, [config]
 
-      Committer.new('spec/fixtures/iip.conf.xml', net_fpga).commit
+      Committer.new(net_fpga).commit 'spec/fixtures/iip.conf.xml'
 
       net_fpga.verify
     end
