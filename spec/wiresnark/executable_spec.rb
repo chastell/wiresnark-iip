@@ -10,36 +10,17 @@ module Wiresnark describe Executable do
     end
 
     it 'executes IIP commit command and prints warnings about the XML (if any)' do
-      config = {
-        0 => {
-          local: 'ad:e3:3e:a4:23:aa',
-          other: 'a3:a3:45:23:34:aa',
-          phases: [
-            { type: 'QOS', length: 180 },
-            { type: 'CAN', length: 190 },
-            { type: 'DSS', length: 200 },
-            { type: 'MGT', length: 210 },
-            { type: 'NIL', length: 220 },
-          ],
-        },
-        1 => {
-          local: 'ad:e3:3e:b4:23:aa',
-          other: 'a3:aa:45:23:34:aa',
-          phases: [],
-        },
-      }
-
-      net_fpga = MiniTest::Mock.new
-      net_fpga.expect :config=, nil, [config]
+      committer = MiniTest::Mock.new
+      committer.expect :commit, nil, ['spec/fixtures/iip.conf.xml']
 
       stderr = capture_io do
-        Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run net_fpga: net_fpga
+        Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run committer: committer
       end.last
 
       stderr.must_include 'BaseValue ignored'
       stderr.must_include 'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
 
-      net_fpga.verify
+      committer.verify
     end
 
     it 'executes IIP show commands' do

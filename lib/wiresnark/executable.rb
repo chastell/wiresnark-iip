@@ -4,16 +4,15 @@ module Wiresnark class Executable
     @args    = args
   end
 
-  def run opts = { net_fpga: NetFPGA.new, runner: Runner.new, shower: Shower.new }
+  def run opts = { committer: Committer.new, getter: Getter.new, runner: Runner.new, shower: Shower.new }
     case @command
     when 'run'
       opts[:runner].run @args.first
     when 'iip'
       case @args.shift
       when 'commit'
-        xml = XMLParser.new @args.first
-        xml.warnings.each { |warning| warn warning }
-        opts[:net_fpga].config = xml.parse
+        XMLParser.new(@args.first).warnings.each { |warning| warn warning }
+        opts[:committer].commit @args.first
       when 'get'
         puts opts[:getter].get
       when 'show'
