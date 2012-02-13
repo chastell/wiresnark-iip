@@ -15,5 +15,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'pcaprub'
 
   gem.add_development_dependency 'bundler'
-  gem.add_development_dependency 'minitest', '>= 2.3'
+  gem.add_development_dependency 'minitest', '>= 2.11.1'
 end
