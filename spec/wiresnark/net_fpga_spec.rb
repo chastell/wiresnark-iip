@@ -25,26 +25,45 @@ module Wiresnark describe NetFPGA do
       }
 
       regbridge = MiniTest::Mock.new
+
+      # port 0, local MAC
       regbridge.expect :set_register, nil, [0x2000000, 0x0000ade3]
       regbridge.expect :set_register, nil, [0x2000004, 0x3ea423aa]
+
+      # port 0, other MAC
       regbridge.expect :set_register, nil, [0x2000008, 0x0000a3a3]
       regbridge.expect :set_register, nil, [0x200000c, 0x452334aa]
+
+      # port 0, number of phases
+      regbridge.expect :set_register, nil, [0x2000100, 5]
+
+      # port 0, phase types + lenghts
+      regbridge.expect :set_register, nil, [0x2000124, 4]
+      regbridge.expect :set_register, nil, [0x2000104, 23]
+
+      regbridge.expect :set_register, nil, [0x2000128, 2]
+      regbridge.expect :set_register, nil, [0x2000108, 24]
+
+      regbridge.expect :set_register, nil, [0x200012c, 1]
+      regbridge.expect :set_register, nil, [0x200010c, 25]
+
+      regbridge.expect :set_register, nil, [0x2000130, 7]
+      regbridge.expect :set_register, nil, [0x2000110, 26]
+
+      regbridge.expect :set_register, nil, [0x2000134, 0]
+      regbridge.expect :set_register, nil, [0x2000114, 27]
+
+      # port 1, local MAC
       regbridge.expect :set_register, nil, [0x2000040, 0x0000ade3]
       regbridge.expect :set_register, nil, [0x2000044, 0x3eb423aa]
+
+      # port 1, other MAC
       regbridge.expect :set_register, nil, [0x2000048, 0x0000a3aa]
       regbridge.expect :set_register, nil, [0x200004c, 0x452334aa]
-      regbridge.expect :set_register, nil, [0x2000100, 5]
-      regbridge.expect :set_register, nil, [0x2000104, 23]
-      regbridge.expect :set_register, nil, [0x2000108, 24]
-      regbridge.expect :set_register, nil, [0x200010c, 25]
-      regbridge.expect :set_register, nil, [0x2000110, 26]
-      regbridge.expect :set_register, nil, [0x2000114, 27]
-      regbridge.expect :set_register, nil, [0x2000124, 4]
-      regbridge.expect :set_register, nil, [0x2000128, 2]
-      regbridge.expect :set_register, nil, [0x200012c, 1]
-      regbridge.expect :set_register, nil, [0x2000130, 7]
-      regbridge.expect :set_register, nil, [0x2000134, 0]
+
+      # port 1, number of phases
       regbridge.expect :set_register, nil, [0x2000180, 0]
+
       nf = NetFPGA.new regbridge
       nf.config = config
 
