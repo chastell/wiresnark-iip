@@ -1,4 +1,4 @@
-module Wiresnark class Getter
+module Wiresnark module IIP class Getter
   def initialize net_fpga
     @net_fpga = net_fpga
   end
@@ -26,4 +26,4 @@ module Wiresnark class Getter
       end
     end.to_xml
   end
-end end
+end end end

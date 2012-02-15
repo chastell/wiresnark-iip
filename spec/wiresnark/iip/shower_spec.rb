@@ -1,6 +1,6 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module Wiresnark describe Shower do
+module Wiresnark module IIP describe Shower do
   describe '#show' do
     it 'returns the proper Port params' do
       p0 = MiniTest::Mock.new
@@ -64,4 +64,4 @@ module Wiresnark describe Shower do
       -> { Shower.new(nf).show(['foo', 'eth0', 'v_1']) }.must_output '', "unknown parameter: foo\n"
     end
   end
-end end
+end end end

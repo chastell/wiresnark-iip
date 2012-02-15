@@ -1,4 +1,4 @@
-module Wiresnark class Shower
+module Wiresnark module IIP class Shower
   def initialize net_fpga = NetFPGA.new
     @net_fpga = net_fpga
   end
@@ -22,4 +22,4 @@ module Wiresnark class Shower
       warn "unknown parameter: #{param}"
     end
   end
-end end
+end end end
