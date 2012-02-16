@@ -1,4 +1,4 @@
-module Wiresnark class XMLParser
+module Wiresnark class ConfigParser
   DefaultMAC  = '00:00:00:00:00:00'
   ValidIface  = /\Aeth\d\Z/
   ValidMAC    = /\A\h\h(:\h\h){5}\Z/

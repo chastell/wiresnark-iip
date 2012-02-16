@@ -15,6 +15,7 @@ module Wiresnark
   }
 end
 
+require_relative 'wiresnark/config_parser'
 require_relative 'wiresnark/configuration'
 require_relative 'wiresnark/dsl/common_dsl'
 require_relative 'wiresnark/dsl/packet_dsl'
@@ -34,4 +35,3 @@ require_relative 'wiresnark/packet'
 require_relative 'wiresnark/reg_parser'
 require_relative 'wiresnark/runner'
 require_relative 'wiresnark/stream'
-require_relative 'wiresnark/xml_parser'
