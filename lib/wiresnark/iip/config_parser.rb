@@ -1,4 +1,4 @@
-module Wiresnark class ConfigParser
+module Wiresnark module IIP class ConfigParser
   DefaultMAC  = '00:00:00:00:00:00'
   ValidIface  = /\Aeth\d\Z/
   ValidMAC    = /\A\h\h(:\h\h){5}\Z/
@@ -111,4 +111,4 @@ module Wiresnark class ConfigParser
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
     end
   end
-end end
+end end end

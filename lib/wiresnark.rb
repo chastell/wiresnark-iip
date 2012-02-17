@@ -15,7 +15,6 @@ module Wiresnark
   }
 end
 
-require_relative 'wiresnark/config_parser'
 require_relative 'wiresnark/configuration'
 require_relative 'wiresnark/dsl/common_dsl'
 require_relative 'wiresnark/dsl/packet_dsl'
@@ -25,6 +24,7 @@ require_relative 'wiresnark/dsl/wiresnark_dsl'
 require_relative 'wiresnark/executable'
 require_relative 'wiresnark/generator'
 require_relative 'wiresnark/iip/committer'
+require_relative 'wiresnark/iip/config_parser'
 require_relative 'wiresnark/iip/getter'
 require_relative 'wiresnark/iip/shower'
 require_relative 'wiresnark/interface'

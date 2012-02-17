@@ -1,6 +1,6 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module Wiresnark describe ConfigParser do
+module Wiresnark module IIP describe ConfigParser do
   let(:parser) { ConfigParser.new 'spec/fixtures/iip.conf.xml' }
 
   describe '#parse' do
@@ -90,4 +90,4 @@ module Wiresnark describe ConfigParser do
       warns.must_include 'piless PhaseLength'
     end
   end
-end end
+end end end

@@ -11,7 +11,7 @@ module Wiresnark class Executable
     when 'iip'
       case @args.shift
       when 'commit'
-        ConfigParser.new(@args.first).warnings.each { |warning| warn warning }
+        IIP::ConfigParser.new(@args.first).warnings.each { |warning| warn warning }
         opts[:committer].commit @args.first
       when 'get'
         puts opts[:getter].get
