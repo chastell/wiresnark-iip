@@ -10,10 +10,9 @@ module Wiresnark module IIP class ConfigParser
 
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
-      local = mac_from_interface 'MACSourceAddress', interface
-      other = mac_from_interface 'MACDestinationAddress', interface
-
-      phases = interface.xpath('Scheduler/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
+      local  = mac_from_interface 'MACSourceAddress', interface
+      other  = mac_from_interface 'MACDestinationAddress', interface
+      phases = phases_from_interface interface
       [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
     end]
   end
@@ -27,6 +26,10 @@ module Wiresnark module IIP class ConfigParser
   def mac_from_interface element, interface
     mac = interface.at_xpath("v_port/#{element}/text()").to_s
     mac =~ ValidMAC ? mac : DefaultMAC
+  end
+
+  def phases_from_interface interface
+    interface.xpath('Scheduler[@type = "XenNet"]/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
   end
 
   def warn_attrless_elements
