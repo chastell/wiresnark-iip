@@ -10,10 +10,11 @@ module Wiresnark module IIP class ConfigParser
 
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
-      local  = mac_from_interface 'MACSourceAddress', interface
-      other  = mac_from_interface 'MACDestinationAddress', interface
-      phases = phases_from_interface interface
-      [interface.attr('name').chars.to_a.last.to_i, { local: local, other: other, phases: phases }]
+      [interface.attr('name')[/\d$/].to_i, {
+        local:  mac_from_interface('MACSourceAddress', interface),
+        other:  mac_from_interface('MACDestinationAddress', interface),
+        phases: phases_from_interface(interface),
+      }]
     end]
   end
 
