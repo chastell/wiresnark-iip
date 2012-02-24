@@ -8,9 +8,10 @@ module Wiresnark class NetFPGA
 
   def config= config
     config.each do |i, params|
-      ports[i].local_mac = params[:local]
-      ports[i].other_mac = params[:other]
-      ports[i].phases    = params[:phases]
+      ports[i].ether_type = params[:ether_type]
+      ports[i].local_mac  = params[:local]
+      ports[i].other_mac  = params[:other]
+      ports[i].phases     = params[:phases]
     end
   end
 

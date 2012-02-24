@@ -7,6 +7,7 @@ module Wiresnark describe NetFPGA do
     it 'sets the card’s configuration' do
       config = {
         0 => {
+          ether_type: 0xabcd,
           local: 'ad:e3:3e:a4:23:aa',
           other: 'a3:a3:45:23:34:aa',
           phases: [
@@ -18,6 +19,7 @@ module Wiresnark describe NetFPGA do
           ],
         },
         1 => {
+          ether_type: 0,
           local: 'ad:e3:3e:b4:23:aa',
           other: 'a3:aa:45:23:34:aa',
           phases: [],
@@ -25,6 +27,9 @@ module Wiresnark describe NetFPGA do
       }
 
       regbridge = MiniTest::Mock.new
+
+      # port 0, EtherType
+      regbridge.expect :set_register, nil, [0x2000110, 0xabcd]
 
       # port 0, local MAC
       regbridge.expect :set_register, nil, [0x2000100, 0x0000ade3]
@@ -52,6 +57,9 @@ module Wiresnark describe NetFPGA do
 
       regbridge.expect :set_register, nil, [0x2000160, 0]
       regbridge.expect :set_register, nil, [0x2000140, 27]
+
+      # port 1, EtherType
+      regbridge.expect :set_register, nil, [0x2000210, 0]
 
       # port 1, local MAC
       regbridge.expect :set_register, nil, [0x2000200, 0x0000ade3]
