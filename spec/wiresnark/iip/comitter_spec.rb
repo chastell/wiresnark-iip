@@ -5,6 +5,7 @@ module Wiresnark module IIP describe Committer do
     it 'configures NetFPGA with the passed XML' do
       config = {
         0 => {
+          ether_type: 0xabcd,
           local: 'ad:e3:3e:a4:23:aa',
           other: 'a3:a3:45:23:34:aa',
           phases: [
@@ -16,6 +17,7 @@ module Wiresnark module IIP describe Committer do
           ],
         },
         1 => {
+          ether_type: 0,
           local: 'ad:e3:3e:b4:23:aa',
           other: 'a3:aa:45:23:34:aa',
           phases: [],

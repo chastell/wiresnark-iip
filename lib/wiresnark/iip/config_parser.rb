@@ -11,9 +11,10 @@ module Wiresnark module IIP class ConfigParser
   def parse
     Hash[@xml.xpath('/interfaces/interface').map do |interface|
       [interface.attr('name')[/\d$/].to_i, {
-        local:  mac_from_interface('MACSourceAddress', interface),
-        other:  mac_from_interface('MACDestinationAddress', interface),
-        phases: phases_from_interface(interface),
+        ether_type: interface.at_xpath('v_port/MACType/text()').to_s.to_i(16),
+        local:      mac_from_interface('MACSourceAddress', interface),
+        other:      mac_from_interface('MACDestinationAddress', interface),
+        phases:     phases_from_interface(interface),
       }]
     end]
   end

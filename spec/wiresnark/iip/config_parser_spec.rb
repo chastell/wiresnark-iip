@@ -6,6 +6,7 @@ module Wiresnark module IIP describe ConfigParser do
   describe '#parse' do
     it 'parses the IIP XML config file' do
       hash = parser.parse
+      hash[0][:ether_type].must_equal 0xabcd
       hash[0][:local].must_equal 'ad:e3:3e:a4:23:aa'
       hash[1][:other].must_equal 'a3:aa:45:23:34:aa'
       hash[0][:phases].must_equal [
@@ -19,7 +20,7 @@ module Wiresnark module IIP describe ConfigParser do
 
     it 'parses empty(ish) config files' do
       empty = {
-        0 => { local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [] }
+        0 => { ether_type: 0, local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [] }
       }
       ConfigParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml').parse.must_equal empty
       ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml').parse.must_equal empty
