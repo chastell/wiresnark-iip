@@ -9,6 +9,7 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_0_LOCAL_MAC_LO_REG' then 0x3ea42300
       when 'PORT_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'PORT_1_OTHER_MAC_LO_REG' then 0x45233400
+      when 'PORT_2_ETHER_TYPE_REG'   then 0x86dd
       when 'PORT_2_NUM_PHASES_REG'   then 4
       when 'PORT_2_PH_0_LENGTH_REG'  then 23
       when 'PORT_2_PH_1_LENGTH_REG'  then 24
@@ -27,6 +28,23 @@ module Wiresnark describe NetFPGA::Port do
     it 'returns the length of the cycle' do
       port = NetFPGA::Port.new net_fpga, 2
       port.cycle_length.must_equal 784
+    end
+  end
+
+  describe '#ether_type' do
+    it 'returns the EtherType' do
+      port = NetFPGA::Port.new net_fpga, 2
+      port.ether_type.must_equal 0x86dd
+    end
+  end
+
+  describe '#ether_type=' do
+    it 'sets the EtherType' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['PORT_0_ETHER_TYPE_REG', 0x86dd]
+      port = NetFPGA::Port.new net_fpga, 0
+      port.ether_type = 0x86dd
+      net_fpga.verify
     end
   end
 

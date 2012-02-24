@@ -10,6 +10,14 @@ module Wiresnark class NetFPGA::Port
     phases.map { |p| p[:length] }.inject :+
   end
 
+  def ether_type
+    @net_fpga.get "PORT_#{@port}_ETHER_TYPE_REG"
+  end
+
+  def ether_type= ether_type
+    @net_fpga.set "PORT_#{@port}_ETHER_TYPE_REG", ether_type
+  end
+
   def ifgap
     24
   end
