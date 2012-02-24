@@ -607,7 +607,7 @@
 #define PORT_0_ETHER_TYPE_REG           0x2000110
 #define PORT_0_NUM_FRAMES_GOOD_REG      0x2000114
 #define PORT_0_NUM_FRAMES_BAD_REG       0x2000118
-#define PORT_0_PIH_IPV6_REG             0x200011c
+#define PORT_0_PIH_QOS_REG              0x200011c
 #define PORT_0_PIH_CAN_REG              0x2000120
 #define PORT_0_PIH_DSS_REG              0x2000124
 #define PORT_0_PIH_MGT_REG              0x2000128
@@ -642,7 +642,7 @@
 #define PORT_1_ETHER_TYPE_REG           0x2000210
 #define PORT_1_NUM_FRAMES_GOOD_REG      0x2000214
 #define PORT_1_NUM_FRAMES_BAD_REG       0x2000218
-#define PORT_1_PIH_IPV6_REG             0x200021c
+#define PORT_1_PIH_QOS_REG              0x200021c
 #define PORT_1_PIH_CAN_REG              0x2000220
 #define PORT_1_PIH_DSS_REG              0x2000224
 #define PORT_1_PIH_MGT_REG              0x2000228
@@ -677,7 +677,7 @@
 #define PORT_2_ETHER_TYPE_REG           0x2000310
 #define PORT_2_NUM_FRAMES_GOOD_REG      0x2000314
 #define PORT_2_NUM_FRAMES_BAD_REG       0x2000318
-#define PORT_2_PIH_IPV6_REG             0x200031c
+#define PORT_2_PIH_QOS_REG              0x200031c
 #define PORT_2_PIH_CAN_REG              0x2000320
 #define PORT_2_PIH_DSS_REG              0x2000324
 #define PORT_2_PIH_MGT_REG              0x2000328
@@ -712,7 +712,7 @@
 #define PORT_3_ETHER_TYPE_REG           0x2000410
 #define PORT_3_NUM_FRAMES_GOOD_REG      0x2000414
 #define PORT_3_NUM_FRAMES_BAD_REG       0x2000418
-#define PORT_3_PIH_IPV6_REG             0x200041c
+#define PORT_3_PIH_QOS_REG              0x200041c
 #define PORT_3_PIH_CAN_REG              0x2000420
 #define PORT_3_PIH_DSS_REG              0x2000424
 #define PORT_3_PIH_MGT_REG              0x2000428
