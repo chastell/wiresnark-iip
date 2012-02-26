@@ -15,12 +15,14 @@ module Wiresnark module IIP describe Committer do
             { type: 'MGT', length: 210 },
             { type: 'NIL', length: 220 },
           ],
+          type_map: { 'CAN' => 2 },
         },
         1 => {
           ether_type: 0,
           local: 'ad:e3:3e:b4:23:aa',
           other: 'a3:aa:45:23:34:aa',
           phases: [],
+          type_map: { 'MGT' => 7 },
         },
       }
 

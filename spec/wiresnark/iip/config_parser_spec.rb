@@ -16,11 +16,12 @@ module Wiresnark module IIP describe ConfigParser do
         { type: 'MGT', length: 210 },
         { type: 'NIL', length: 220 },
       ]
+      hash[0][:type_map].must_equal({ 'CAN' => 2 })
     end
 
     it 'parses empty(ish) config files' do
       empty = {
-        0 => { ether_type: 0, local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [] }
+        0 => { ether_type: 0, local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [], type_map: {} }
       }
       ConfigParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml').parse.must_equal empty
       ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml').parse.must_equal empty

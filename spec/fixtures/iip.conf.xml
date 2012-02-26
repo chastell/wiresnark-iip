@@ -1,9 +1,9 @@
 <interfaces>
   <interface name="eth0">
     <v_port name="v_1">
-      <pi type="ustawione_Z_CLI">
+      <pi type="CAN">
         <VLAN-TAG> value </VLAN-TAG>
-        <PIH>ustawione_Z_CLI</PIH>
+        <PIH>2</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
@@ -27,9 +27,9 @@
   </interface>
   <interface name="eth1">
     <v_port name="v_1">
-      <pi type="typ">
+      <pi type="MGT">
         <VLAN-TAG>value</VLAN-TAG>
-        <PIH> value </PIH>
+        <PIH>7</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:b4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:aa:45:23:34:aa</MACDestinationAddress>

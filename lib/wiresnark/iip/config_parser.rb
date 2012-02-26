@@ -15,6 +15,7 @@ module Wiresnark module IIP class ConfigParser
         local:      mac_from_interface('MACSourceAddress', interface),
         other:      mac_from_interface('MACDestinationAddress', interface),
         phases:     phases_from_interface(interface),
+        type_map:   type_map_from_interface(interface),
       }]
     end]
   end
@@ -32,6 +33,12 @@ module Wiresnark module IIP class ConfigParser
 
   def phases_from_interface interface
     interface.xpath('Scheduler[@type = "XenNet"]/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
+  end
+
+  def type_map_from_interface interface
+    Hash[interface.xpath('v_port/pi').map do |pi|
+      [pi.attr('type'), pi.at_xpath('PIH/text()').to_s.to_i]
+    end]
   end
 
   def warn_attrless_elements
