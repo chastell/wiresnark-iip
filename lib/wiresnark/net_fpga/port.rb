@@ -63,6 +63,12 @@ module Wiresnark class NetFPGA::Port
     end
   end
 
+  def type_map= type_map
+    type_map.each do |type, value|
+      @net_fpga.set "PORT_#{@port}_PIH_#{type}_REG", value
+    end
+  end
+
   private
 
   def get_mac locality

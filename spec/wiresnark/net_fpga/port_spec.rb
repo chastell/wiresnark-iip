@@ -139,4 +139,15 @@ module Wiresnark describe NetFPGA::Port do
       net_fpga.verify
     end
   end
+
+  describe '#type_map=' do
+    it 'sets the type map' do
+      net_fpga = MiniTest::Mock.new
+      net_fpga.expect :set, nil, ['PORT_1_PIH_CAN_REG', 2]
+      net_fpga.expect :set, nil, ['PORT_1_PIH_MGT_REG', 7]
+      port = NetFPGA::Port.new net_fpga, 1
+      port.type_map = { 'CAN' => 2, 'MGT' => 7 }
+      net_fpga.verify
+    end
+  end
 end end
