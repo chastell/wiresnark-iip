@@ -12,6 +12,7 @@ module Wiresnark class NetFPGA
       ports[i].local_mac  = params[:local]
       ports[i].other_mac  = params[:other]
       ports[i].phases     = params[:phases]
+      ports[i].type_map   = params[:type_map]
     end
   end
 

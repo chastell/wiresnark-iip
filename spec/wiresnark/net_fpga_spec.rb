@@ -17,12 +17,14 @@ module Wiresnark describe NetFPGA do
             { type: 'MGT', length: 208 },
             { type: 'NIL', length: 216 },
           ],
+          type_map: { 'CAN' => 2, 'MGT' => 7 },
         },
         1 => {
           ether_type: 0,
           local: 'ad:e3:3e:b4:23:aa',
           other: 'a3:aa:45:23:34:aa',
           phases: [],
+          type_map: {},
         },
       }
 
@@ -57,6 +59,10 @@ module Wiresnark describe NetFPGA do
 
       regbridge.expect :set_register, nil, [0x2000160, 0]
       regbridge.expect :set_register, nil, [0x2000140, 27]
+
+      # port 0, type map
+      regbridge.expect :set_register, nil, [0x2000120, 2]
+      regbridge.expect :set_register, nil, [0x2000128, 7]
 
       # port 1, EtherType
       regbridge.expect :set_register, nil, [0x2000210, 0]
