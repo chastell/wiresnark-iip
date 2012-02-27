@@ -4,6 +4,7 @@
     <v_port name="v_1">
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
       <MTU>2048</MTU>
       <ifgap>24</ifgap>
     </v_port>
