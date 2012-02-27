@@ -37,7 +37,7 @@ module Wiresnark module IIP class ConfigParser
 
   def type_map_from_interface interface
     Hash[interface.xpath('v_port/pi').map do |pi|
-      [pi.attr('type'), pi.at_xpath('PIH/text()').to_s.to_i]
+      [pi.attr('type'), pi.at_xpath('PIH/text()').to_s.to_i(2)]
     end]
   end
 

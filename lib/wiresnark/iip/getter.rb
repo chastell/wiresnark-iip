@@ -11,7 +11,7 @@ module Wiresnark module IIP class Getter
             xml.v_port name: 'v_1' do
               port.type_map.each do |type, value|
                 xml.pi type: type do
-                  xml.PIH value
+                  xml.PIH value.to_s(2).rjust 3, '0'
                 end
               end
               xml.MACSourceAddress port.local_mac

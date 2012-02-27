@@ -57,8 +57,8 @@ module Wiresnark module IIP describe Shower do
       p0.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
       nf.expect :ports, [p0]
 
-      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'CAN']).must_equal '2'
-      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'QOS']).must_equal '4'
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'CAN']).must_equal '010'
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'QOS']).must_equal '100'
 
       p0.verify
       nf.verify
@@ -70,7 +70,7 @@ module Wiresnark module IIP describe Shower do
       p0.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
       nf.expect :ports, [p0]
 
-      Shower.new(nf).show(['PIH', 'eth0', 'v_1']).must_equal 'DSS=1,CAN=2,QOS=4,MGT=7'
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1']).must_equal 'DSS=001,CAN=010,QOS=100,MGT=111'
 
       p0.verify
       nf.verify

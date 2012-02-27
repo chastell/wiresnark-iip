@@ -3,16 +3,16 @@
   <interface name="eth0">
     <v_port name="v_1">
       <pi type="DSS">
-        <PIH>1</PIH>
+        <PIH>001</PIH>
       </pi>
       <pi type="CAN">
-        <PIH>2</PIH>
+        <PIH>010</PIH>
       </pi>
       <pi type="QOS">
-        <PIH>4</PIH>
+        <PIH>100</PIH>
       </pi>
       <pi type="MGT">
-        <PIH>7</PIH>
+        <PIH>111</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
