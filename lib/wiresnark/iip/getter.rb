@@ -1,5 +1,5 @@
 module Wiresnark module IIP class Getter
-  def initialize net_fpga
+  def initialize net_fpga = NetFPGA.new
     @net_fpga = net_fpga
   end
 
