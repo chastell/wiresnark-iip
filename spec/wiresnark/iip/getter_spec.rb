@@ -20,6 +20,7 @@ module Wiresnark module IIP describe Getter do
         { type: 'MGT', length: 208 },
         { type: 'NIL', length: 216 },
       ]
+      port.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
 
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :ports, [port]
