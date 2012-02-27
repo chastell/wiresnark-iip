@@ -12,11 +12,12 @@ module Wiresnark module IIP class Shower
     when 'CL'    then port.cycle_length
     when 'MACDA' then port.other_mac
     when 'MACSA' then port.local_mac
+    when 'MACT'  then "0x#{port.ether_type.to_s 16}"
     when 'MTU'   then port.mtu
     when 'NP'    then port.phase_number
     when 'PL'    then port.phases.map { |p| "#{p[:type]}=#{p[:length]}" if type.nil? or type == p[:type] }.join ','
     when 'ifgap' then port.ifgap
-    when 'BV', 'CBS', 'CIR', 'CLASS', 'DAF', 'MACT', 'MACVLANT', 'PIH', 'PIT', 'PIVT', 'SAF', 'VLANTF', 'VPTIin', 'VPTIout', 'WFQ'
+    when 'BV', 'CBS', 'CIR', 'CLASS', 'DAF', 'MACVLANT', 'PIH', 'PIT', 'PIVT', 'SAF', 'VLANTF', 'VPTIin', 'VPTIout', 'WFQ'
       warn "unhandled parameter: #{param}"
     else
       warn "unknown parameter: #{param}"

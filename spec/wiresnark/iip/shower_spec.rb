@@ -9,12 +9,14 @@ module Wiresnark module IIP describe Shower do
       nf = MiniTest::Mock.new
       p0.expect :local_mac, '00:11:22:33:44:55'
       p1.expect :other_mac, 'aa:bb:cc:dd:ee:ff'
+      p1.expect :ether_type, 0xabcd
       p2.expect :cycle_length, 1000
       p2.expect :phase_number, 4
       nf.expect :ports, [p0, p1, p2]
 
       Shower.new(nf).show(['MACSA', 'eth0', 'v_1']).must_equal '00:11:22:33:44:55'
       Shower.new(nf).show(['MACDA', 'eth1', 'v_1']).must_equal 'aa:bb:cc:dd:ee:ff'
+      Shower.new(nf).show(['MACT',  'eth1', 'v_1']).must_equal '0xabcd'
       Shower.new(nf).show(['CL',    'eth2', 'v_1']).must_equal 1000
       Shower.new(nf).show(['NP',    'eth2', 'v_1']).must_equal 4
 
