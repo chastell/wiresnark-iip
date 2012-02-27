@@ -9,6 +9,10 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_0_LOCAL_MAC_LO_REG' then 0x3ea42300
       when 'PORT_1_OTHER_MAC_HI_REG' then 0x0000a3a3
       when 'PORT_1_OTHER_MAC_LO_REG' then 0x45233400
+      when 'PORT_1_PIH_DSS_REG'      then 1
+      when 'PORT_1_PIH_CAN_REG'      then 2
+      when 'PORT_1_PIH_QOS_REG'      then 4
+      when 'PORT_1_PIH_MGT_REG'      then 7
       when 'PORT_2_ETHER_TYPE_REG'   then 0x86dd
       when 'PORT_2_NUM_PHASES_REG'   then 4
       when 'PORT_2_PH_0_LENGTH_REG'  then 23
@@ -137,6 +141,18 @@ module Wiresnark describe NetFPGA::Port do
         { type: 'NIL', length: 208 },
       ]
       net_fpga.verify
+    end
+  end
+
+  describe '#type_map' do
+    it 'gets the type map' do
+      port = NetFPGA::Port.new net_fpga, 1
+      port.type_map.must_equal({
+        'DSS' => 1,
+        'CAN' => 2,
+        'QOS' => 4,
+        'MGT' => 7,
+      })
     end
   end
 

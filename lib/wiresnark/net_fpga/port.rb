@@ -63,6 +63,12 @@ module Wiresnark class NetFPGA::Port
     end
   end
 
+  def type_map
+    Hash[TypeBytes.keys.reject { |k| k == 'NIL' }.map do |type|
+      [type, @net_fpga.get("PORT_#{@port}_PIH_#{type}_REG")]
+    end]
+  end
+
   def type_map= type_map
     type_map.each do |type, value|
       @net_fpga.set "PORT_#{@port}_PIH_#{type}_REG", value
