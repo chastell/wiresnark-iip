@@ -51,6 +51,31 @@ module Wiresnark module IIP describe Shower do
       nf.verify
     end
 
+    it 'returns the proper type value' do
+      p0 = MiniTest::Mock.new
+      nf = MiniTest::Mock.new
+      p0.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
+      nf.expect :ports, [p0]
+
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'CAN']).must_equal '2'
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1', 'QOS']).must_equal '4'
+
+      p0.verify
+      nf.verify
+    end
+
+    it 'returns all type values' do
+      p0 = MiniTest::Mock.new
+      nf = MiniTest::Mock.new
+      p0.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
+      nf.expect :ports, [p0]
+
+      Shower.new(nf).show(['PIH', 'eth0', 'v_1']).must_equal 'DSS=1,CAN=2,QOS=4,MGT=7'
+
+      p0.verify
+      nf.verify
+    end
+
     it 'returns the proper constant params' do
       Shower.new.show(['MTU',   'eth0', 'v_1']).must_equal 2048
       Shower.new.show(['ifgap', 'eth1', 'v_1']).must_equal 24
