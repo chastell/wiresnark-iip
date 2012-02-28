@@ -16,15 +16,17 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_1_PIH_QOS_REG'      then 4
       when 'PORT_1_PIH_MGT_REG'      then 7
       when 'PORT_2_ETHER_TYPE_REG'   then 0x86dd
-      when 'PORT_2_NUM_PHASES_REG'   then 4
+      when 'PORT_2_NUM_PHASES_REG'   then 5
       when 'PORT_2_PH_0_LENGTH_REG'  then 23
       when 'PORT_2_PH_1_LENGTH_REG'  then 24
       when 'PORT_2_PH_2_LENGTH_REG'  then 25
       when 'PORT_2_PH_3_LENGTH_REG'  then 26
+      when 'PORT_2_PH_4_LENGTH_REG'  then 27
       when 'PORT_2_PH_0_TYPE_REG'    then 4
       when 'PORT_2_PH_1_TYPE_REG'    then 2
       when 'PORT_2_PH_2_TYPE_REG'    then 7
       when 'PORT_2_PH_3_TYPE_REG'    then 0
+      when 'PORT_2_PH_4_TYPE_REG'    then 3
       when 'PORT_3_ETHER_TYPE_REG'   then 0xdeadbeef
       when 'PORT_3_NUM_PHASES_REG'   then 0xdeadbeef
       when 'PORT_3_PIH_DSS_REG'      then 0xdeadbeef
@@ -36,7 +38,7 @@ module Wiresnark describe NetFPGA::Port do
   describe '#cycle_length' do
     it 'returns the length of the cycle' do
       port = NetFPGA::Port.new net_fpga, 2
-      port.cycle_length.must_equal 784
+      port.cycle_length.must_equal 1000
     end
   end
 
@@ -113,7 +115,7 @@ module Wiresnark describe NetFPGA::Port do
   describe '#phase_number' do
     it 'returns the number of phases' do
       port = NetFPGA::Port.new net_fpga, 2
-      port.phase_number.must_equal 4
+      port.phase_number.must_equal 5
     end
 
     it 'defaults to 0 if it’s more than 8' do
@@ -130,6 +132,7 @@ module Wiresnark describe NetFPGA::Port do
         { type: 'CAN', length: 192 },
         { type: 'MGT', length: 200 },
         { type: 'NIL', length: 208 },
+        { type: 'NIL', length: 216 },
       ]
     end
 

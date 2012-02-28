@@ -51,7 +51,7 @@ module Wiresnark class NetFPGA::Port
   def phases
     Array.new phase_number do |ph|
       {
-        type:   TypeBytes.invert[@net_fpga.get "PORT_#{@port}_PH_#{ph}_TYPE_REG"],
+        type:   TypeBytes.invert[@net_fpga.get "PORT_#{@port}_PH_#{ph}_TYPE_REG"] || 'NIL',
         length: @net_fpga.get("PORT_#{@port}_PH_#{ph}_LENGTH_REG") * LengthUnit,
       }
     end
