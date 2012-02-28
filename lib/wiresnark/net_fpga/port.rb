@@ -61,7 +61,7 @@ module Wiresnark class NetFPGA::Port
   def phases= phases
     @net_fpga.set "PORT_#{@port}_NUM_PHASES_REG", phases.size
     phases.each.with_index do |phase, ph|
-      @net_fpga.set "PORT_#{@port}_PH_#{ph}_TYPE_REG",   TypeBytes[phase[:type]]
+      @net_fpga.set "PORT_#{@port}_PH_#{ph}_TYPE_REG",   PhaseTypes.invert[phase[:type]]
       @net_fpga.set "PORT_#{@port}_PH_#{ph}_LENGTH_REG", phase[:length] / LengthUnit
     end
   end

@@ -45,16 +45,16 @@ module Wiresnark describe NetFPGA do
       regbridge.expect :set_register, nil, [0x200012c, 5]
 
       # port 0, phase types + lenghts
-      regbridge.expect :set_register, nil, [0x2000150, 4]
+      regbridge.expect :set_register, nil, [0x2000150, 1]
       regbridge.expect :set_register, nil, [0x2000130, 23]
 
       regbridge.expect :set_register, nil, [0x2000154, 2]
       regbridge.expect :set_register, nil, [0x2000134, 24]
 
-      regbridge.expect :set_register, nil, [0x2000158, 1]
+      regbridge.expect :set_register, nil, [0x2000158, 3]
       regbridge.expect :set_register, nil, [0x2000138, 25]
 
-      regbridge.expect :set_register, nil, [0x200015c, 7]
+      regbridge.expect :set_register, nil, [0x200015c, 4]
       regbridge.expect :set_register, nil, [0x200013c, 26]
 
       regbridge.expect :set_register, nil, [0x2000160, 0]
