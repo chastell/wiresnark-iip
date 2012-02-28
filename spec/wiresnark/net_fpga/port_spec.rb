@@ -27,6 +27,7 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_2_PH_3_TYPE_REG'    then 0
       when 'PORT_3_ETHER_TYPE_REG'   then 0xdeadbeef
       when 'PORT_3_NUM_PHASES_REG'   then 0xdeadbeef
+      when 'PORT_3_PIH_DSS_REG'      then 0xdeadbeef
       end
     end
     net_fpga
@@ -163,12 +164,14 @@ module Wiresnark describe NetFPGA::Port do
 
   describe '#type_map' do
     it 'gets the type map' do
-      port = NetFPGA::Port.new net_fpga, 1
-      port.type_map.must_equal({
-        'DSS' => 1,
-        'CAN' => 2,
-        'QOS' => 4,
-        'MGT' => 7,
+      NetFPGA::Port.new(net_fpga, 1).type_map.must_equal({
+        'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7,
+      })
+    end
+
+    it 'zeroes unset type values and ones larger than 0xff' do
+      NetFPGA::Port.new(net_fpga, 3).type_map.must_equal({
+        'DSS' => 0, 'CAN' => 0, 'QOS' => 0, 'MGT' => 0,
       })
     end
   end
