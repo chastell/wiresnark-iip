@@ -70,9 +70,9 @@ module Wiresnark module IIP class ConfigParser
 
   def warn_ignored_elements_exist
     parsed = [
-      'interfaces', 'interface', 'v_port', 'Scheduler',
-      'DestinationAddressfiltering', 'MACDestinationAddress', 'MACSourceAddress',
-      'Cyclelength', 'NumberPhases', 'PhaseLength',
+      'Cyclelength', 'DestinationAddressfiltering', 'MACDestinationAddress',
+      'MACSourceAddress', 'MACType', 'NumberPhases', 'PIH', 'PhaseLength',
+      'Scheduler', 'interface', 'interfaces', 'pi', 'v_port',
     ]
     (@xml.xpath('//*').map(&:name) - parsed).map { |element| "#{element} ignored" }
   end

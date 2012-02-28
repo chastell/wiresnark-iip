@@ -44,8 +44,8 @@ module Wiresnark module IIP describe ConfigParser do
     it 'warns about ignored elements' do
       warns = parser.warnings
       [
-        'BaseValue', 'CBS', 'CIR', 'MACType', 'MACVLAN-tag', 'MTU', 'PIH',
-        'SourceAddressfiltering', 'VLAN-TAG', 'VLAN-tagfiltering', 'WFQ', 'ifgap', 'pi',
+        'BaseValue', 'CBS', 'CIR', 'MACVLAN-tag', 'MTU', 'SourceAddressfiltering',
+        'VLAN-TAG', 'VLAN-tagfiltering', 'WFQ', 'ifgap',
       ].each { |elem| warns.must_include "#{elem} ignored" }
     end
 
