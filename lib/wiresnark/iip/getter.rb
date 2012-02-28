@@ -8,17 +8,17 @@ module Wiresnark module IIP class Getter
       xml.interfaces do
         @net_fpga.ports.each.with_index do |port, i|
           xml.interface name: "eth#{i}" do
-            xml.v_port name: 'v_1' do
-              port.type_map.each do |type, value|
+            port.type_map.each.with_index do |(type, value), i|
+              xml.v_port name: "v_#{i+1}" do
                 xml.pi type: type do
                   xml.PIH value.to_s(2).rjust 3, '0'
                 end
+                xml.MACSourceAddress port.local_mac
+                xml.MACDestinationAddress port.other_mac
+                xml.MACType "0x#{port.ether_type.to_s 16}"
+                xml.MTU port.mtu
+                xml.ifgap port.ifgap
               end
-              xml.MACSourceAddress port.local_mac
-              xml.MACDestinationAddress port.other_mac
-              xml.MACType "0x#{port.ether_type.to_s 16}"
-              xml.MTU port.mtu
-              xml.ifgap port.ifgap
             end
             xml.Scheduler type: 'XenNet' do
               xml.Cyclelength port.cycle_length

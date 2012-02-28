@@ -5,12 +5,33 @@
       <pi type="DSS">
         <PIH>001</PIH>
       </pi>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
+      <MTU>2048</MTU>
+      <ifgap>24</ifgap>
+    </v_port>
+    <v_port name="v_2">
       <pi type="CAN">
         <PIH>010</PIH>
       </pi>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
+      <MTU>2048</MTU>
+      <ifgap>24</ifgap>
+    </v_port>
+    <v_port name="v_3">
       <pi type="QOS">
         <PIH>100</PIH>
       </pi>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
+      <MTU>2048</MTU>
+      <ifgap>24</ifgap>
+    </v_port>
+    <v_port name="v_4">
       <pi type="MGT">
         <PIH>111</PIH>
       </pi>
