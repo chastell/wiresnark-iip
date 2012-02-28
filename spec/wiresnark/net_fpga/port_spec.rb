@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require_relative '../../spec_helper'
 
 module Wiresnark describe NetFPGA::Port do
@@ -23,6 +25,7 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_2_PH_1_TYPE_REG'    then 2
       when 'PORT_2_PH_2_TYPE_REG'    then 7
       when 'PORT_2_PH_3_TYPE_REG'    then 0
+      when 'PORT_3_NUM_PHASES_REG'   then 3735928559
       end
     end
     net_fpga
@@ -107,6 +110,11 @@ module Wiresnark describe NetFPGA::Port do
       port = NetFPGA::Port.new net_fpga, 2
       port.phase_number.must_equal 4
     end
+
+    it 'defaults to 0 if it’s more than 8' do
+      port = NetFPGA::Port.new net_fpga, 3
+      port.phase_number.must_be :zero?
+    end
   end
 
   describe '#phases' do
@@ -118,6 +126,11 @@ module Wiresnark describe NetFPGA::Port do
         { type: 'MGT', length: 200 },
         { type: 'NIL', length: 208 },
       ]
+    end
+
+    it 'does not raise on uninitialised NetFPGA' do
+      port = NetFPGA::Port.new net_fpga, 3
+      port.phases
     end
   end
 

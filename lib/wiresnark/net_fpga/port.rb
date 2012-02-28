@@ -43,11 +43,12 @@ module Wiresnark class NetFPGA::Port
   end
 
   def phase_number
-    @net_fpga.get "PORT_#{@port}_NUM_PHASES_REG"
+    num_phases = @net_fpga.get "PORT_#{@port}_NUM_PHASES_REG"
+    num_phases > 8 ? 0 : num_phases
   end
 
   def phases
-    Array.new @net_fpga.get "PORT_#{@port}_NUM_PHASES_REG" do |ph|
+    Array.new phase_number do |ph|
       {
         type:   TypeBytes.invert[@net_fpga.get "PORT_#{@port}_PH_#{ph}_TYPE_REG"],
         length: @net_fpga.get("PORT_#{@port}_PH_#{ph}_LENGTH_REG") * LengthUnit,
