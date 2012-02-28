@@ -11,7 +11,8 @@ module Wiresnark class NetFPGA::Port
   end
 
   def ether_type
-    @net_fpga.get "PORT_#{@port}_ETHER_TYPE_REG"
+    ether_type = @net_fpga.get "PORT_#{@port}_ETHER_TYPE_REG"
+    ether_type > 0xffff ? 0 : ether_type
   end
 
   def ether_type= ether_type

@@ -25,7 +25,8 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_2_PH_1_TYPE_REG'    then 2
       when 'PORT_2_PH_2_TYPE_REG'    then 7
       when 'PORT_2_PH_3_TYPE_REG'    then 0
-      when 'PORT_3_NUM_PHASES_REG'   then 3735928559
+      when 'PORT_3_ETHER_TYPE_REG'   then 0xdeadbeef
+      when 'PORT_3_NUM_PHASES_REG'   then 0xdeadbeef
       end
     end
     net_fpga
@@ -40,8 +41,11 @@ module Wiresnark describe NetFPGA::Port do
 
   describe '#ether_type' do
     it 'returns the EtherType' do
-      port = NetFPGA::Port.new net_fpga, 2
-      port.ether_type.must_equal 0x86dd
+      NetFPGA::Port.new(net_fpga, 2).ether_type.must_equal 0x86dd
+    end
+
+    it 'zeroes the EtherType if it would be more than 0xffff' do
+      NetFPGA::Port.new(net_fpga, 3).ether_type.must_be :zero?
     end
   end
 
