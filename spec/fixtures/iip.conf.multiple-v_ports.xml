@@ -1,0 +1,19 @@
+<interfaces>
+  <interface name="eth0">
+    <v_port name="v_1">
+      <pi type="CAN">
+        <PIH>010</PIH>
+      </pi>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
+    </v_port><v_port name="v_2">
+      <pi type="MGT">
+        <PIH>111</PIH>
+      </pi>
+      <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
+      <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
+      <MACType>0xabcd</MACType>
+    </v_port>
+  </interface>
+</interfaces>

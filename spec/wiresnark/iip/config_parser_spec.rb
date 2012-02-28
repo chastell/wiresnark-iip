@@ -33,6 +33,11 @@ module Wiresnark module IIP describe ConfigParser do
       bad[0][:local].must_equal '00:00:00:00:00:00'
       bad[0][:other].must_equal '00:00:00:00:00:00'
     end
+
+    it 'parses type_map from subequent v_ports' do
+      config = ConfigParser.new('spec/fixtures/iip.conf.multiple-v_ports.xml').parse
+      config[0][:type_map].must_equal({ 'CAN' => 2, 'MGT' => 7 })
+    end
   end
 
   describe '#warnings' do
