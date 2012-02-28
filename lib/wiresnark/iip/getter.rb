@@ -15,7 +15,7 @@ module Wiresnark module IIP class Getter
                 end
                 xml.MACSourceAddress port.local_mac
                 xml.MACDestinationAddress port.other_mac
-                xml.MACType "0x#{port.ether_type.to_s 16}"
+                xml.MACType "0x#{port.ether_type.to_s(16).rjust 4, '0'}"
                 xml.MTU port.mtu
                 xml.ifgap port.ifgap
               end
