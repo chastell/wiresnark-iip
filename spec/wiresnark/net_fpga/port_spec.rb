@@ -22,9 +22,9 @@ module Wiresnark describe NetFPGA::Port do
       when 'PORT_2_PH_2_LENGTH_REG'  then 25
       when 'PORT_2_PH_3_LENGTH_REG'  then 26
       when 'PORT_2_PH_4_LENGTH_REG'  then 27
-      when 'PORT_2_PH_0_TYPE_REG'    then 4
+      when 'PORT_2_PH_0_TYPE_REG'    then 1
       when 'PORT_2_PH_1_TYPE_REG'    then 2
-      when 'PORT_2_PH_2_TYPE_REG'    then 7
+      when 'PORT_2_PH_2_TYPE_REG'    then 4
       when 'PORT_2_PH_3_TYPE_REG'    then 0
       when 'PORT_2_PH_4_TYPE_REG'    then 3
       when 'PORT_3_ETHER_TYPE_REG'   then 0xdeadbeef
@@ -132,13 +132,12 @@ module Wiresnark describe NetFPGA::Port do
         { type: 'CAN', length: 192 },
         { type: 'MGT', length: 200 },
         { type: 'NIL', length: 208 },
-        { type: 'NIL', length: 216 },
+        { type: 'DSS', length: 216 },
       ]
     end
 
     it 'does not raise on uninitialised NetFPGA' do
-      port = NetFPGA::Port.new net_fpga, 3
-      port.phases
+      NetFPGA::Port.new(net_fpga, 3).phases
     end
   end
 

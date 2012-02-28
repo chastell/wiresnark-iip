@@ -1,5 +1,6 @@
 module Wiresnark class NetFPGA::Port
   LengthUnit = 8
+  PhaseTypes = { 0 => 'NIL', 1 => 'QOS', 2 => 'CAN', 3 => 'DSS', 4 => 'MGT' }
 
   def initialize net_fpga, port
     @net_fpga = net_fpga
@@ -51,7 +52,7 @@ module Wiresnark class NetFPGA::Port
   def phases
     Array.new phase_number do |ph|
       {
-        type:   TypeBytes.invert[@net_fpga.get "PORT_#{@port}_PH_#{ph}_TYPE_REG"] || 'NIL',
+        type:   PhaseTypes[@net_fpga.get "PORT_#{@port}_PH_#{ph}_TYPE_REG"] || 'NIL',
         length: @net_fpga.get("PORT_#{@port}_PH_#{ph}_LENGTH_REG") * LengthUnit,
       }
     end
