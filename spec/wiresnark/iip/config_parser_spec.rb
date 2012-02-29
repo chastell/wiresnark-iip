@@ -83,6 +83,7 @@ module Wiresnark module IIP describe ConfigParser do
       warns = ConfigParser.new('spec/fixtures/iip.conf.bad-values.xml').warnings
       warns.must_include 'bad MACSourceAddress: 11:22:33:44:55'
       warns.must_include 'bad MACDestinationAddress: gg:hh:ii:jj:kk:ll'
+      warns.must_include 'bad MACType: boo'
       warns.must_include 'bad Cyclelength: foo'
       warns.must_include 'bad NumberPhases: bar'
       warns.must_include 'bad PhaseLength: baz'

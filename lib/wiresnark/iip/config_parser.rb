@@ -97,6 +97,12 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
+  def warn_mactype_in_wrong_format
+    @xml.xpath('//MACType').map do |mac_type|
+      "bad MACType: #{mac_type.text}" unless mac_type.text =~ /\A0x\h\h\h\h\Z/
+    end
+  end
+
   def warn_np_different_than_number_of_pl
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'NumberPhases'
