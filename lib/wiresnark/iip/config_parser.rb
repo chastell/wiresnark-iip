@@ -125,6 +125,12 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
+  def warn_pih_in_wrong_format
+    @xml.xpath('//PIH').map do |pih|
+      "bad PIH: #{pih.text}" unless pih.text =~ /\A[01]+\Z/
+    end
+  end
+
   def warn_pl_will_be_rounded
     @xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength/text()').map do |pl|
       pl      = pl.to_s.to_i

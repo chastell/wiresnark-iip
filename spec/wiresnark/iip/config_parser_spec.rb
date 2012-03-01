@@ -86,6 +86,7 @@ module Wiresnark module IIP describe ConfigParser do
       warns.must_include 'bad MACType: boo'
       warns.must_include 'bad Cyclelength: foo'
       warns.must_include 'bad NumberPhases: bar'
+      warns.must_include 'bad PIH: 012'
       warns.must_include 'bad PhaseLength: baz'
       warns.must_include 'bad PhaseLength pi: QUX'
       warns.must_include 'bad interface name: ath0'
