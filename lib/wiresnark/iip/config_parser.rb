@@ -1,8 +1,9 @@
 module Wiresnark module IIP class ConfigParser
-  DefaultMAC  = '00:00:00:00:00:00'
-  ValidIface  = /\Aeth\d\Z/
-  ValidMAC    = /\A\h\h(:\h\h){5}\Z/
-  ValidNumber = /\A\d+\Z/
+  DefaultMAC   = '00:00:00:00:00:00'
+  ValidBinary  = /\A[01]+\Z/
+  ValidDecimal = /\A\d+\Z/
+  ValidIface   = /\Aeth\d\Z/
+  ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
   def initialize path
     @xml = Nokogiri::XML File.read path
@@ -115,7 +116,7 @@ module Wiresnark module IIP class ConfigParser
 
   def warn_number_in_wrong_format
     @xml.xpath('//Cyclelength | //NumberPhases | //PhaseLength').map do |element|
-      "bad #{element.name}: #{element.text}" unless element.text =~ ValidNumber
+      "bad #{element.name}: #{element.text}" unless element.text =~ ValidDecimal
     end
   end
 
@@ -127,7 +128,7 @@ module Wiresnark module IIP class ConfigParser
 
   def warn_pih_in_wrong_format
     @xml.xpath('//PIH').map do |pih|
-      "bad PIH: #{pih.text}" unless pih.text =~ /\A[01]+\Z/
+      "bad PIH: #{pih.text}" unless pih.text =~ ValidBinary
     end
   end
 
