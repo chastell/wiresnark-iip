@@ -2,6 +2,7 @@ module Wiresnark module IIP class ConfigParser
   DefaultMAC   = '00:00:00:00:00:00'
   ValidBinary  = /\A[01]+\Z/
   ValidDecimal = /\A\d+\Z/
+  ValidHex     = /\A0x\h\h\h\h\Z/
   ValidIface   = /\Aeth\d\Z/
   ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
@@ -100,7 +101,7 @@ module Wiresnark module IIP class ConfigParser
 
   def warn_mactype_in_wrong_format
     @xml.xpath('//MACType').map do |mac_type|
-      "bad MACType: #{mac_type.text}" unless mac_type.text =~ /\A0x\h\h\h\h\Z/
+      "bad MACType: #{mac_type.text}" unless mac_type.text =~ ValidHex
     end
   end
 
