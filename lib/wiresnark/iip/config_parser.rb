@@ -6,6 +6,16 @@ module Wiresnark module IIP class ConfigParser
   ValidIface   = /\Aeth\d\Z/
   ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
+  ElementFormats = {
+    'Cyclelength'           => ValidDecimal,
+    'MACDestinationAddress' => ValidMAC,
+    'MACSourceAddress'      => ValidMAC,
+    'MACType'               => ValidHex,
+    'NumberPhases'          => ValidDecimal,
+    'PIH'                   => ValidBinary,
+    'PhaseLength'           => ValidDecimal,
+  }
+
   def initialize path
     @xml = Nokogiri::XML File.read path
   end
@@ -70,6 +80,14 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
+  def warn_elements_in_wrong_formats
+    ElementFormats.map do |name, format|
+      @xml.xpath("//#{name}").map do |element|
+        "bad #{name}: #{element.text}" unless element.text =~ format
+      end
+    end
+  end
+
   def warn_ignored_elements_exist
     parsed = [
       'Cyclelength', 'DestinationAddressfiltering', 'MACDestinationAddress',
@@ -85,23 +103,11 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
-  def warn_mac_in_wrong_format
-    @xml.xpath('//MACDestinationAddress | //MACSourceAddress').map do |element|
-      "bad #{element.name}: #{element.text}" unless element.text =~ ValidMAC
-    end
-  end
-
   def warn_mac_is_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
       ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
         "#{mac} set to #{DefaultMAC}" unless v_port.at_xpath mac
       end
-    end
-  end
-
-  def warn_mactype_in_wrong_format
-    @xml.xpath('//MACType').map do |mac_type|
-      "bad MACType: #{mac_type.text}" unless mac_type.text =~ ValidHex
     end
   end
 
@@ -115,21 +121,9 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
-  def warn_number_in_wrong_format
-    @xml.xpath('//Cyclelength | //NumberPhases | //PhaseLength').map do |element|
-      "bad #{element.name}: #{element.text}" unless element.text =~ ValidDecimal
-    end
-  end
-
   def warn_pi_in_wrong_format
     @xml.xpath('//PhaseLength').map do |pl|
       "bad PhaseLength pi: #{pl.attr 'pi'}" unless TypeBytes.keys.include? pl.attr 'pi'
-    end
-  end
-
-  def warn_pih_in_wrong_format
-    @xml.xpath('//PIH').map do |pih|
-      "bad PIH: #{pih.text}" unless pih.text =~ ValidBinary
     end
   end
 
