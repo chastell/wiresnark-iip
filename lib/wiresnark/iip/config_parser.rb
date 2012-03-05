@@ -16,6 +16,15 @@ module Wiresnark module IIP class ConfigParser
     'PhaseLength'           => ValidDecimal,
   }
 
+  AttrFormats = {
+    'interface' => {
+      'name' => -> name { name =~ ValidIface },
+    },
+    'PhaseLength' => {
+      'pi' => -> pi { TypeBytes.keys.include? pi },
+    },
+  }
+
   def initialize path
     @xml = Nokogiri::XML File.read path
   end
@@ -80,6 +89,16 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
+  def warn_attrs_in_wrong_formats
+    AttrFormats.map do |name, formats|
+      formats.map do |attr, validator|
+        @xml.xpath("//#{name}").map do |element|
+          "bad #{name} #{attr}: #{element.attr attr}" unless validator.call element.attr attr
+        end
+      end
+    end
+  end
+
   def warn_elements_in_wrong_formats
     ElementFormats.map do |name, format|
       @xml.xpath("//#{name}").map do |element|
@@ -97,12 +116,6 @@ module Wiresnark module IIP class ConfigParser
     (@xml.xpath('//*').map(&:name) - parsed).map { |element| "#{element} ignored" }
   end
 
-  def warn_interface_name_in_wrong_format
-    @xml.xpath('//interface').map do |iface|
-      "bad interface name: #{iface.attr 'name'}" unless iface.attr('name') =~ ValidIface
-    end
-  end
-
   def warn_mac_is_missing
     @xml.xpath('/interfaces/interface/v_port').map do |v_port|
       ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
@@ -118,12 +131,6 @@ module Wiresnark module IIP class ConfigParser
         pl_num = scheduler.xpath('PhaseLength').size
         "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
       end
-    end
-  end
-
-  def warn_pi_in_wrong_format
-    @xml.xpath('//PhaseLength').map do |pl|
-      "bad PhaseLength pi: #{pl.attr 'pi'}" unless TypeBytes.keys.include? pl.attr 'pi'
     end
   end
 
