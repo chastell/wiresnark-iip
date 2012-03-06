@@ -7,13 +7,13 @@ module Wiresnark module IIP class ConfigParser
   ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
   ElementFormats = {
-    'Cyclelength'           => ValidDecimal,
-    'MACDestinationAddress' => ValidMAC,
-    'MACSourceAddress'      => ValidMAC,
-    'MACType'               => ValidHex,
-    'NumberPhases'          => ValidDecimal,
-    'PIH'                   => ValidBinary,
-    'PhaseLength'           => ValidDecimal,
+    'Cyclelength'           => -> text { text =~ ValidDecimal },
+    'MACDestinationAddress' => -> text { text =~ ValidMAC     },
+    'MACSourceAddress'      => -> text { text =~ ValidMAC     },
+    'MACType'               => -> text { text =~ ValidHex     },
+    'NumberPhases'          => -> text { text =~ ValidDecimal },
+    'PIH'                   => -> text { text =~ ValidBinary  },
+    'PhaseLength'           => -> text { text =~ ValidDecimal },
   }
 
   AttrFormats = {
@@ -100,9 +100,9 @@ module Wiresnark module IIP class ConfigParser
   end
 
   def warn_elements_in_wrong_formats
-    ElementFormats.map do |name, format|
+    ElementFormats.map do |name, validator|
       @xml.xpath("//#{name}").map do |element|
-        "bad #{name}: #{element.text}" unless element.text =~ format
+        "bad #{name}: #{element.text}" unless validator.call element.text
       end
     end
   end
