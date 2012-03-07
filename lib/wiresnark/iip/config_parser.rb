@@ -6,23 +6,15 @@ module Wiresnark module IIP class ConfigParser
   ValidIface   = /\Aeth\d\Z/
   ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
-  ElementFormats = {
-    'Cyclelength'           => -> text { text =~ ValidDecimal },
-    'MACDestinationAddress' => -> text { text =~ ValidMAC     },
-    'MACSourceAddress'      => -> text { text =~ ValidMAC     },
-    'MACType'               => -> text { text =~ ValidHex     },
-    'NumberPhases'          => -> text { text =~ ValidDecimal },
-    'PIH'                   => -> text { text =~ ValidBinary  },
-    'PhaseLength'           => -> text { text =~ ValidDecimal },
-  }
-
-  AttrFormats = {
-    'interface' => {
-      'name' => -> name { name =~ ValidIface },
-    },
-    'PhaseLength' => {
-      'pi' => -> pi { TypeBytes.keys.include? pi },
-    },
+  ValidFormats = {
+    'Cyclelength'           => { text: -> text { text =~ ValidDecimal } },
+    'MACDestinationAddress' => { text: -> text { text =~ ValidMAC     } },
+    'MACSourceAddress'      => { text: -> text { text =~ ValidMAC     } },
+    'MACType'               => { text: -> text { text =~ ValidHex     } },
+    'NumberPhases'          => { text: -> text { text =~ ValidDecimal } },
+    'PIH'                   => { text: -> text { text =~ ValidBinary  } },
+    'PhaseLength'           => { text: -> text { text =~ ValidDecimal }, attr: { 'pi'   => -> pi   { TypeBytes.keys.include? pi } } },
+    'interface'             => {                                         attr: { 'name' => -> name { name =~ ValidIface         } } },
   }
 
   def initialize path
@@ -90,20 +82,20 @@ module Wiresnark module IIP class ConfigParser
   end
 
   def warn_attrs_in_wrong_formats
-    AttrFormats.map do |name, formats|
-      formats.map do |attr, validator|
+    ValidFormats.map do |name, hash|
+      hash[:attr].map do |attr, validator|
         @xml.xpath("//#{name}").map do |element|
           "bad #{name} #{attr}: #{element.attr attr}" unless validator.call element.attr attr
         end
-      end
+      end if hash[:attr]
     end
   end
 
   def warn_elements_in_wrong_formats
-    ElementFormats.map do |name, validator|
+    ValidFormats.map do |name, hash|
       @xml.xpath("//#{name}").map do |element|
-        "bad #{name}: #{element.text}" unless validator.call element.text
-      end
+        "bad #{name}: #{element.text}" unless hash[:text].call element.text
+      end if hash[:text]
     end
   end
 
