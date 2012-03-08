@@ -81,24 +81,6 @@ module Wiresnark module IIP class ConfigParser
     end
   end
 
-  def warn_attrs_in_wrong_formats
-    ValidFormats.map do |name, hash|
-      hash[:attr].map do |attr, validator|
-        @xml.xpath("//#{name}").map do |element|
-          "bad #{name} #{attr}: #{element.attr attr}" unless validator.call element.attr attr
-        end
-      end if hash[:attr]
-    end
-  end
-
-  def warn_elements_in_wrong_formats
-    ValidFormats.map do |name, hash|
-      @xml.xpath("//#{name}").map do |element|
-        "bad #{name}: #{element.text}" unless hash[:text].call element.text
-      end if hash[:text]
-    end
-  end
-
   def warn_ignored_elements_exist
     parsed = [
       'Cyclelength', 'DestinationAddressfiltering', 'MACDestinationAddress',
@@ -131,6 +113,24 @@ module Wiresnark module IIP class ConfigParser
       pl      = pl.to_s.to_i
       rounded = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
       "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
+    end
+  end
+
+  # FIXME: TOO MUCH CLEVER
+  def warn_wrong_formats
+    ValidFormats.map do |name, hash|
+      @xml.xpath("//#{name}").map do |element|
+        hash.map do |key, value|
+          case key
+          when :text
+            "bad #{name}: #{element.text}" unless value.call element.text
+          when :attr
+            value.map do |attr, validator|
+              "bad #{name} #{attr}: #{element.attr attr}" unless validator.call element.attr attr
+            end
+          end
+        end
+      end
     end
   end
 end end end
