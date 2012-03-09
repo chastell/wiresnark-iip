@@ -1,3 +1,5 @@
+require_relative 'common_dsl'
+
 module Wiresnark module DSL::MonitorDSL
   include DSL::CommonDSL
 

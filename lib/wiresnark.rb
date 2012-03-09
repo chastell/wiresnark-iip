@@ -15,5 +15,4 @@ module Wiresnark
   }
 end
 
-require_relative 'wiresnark/dsl/packet_dsl'
 Dir["#{File.dirname(__FILE__)}/**/*.rb"].sort.each { |f| require f }
