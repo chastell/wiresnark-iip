@@ -11,6 +11,7 @@ module Wiresnark module IIP class ConfigParser
     'MACDestinationAddress' => { text: -> text { text =~ ValidMAC     } },
     'MACSourceAddress'      => { text: -> text { text =~ ValidMAC     } },
     'MACType'               => { text: -> text { text =~ ValidHex     } },
+    'MTU'                   => { text: -> text { text =~ ValidDecimal } },
     'NumberPhases'          => { text: -> text { text =~ ValidDecimal } },
     'PIH'                   => { text: -> text { text =~ ValidBinary  } },
     'PhaseLength'           => { text: -> text { text =~ ValidDecimal }, attr: { 'pi'   => -> pi   { TypeBytes.keys.include? pi } } },

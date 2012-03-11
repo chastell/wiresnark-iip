@@ -7,6 +7,7 @@
       <MACSourceAddress>11:22:33:44:55</MACSourceAddress>
       <MACDestinationAddress>gg:hh:ii:jj:kk:ll</MACDestinationAddress>
       <MACType>boo</MACType>
+      <MTU>bah</MTU>
     </v_port>
     <Scheduler type="XenNet">
       <Cyclelength>foo</Cyclelength>
