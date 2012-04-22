@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wiresnark (0.1.8)
+    wiresnark-iip (0.0.0)
       ffi
       nokogiri
       pcaprub
@@ -20,4 +20,4 @@ PLATFORMS
 DEPENDENCIES
   bundler
   minitest (>= 2.11.1)
-  wiresnark!
+  wiresnark-iip!

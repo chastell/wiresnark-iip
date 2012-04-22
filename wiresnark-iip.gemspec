@@ -1,8 +1,8 @@
 Gem::Specification.new do |gem|
-  gem.name     = 'wiresnark'
-  gem.version  = '0.1.8'
-  gem.summary  = 'Wiresnark: packet generator/monitor'
-  gem.homepage = 'http://github.com/chastell/wiresnark'
+  gem.name     = 'wiresnark-iip'
+  gem.version  = '0.0.0'
+  gem.summary  = 'Wiresnark: IIP support'
+  gem.homepage = 'http://github.com/chastell/wiresnark-iip'
   gem.author   = 'Piotr Szotkowski'
   gem.email    = 'p.szotkowski@tele.pw.edu.pl'
 

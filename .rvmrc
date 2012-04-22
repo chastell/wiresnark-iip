@@ -1,2 +1,2 @@
-rvm gemset use wiresnark
+rvm gemset use wiresnark-iip
 bundle
