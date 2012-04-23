@@ -1,11 +1,7 @@
 require 'ffi'
 require 'nokogiri'
-require 'pcaprub'
 
 module Wiresnark
-  module DSL
-  end
-
   TypeBytes = {
     'NIL' => 0,
     'DSS' => 1,

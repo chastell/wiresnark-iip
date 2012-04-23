@@ -4,10 +4,8 @@ module Wiresnark class Executable
     @args    = args
   end
 
-  def run opts = { committer: IIP::Committer.new, getter: IIP::Getter.new, runner: Runner.new, shower: IIP::Shower.new }
+  def run opts = { committer: IIP::Committer.new, getter: IIP::Getter.new, shower: IIP::Shower.new }
     case @command
-    when 'run'
-      opts[:runner].run @args.first
     when 'iip'
       case @args.shift
       when 'commit'

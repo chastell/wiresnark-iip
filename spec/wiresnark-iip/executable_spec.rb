@@ -2,13 +2,6 @@ require_relative '../spec_helper'
 
 module Wiresnark describe Executable do
   describe '#run' do
-    it 'passes the given file to the runner' do
-      runner = MiniTest::Mock.new
-      runner.expect :run, nil, ['spec/fixtures/three-to-lo.rb']
-      Executable.new(['run', 'spec/fixtures/three-to-lo.rb']).run runner: runner
-      runner.verify
-    end
-
     it 'executes IIP commit command and prints warnings about the XML (if any)' do
       committer = MiniTest::Mock.new
       committer.expect :commit, nil, ['spec/fixtures/iip.conf.xml']
