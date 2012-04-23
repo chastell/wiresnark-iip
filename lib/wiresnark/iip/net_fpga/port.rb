@@ -1,4 +1,4 @@
-module Wiresnark class NetFPGA::Port
+module Wiresnark::IIP class NetFPGA::Port
   LengthUnit = 8
   PhaseTypes = { 0 => 'NIL', 1 => 'QOS', 2 => 'CAN', 3 => 'DSS', 4 => 'MGT' }
 

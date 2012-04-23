@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-module Wiresnark describe NetFPGA::Port do
+module Wiresnark::IIP describe NetFPGA::Port do
   let :net_fpga do
     net_fpga = Object.new
     def net_fpga.get reg

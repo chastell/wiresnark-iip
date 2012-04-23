@@ -1,6 +1,6 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module Wiresnark describe RegParser do
+module Wiresnark::IIP describe RegParser do
   describe '#parse' do
     it 'plucks the register definitions from the passed file' do
       hash = RegParser.new('spec/fixtures/reg_defines_simple_system_iip.h').parse

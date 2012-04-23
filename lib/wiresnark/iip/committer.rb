@@ -1,4 +1,4 @@
-module Wiresnark module IIP class Committer
+module Wiresnark::IIP class Committer
   def initialize net_fpga = NetFPGA.new
     @net_fpga = net_fpga
   end
@@ -6,4 +6,4 @@ module Wiresnark module IIP class Committer
   def commit config_path
     @net_fpga.config = ConfigParser.new(config_path).parse
   end
-end end end
+end end

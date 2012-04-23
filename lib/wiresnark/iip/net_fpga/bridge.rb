@@ -1,6 +1,6 @@
-module Wiresnark class NetFPGA::Bridge
+module Wiresnark::IIP class NetFPGA::Bridge
   extend FFI::Library
-  ffi_lib "#{File.dirname __FILE__}/../../../ext/wiresnark-iip/regset.so"
+  ffi_lib "#{File.dirname __FILE__}/../../../../ext/wiresnark/iip/regset.so"
 
   attach_function :get_register, [:uint],        :uint
   attach_function :set_register, [:uint, :uint], :void

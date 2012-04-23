@@ -1,4 +1,4 @@
-module Wiresnark module IIP class ConfigParser
+module Wiresnark::IIP class ConfigParser
   DefaultMAC   = '00:00:00:00:00:00'
   ValidBinary  = /\A[01]+\Z/
   ValidDecimal = /\A\d+\Z/
@@ -134,4 +134,4 @@ module Wiresnark module IIP class ConfigParser
       end
     end
   end
-end end end
+end end

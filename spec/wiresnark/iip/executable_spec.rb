@@ -1,6 +1,6 @@
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module Wiresnark describe Executable do
+module Wiresnark::IIP describe Executable do
   describe '#run' do
     it 'executes IIP commit command and prints warnings about the XML (if any)' do
       committer = MiniTest::Mock.new

@@ -2,7 +2,7 @@
 
 require_relative '../../spec_helper'
 
-module Wiresnark module IIP describe Getter do
+module Wiresnark::IIP describe Getter do
   describe '#get' do
     it 'returns the XML representation of the given NetFPGA’s configuration' do
       port = MiniTest::Mock.new
@@ -31,4 +31,4 @@ module Wiresnark module IIP describe Getter do
       net_fpga.verify
     end
   end
-end end end
+end end

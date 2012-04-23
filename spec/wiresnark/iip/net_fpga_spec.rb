@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
-require_relative '../spec_helper'
+require_relative '../../spec_helper'
 
-module Wiresnark describe NetFPGA do
+module Wiresnark::IIP describe NetFPGA do
   describe '#config=' do
     it 'sets the card’s configuration' do
       config = {

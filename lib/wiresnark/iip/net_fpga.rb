@@ -1,9 +1,9 @@
-module Wiresnark class NetFPGA
+module Wiresnark::IIP class NetFPGA
   attr_reader :registers
 
   def initialize regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
-    @registers = RegParser.new("#{File.dirname __FILE__}/../../ext/wiresnark-iip/reg_defines_simple_system_iip.h").parse
+    @registers = RegParser.new("#{File.dirname __FILE__}/../../../ext/wiresnark/iip/reg_defines_simple_system_iip.h").parse
   end
 
   def config= config

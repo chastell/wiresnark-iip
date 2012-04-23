@@ -1,6 +1,6 @@
 require_relative '../../spec_helper'
 
-module Wiresnark module IIP describe Committer do
+module Wiresnark::IIP describe Committer do
   describe '#commit' do
     it 'configures NetFPGA with the passed XML' do
       config = {
@@ -34,4 +34,4 @@ module Wiresnark module IIP describe Committer do
       net_fpga.verify
     end
   end
-end end end
+end end

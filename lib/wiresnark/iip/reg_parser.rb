@@ -1,4 +1,4 @@
-module Wiresnark class RegParser
+module Wiresnark::IIP class RegParser
   def initialize path
     @path = path
   end

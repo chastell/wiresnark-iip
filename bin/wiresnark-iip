@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/wiresnark-iip'
-Wiresnark::Executable.new.run
+require_relative '../lib/wiresnark/iip'
+Wiresnark::IIP::Executable.new.run

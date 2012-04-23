@@ -1,6 +1,6 @@
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
-module Wiresnark describe NetFPGA::Bridge do
+module Wiresnark::IIP describe NetFPGA::Bridge do
   it 'has #{g,s}et_register methods' do
     bridge = NetFPGA::Bridge.new
     assert bridge.respond_to? :get_register
