@@ -4,7 +4,6 @@ PATH
     wiresnark-iip (0.0.0)
       ffi
       nokogiri
-      pcaprub
 
 GEM
   remote: http://rubygems.org/
@@ -12,12 +11,11 @@ GEM
     ffi (1.0.11)
     minitest (2.12.1)
     nokogiri (1.5.2)
-    pcaprub (0.11.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   bundler
-  minitest (>= 2.11.1)
+  minitest (>= 2.12)
   wiresnark-iip!

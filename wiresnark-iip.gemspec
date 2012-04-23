@@ -12,8 +12,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'ffi'
   gem.add_dependency 'nokogiri'
-  gem.add_dependency 'pcaprub'
 
   gem.add_development_dependency 'bundler'
-  gem.add_development_dependency 'minitest', '>= 2.11.1'
+  gem.add_development_dependency 'minitest', '>= 2.12'
 end
