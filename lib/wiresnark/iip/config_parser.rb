@@ -14,8 +14,8 @@ module Wiresnark::IIP class ConfigParser
     'MTU'                   => { text: -> text { text =~ ValidDecimal } },
     'NumberPhases'          => { text: -> text { text =~ ValidDecimal } },
     'PIH'                   => { text: -> text { text =~ ValidBinary  } },
-    'PhaseLength'           => { text: -> text { text =~ ValidDecimal }, attr: { 'pi'   => -> pi   { TypeBytes.keys.include? pi } } },
-    'interface'             => {                                         attr: { 'name' => -> name { name =~ ValidIface         } } },
+    'PhaseLength'           => { text: -> text { text =~ ValidDecimal }, attr: { 'pi'   => -> pi   { NetFPGA::Port::PhaseTypes.values.include? pi } } },
+    'interface'             => {                                         attr: { 'name' => -> name { name =~ ValidIface } } },
   }
 
   def initialize path
