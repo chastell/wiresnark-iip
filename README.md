@@ -27,7 +27,7 @@ building and installing a gem and compiling a C driver.
 
 ### Compile the C driver
 
-    cd $(dirname `gem which wiresnark-iip`)/..
+    cd $(dirname `gem which wiresnark/iip`)/../..
     rake build_regset
 
 ### IIP
