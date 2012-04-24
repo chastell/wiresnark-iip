@@ -1,2 +1,2 @@
 #/bin/sh
-wiresnark iip show MACSA $*
+wiresnark-iip show MACSA $*

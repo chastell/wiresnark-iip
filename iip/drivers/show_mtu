@@ -1,2 +1,2 @@
 #/bin/sh
-wiresnark iip show MTU $*
+wiresnark-iip show MTU $*

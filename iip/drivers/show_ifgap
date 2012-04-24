@@ -1,2 +1,2 @@
 #/bin/sh
-wiresnark iip show ifgap $*
+wiresnark-iip show ifgap $*

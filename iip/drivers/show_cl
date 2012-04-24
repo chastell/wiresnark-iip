@@ -1,2 +1,2 @@
 #/bin/sh
-wiresnark iip show CL $*
+wiresnark-iip show CL $*

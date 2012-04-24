@@ -1,2 +1,2 @@
 #/bin/sh
-wiresnark iip show MACDA $*
+wiresnark-iip show MACDA $*
