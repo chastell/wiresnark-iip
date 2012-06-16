@@ -21,5 +21,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'nokogiri'
 
   gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'rake-compiler'
   gem.add_development_dependency 'minitest', '>= 2.12'
 end
