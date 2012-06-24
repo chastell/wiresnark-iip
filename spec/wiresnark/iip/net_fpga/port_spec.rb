@@ -145,14 +145,14 @@ module Wiresnark::IIP describe NetFPGA::Port do
     it 'sets the phases' do
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :set, nil, ['PORT_3_NUM_PHASES_REG',  4]
-      net_fpga.expect :set, nil, ['PORT_3_PH_0_LENGTH_REG', 23]
-      net_fpga.expect :set, nil, ['PORT_3_PH_1_LENGTH_REG', 24]
-      net_fpga.expect :set, nil, ['PORT_3_PH_2_LENGTH_REG', 25]
-      net_fpga.expect :set, nil, ['PORT_3_PH_3_LENGTH_REG', 26]
       net_fpga.expect :set, nil, ['PORT_3_PH_0_TYPE_REG',   1]
+      net_fpga.expect :set, nil, ['PORT_3_PH_0_LENGTH_REG', 23]
       net_fpga.expect :set, nil, ['PORT_3_PH_1_TYPE_REG',   2]
+      net_fpga.expect :set, nil, ['PORT_3_PH_1_LENGTH_REG', 24]
       net_fpga.expect :set, nil, ['PORT_3_PH_2_TYPE_REG',   4]
+      net_fpga.expect :set, nil, ['PORT_3_PH_2_LENGTH_REG', 25]
       net_fpga.expect :set, nil, ['PORT_3_PH_3_TYPE_REG',   0]
+      net_fpga.expect :set, nil, ['PORT_3_PH_3_LENGTH_REG', 26]
       port = NetFPGA::Port.new net_fpga, 3
       port.phases = [
         { type: 'QOS', length: 184 },

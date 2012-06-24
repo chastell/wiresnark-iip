@@ -6,12 +6,14 @@ module Wiresnark::IIP describe Getter do
   describe '#get' do
     it 'returns the XML representation of the given NetFPGA’s configuration' do
       port = MiniTest::Mock.new
+      4.times do
+        port.expect :ether_type, 0x0abc
+        port.expect :ifgap, 24
+        port.expect :local_mac, 'ad:e3:3e:a4:23:aa'
+        port.expect :mtu, 2048
+        port.expect :other_mac, 'a3:a3:45:23:34:aa'
+      end
       port.expect :cycle_length, 984
-      port.expect :ether_type, 0x0abc
-      port.expect :ifgap, 24
-      port.expect :local_mac, 'ad:e3:3e:a4:23:aa'
-      port.expect :mtu, 2048
-      port.expect :other_mac, 'a3:a3:45:23:34:aa'
       port.expect :phase_number, 5
       port.expect :phases, [
         { type: 'QOS', length: 176 },
