@@ -17,6 +17,8 @@ Gem::Specification.new do |gem|
     gem.test_files  = Dir['spec/**/*']
   end
 
+  gem.extensions = ['ext/wiresnark/iip/extconf.rb']
+
   gem.add_dependency 'ffi'
   gem.add_dependency 'nokogiri'
 

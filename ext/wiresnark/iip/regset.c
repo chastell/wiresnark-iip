@@ -1,4 +1,4 @@
-#include "nf2util.c"
+#include "nf2util.h"
 
 unsigned get_register(unsigned reg) {
   struct nf2device nf2;
