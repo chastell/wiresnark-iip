@@ -1,23 +1,23 @@
 /********************************************************
  *
  * C register defines file
- * Project: System IIP Level 1 (iip_port_test)
- * Description: Test of one link in level 1 of system iip
+ * Project: Simple System IIP (iip_simple_system)
+ * Description: Test of simple system iip with static routing 
  *
  ********************************************************/
 
-#ifndef _REG_DEFINES_IIP_PORT_TEST_
-#define _REG_DEFINES_IIP_PORT_TEST_
+#ifndef _REG_DEFINES_IIP_SIMPLE_SYSTEM_
+#define _REG_DEFINES_IIP_SIMPLE_SYSTEM_
 
 /* ========= Version Information ========= */
 
 #define DEVICE_ID          0
 #define DEVICE_MAJOR       1
 #define DEVICE_MINOR       0
-#define DEVICE_REVISION    0
-#define DEVICE_PROJ_DIR    "iip_port_test"
-#define DEVICE_PROJ_NAME   "System IIP Level 1"
-#define DEVICE_PROJ_DESC   "Test of one link in level 1 of system iip"
+#define DEVICE_REVISION    1
+#define DEVICE_PROJ_DIR    "iip_simple_system"
+#define DEVICE_PROJ_NAME   "Simple System IIP"
+#define DEVICE_PROJ_DESC   "Test of simple system iip with static routing "
 
 
 /* ========= Constants ========= */
@@ -207,14 +207,19 @@
 #define CPU_QUEUE_3_BASE_ADDR  0x07c0000
 #define SRAM_BASE_ADDR         0x1000000
 #define UDP_BASE_ADDR          0x2000000
-#define IN_ARB_BASE_ADDR       0x2000000
-#define PORT_0_BASE_ADDR       0x2000100
-#define PORT_1_BASE_ADDR       0x2000200
-#define PORT_2_BASE_ADDR       0x2000300
-#define PORT_3_BASE_ADDR       0x2000400
+#define PORT_0_BASE_ADDR       0x2000000
+#define PORT_1_BASE_ADDR       0x2000100
+#define PORT_2_BASE_ADDR       0x2000200
+#define PORT_3_BASE_ADDR       0x2000300
+#define PIROUTER_BASE_ADDR     0x2000400
+#define DT_QUEUES_0_BASE_ADDR  0x2000480
+#define DT_QUEUES_1_BASE_ADDR  0x2000500
+#define DT_QUEUES_2_BASE_ADDR  0x2000580
+#define DT_QUEUES_3_BASE_ADDR  0x2000600
 #define DRAM_BASE_ADDR         0x4000000
 
 #define CPU_QUEUE_OFFSET   0x0040000
+#define DT_QUEUES_OFFSET   0x0000080
 #define MAC_GRP_OFFSET     0x0040000
 #define PORT_OFFSET        0x0000100
 
@@ -585,157 +590,194 @@
 // Name: SRAM (SRAM)
 // Description: SRAM
 
-// Name: in_arb (IN_ARB)
-// Description: Round-robin input arbiter
-// File: lib/verilog/core/input_arbiter/rr_input_arbiter/xml/rr_input_arbiter.xml
-#define IN_ARB_NUM_PKTS_SENT_REG        0x2000000
-#define IN_ARB_LAST_PKT_WORD_0_HI_REG   0x2000004
-#define IN_ARB_LAST_PKT_WORD_0_LO_REG   0x2000008
-#define IN_ARB_LAST_PKT_CTRL_0_REG      0x200000c
-#define IN_ARB_LAST_PKT_WORD_1_HI_REG   0x2000010
-#define IN_ARB_LAST_PKT_WORD_1_LO_REG   0x2000014
-#define IN_ARB_LAST_PKT_CTRL_1_REG      0x2000018
-#define IN_ARB_STATE_REG                0x200001c
-
-// Name: port (PORT_0)
+// Name: _port (PORT_0)
 // Description: Registers for IIP system port
-// File: lib/verilog/contrib/iip/port/xml/port.xml
-#define PORT_0_LOCAL_MAC_HI_REG         0x2000100
-#define PORT_0_LOCAL_MAC_LO_REG         0x2000104
-#define PORT_0_OTHER_MAC_HI_REG         0x2000108
-#define PORT_0_OTHER_MAC_LO_REG         0x200010c
-#define PORT_0_ETHER_TYPE_REG           0x2000110
-#define PORT_0_NUM_FRAMES_GOOD_REG      0x2000114
-#define PORT_0_NUM_FRAMES_BAD_REG       0x2000118
-#define PORT_0_PIH_QOS_REG              0x200011c
-#define PORT_0_PIH_CAN_REG              0x2000120
-#define PORT_0_PIH_DSS_REG              0x2000124
-#define PORT_0_PIH_MGT_REG              0x2000128
-#define PORT_0_NUM_PHASES_REG           0x200012c
-#define PORT_0_PH_0_LENGTH_REG          0x2000130
-#define PORT_0_PH_1_LENGTH_REG          0x2000134
-#define PORT_0_PH_2_LENGTH_REG          0x2000138
-#define PORT_0_PH_3_LENGTH_REG          0x200013c
-#define PORT_0_PH_4_LENGTH_REG          0x2000140
-#define PORT_0_PH_5_LENGTH_REG          0x2000144
-#define PORT_0_PH_6_LENGTH_REG          0x2000148
-#define PORT_0_PH_7_LENGTH_REG          0x200014c
-#define PORT_0_PH_0_TYPE_REG            0x2000150
-#define PORT_0_PH_1_TYPE_REG            0x2000154
-#define PORT_0_PH_2_TYPE_REG            0x2000158
-#define PORT_0_PH_3_TYPE_REG            0x200015c
-#define PORT_0_PH_4_TYPE_REG            0x2000160
-#define PORT_0_PH_5_TYPE_REG            0x2000164
-#define PORT_0_PH_6_TYPE_REG            0x2000168
-#define PORT_0_PH_7_TYPE_REG            0x200016c
-#define PORT_0_PH_8_TYPE_REG            0x2000170
-#define PORT_0_FAME_OVERHAED_REG        0x2000174
-#define PORT_0_MINIMAL_FRAME_SIZE_REG   0x2000178
+// File: lib/verilog/contrib/iip/_port/xml/_port.xml
+#define PORT_0_LOCAL_MAC_HI_REG         0x2000000
+#define PORT_0_LOCAL_MAC_LO_REG         0x2000004
+#define PORT_0_OTHER_MAC_HI_REG         0x2000008
+#define PORT_0_OTHER_MAC_LO_REG         0x200000c
+#define PORT_0_ETHER_TYPE_REG           0x2000010
+#define PORT_0_NUM_FRAMES_GOOD_REG      0x2000014
+#define PORT_0_NUM_FRAMES_BAD_REG       0x2000018
+#define PORT_0_PIH_QOS_REG              0x200001c
+#define PORT_0_PIH_CAN_REG              0x2000020
+#define PORT_0_PIH_DSS_REG              0x2000024
+#define PORT_0_PIH_MGT_REG              0x2000028
+#define PORT_0_NUM_PHASES_REG           0x200002c
+#define PORT_0_PH_0_LENGTH_REG          0x2000030
+#define PORT_0_PH_1_LENGTH_REG          0x2000034
+#define PORT_0_PH_2_LENGTH_REG          0x2000038
+#define PORT_0_PH_3_LENGTH_REG          0x200003c
+#define PORT_0_PH_4_LENGTH_REG          0x2000040
+#define PORT_0_PH_5_LENGTH_REG          0x2000044
+#define PORT_0_PH_6_LENGTH_REG          0x2000048
+#define PORT_0_PH_7_LENGTH_REG          0x200004c
+#define PORT_0_PH_0_TYPE_REG            0x2000050
+#define PORT_0_PH_1_TYPE_REG            0x2000054
+#define PORT_0_PH_2_TYPE_REG            0x2000058
+#define PORT_0_PH_3_TYPE_REG            0x200005c
+#define PORT_0_PH_4_TYPE_REG            0x2000060
+#define PORT_0_PH_5_TYPE_REG            0x2000064
+#define PORT_0_PH_6_TYPE_REG            0x2000068
+#define PORT_0_PH_7_TYPE_REG            0x200006c
+#define PORT_0_PH_8_TYPE_REG            0x2000070
+#define PORT_0_FAME_OVERHAED_REG        0x2000074
+#define PORT_0_MINIMAL_FRAME_SIZE_REG   0x2000078
 
-// Name: port (PORT_1)
+// Name: _port (PORT_1)
 // Description: Registers for IIP system port
-// File: lib/verilog/contrib/iip/port/xml/port.xml
-#define PORT_1_LOCAL_MAC_HI_REG         0x2000200
-#define PORT_1_LOCAL_MAC_LO_REG         0x2000204
-#define PORT_1_OTHER_MAC_HI_REG         0x2000208
-#define PORT_1_OTHER_MAC_LO_REG         0x200020c
-#define PORT_1_ETHER_TYPE_REG           0x2000210
-#define PORT_1_NUM_FRAMES_GOOD_REG      0x2000214
-#define PORT_1_NUM_FRAMES_BAD_REG       0x2000218
-#define PORT_1_PIH_QOS_REG              0x200021c
-#define PORT_1_PIH_CAN_REG              0x2000220
-#define PORT_1_PIH_DSS_REG              0x2000224
-#define PORT_1_PIH_MGT_REG              0x2000228
-#define PORT_1_NUM_PHASES_REG           0x200022c
-#define PORT_1_PH_0_LENGTH_REG          0x2000230
-#define PORT_1_PH_1_LENGTH_REG          0x2000234
-#define PORT_1_PH_2_LENGTH_REG          0x2000238
-#define PORT_1_PH_3_LENGTH_REG          0x200023c
-#define PORT_1_PH_4_LENGTH_REG          0x2000240
-#define PORT_1_PH_5_LENGTH_REG          0x2000244
-#define PORT_1_PH_6_LENGTH_REG          0x2000248
-#define PORT_1_PH_7_LENGTH_REG          0x200024c
-#define PORT_1_PH_0_TYPE_REG            0x2000250
-#define PORT_1_PH_1_TYPE_REG            0x2000254
-#define PORT_1_PH_2_TYPE_REG            0x2000258
-#define PORT_1_PH_3_TYPE_REG            0x200025c
-#define PORT_1_PH_4_TYPE_REG            0x2000260
-#define PORT_1_PH_5_TYPE_REG            0x2000264
-#define PORT_1_PH_6_TYPE_REG            0x2000268
-#define PORT_1_PH_7_TYPE_REG            0x200026c
-#define PORT_1_PH_8_TYPE_REG            0x2000270
-#define PORT_1_FAME_OVERHAED_REG        0x2000274
-#define PORT_1_MINIMAL_FRAME_SIZE_REG   0x2000278
+// File: lib/verilog/contrib/iip/_port/xml/_port.xml
+#define PORT_1_LOCAL_MAC_HI_REG         0x2000100
+#define PORT_1_LOCAL_MAC_LO_REG         0x2000104
+#define PORT_1_OTHER_MAC_HI_REG         0x2000108
+#define PORT_1_OTHER_MAC_LO_REG         0x200010c
+#define PORT_1_ETHER_TYPE_REG           0x2000110
+#define PORT_1_NUM_FRAMES_GOOD_REG      0x2000114
+#define PORT_1_NUM_FRAMES_BAD_REG       0x2000118
+#define PORT_1_PIH_QOS_REG              0x200011c
+#define PORT_1_PIH_CAN_REG              0x2000120
+#define PORT_1_PIH_DSS_REG              0x2000124
+#define PORT_1_PIH_MGT_REG              0x2000128
+#define PORT_1_NUM_PHASES_REG           0x200012c
+#define PORT_1_PH_0_LENGTH_REG          0x2000130
+#define PORT_1_PH_1_LENGTH_REG          0x2000134
+#define PORT_1_PH_2_LENGTH_REG          0x2000138
+#define PORT_1_PH_3_LENGTH_REG          0x200013c
+#define PORT_1_PH_4_LENGTH_REG          0x2000140
+#define PORT_1_PH_5_LENGTH_REG          0x2000144
+#define PORT_1_PH_6_LENGTH_REG          0x2000148
+#define PORT_1_PH_7_LENGTH_REG          0x200014c
+#define PORT_1_PH_0_TYPE_REG            0x2000150
+#define PORT_1_PH_1_TYPE_REG            0x2000154
+#define PORT_1_PH_2_TYPE_REG            0x2000158
+#define PORT_1_PH_3_TYPE_REG            0x200015c
+#define PORT_1_PH_4_TYPE_REG            0x2000160
+#define PORT_1_PH_5_TYPE_REG            0x2000164
+#define PORT_1_PH_6_TYPE_REG            0x2000168
+#define PORT_1_PH_7_TYPE_REG            0x200016c
+#define PORT_1_PH_8_TYPE_REG            0x2000170
+#define PORT_1_FAME_OVERHAED_REG        0x2000174
+#define PORT_1_MINIMAL_FRAME_SIZE_REG   0x2000178
 
-// Name: port (PORT_2)
+// Name: _port (PORT_2)
 // Description: Registers for IIP system port
-// File: lib/verilog/contrib/iip/port/xml/port.xml
-#define PORT_2_LOCAL_MAC_HI_REG         0x2000300
-#define PORT_2_LOCAL_MAC_LO_REG         0x2000304
-#define PORT_2_OTHER_MAC_HI_REG         0x2000308
-#define PORT_2_OTHER_MAC_LO_REG         0x200030c
-#define PORT_2_ETHER_TYPE_REG           0x2000310
-#define PORT_2_NUM_FRAMES_GOOD_REG      0x2000314
-#define PORT_2_NUM_FRAMES_BAD_REG       0x2000318
-#define PORT_2_PIH_QOS_REG              0x200031c
-#define PORT_2_PIH_CAN_REG              0x2000320
-#define PORT_2_PIH_DSS_REG              0x2000324
-#define PORT_2_PIH_MGT_REG              0x2000328
-#define PORT_2_NUM_PHASES_REG           0x200032c
-#define PORT_2_PH_0_LENGTH_REG          0x2000330
-#define PORT_2_PH_1_LENGTH_REG          0x2000334
-#define PORT_2_PH_2_LENGTH_REG          0x2000338
-#define PORT_2_PH_3_LENGTH_REG          0x200033c
-#define PORT_2_PH_4_LENGTH_REG          0x2000340
-#define PORT_2_PH_5_LENGTH_REG          0x2000344
-#define PORT_2_PH_6_LENGTH_REG          0x2000348
-#define PORT_2_PH_7_LENGTH_REG          0x200034c
-#define PORT_2_PH_0_TYPE_REG            0x2000350
-#define PORT_2_PH_1_TYPE_REG            0x2000354
-#define PORT_2_PH_2_TYPE_REG            0x2000358
-#define PORT_2_PH_3_TYPE_REG            0x200035c
-#define PORT_2_PH_4_TYPE_REG            0x2000360
-#define PORT_2_PH_5_TYPE_REG            0x2000364
-#define PORT_2_PH_6_TYPE_REG            0x2000368
-#define PORT_2_PH_7_TYPE_REG            0x200036c
-#define PORT_2_PH_8_TYPE_REG            0x2000370
-#define PORT_2_FAME_OVERHAED_REG        0x2000374
-#define PORT_2_MINIMAL_FRAME_SIZE_REG   0x2000378
+// File: lib/verilog/contrib/iip/_port/xml/_port.xml
+#define PORT_2_LOCAL_MAC_HI_REG         0x2000200
+#define PORT_2_LOCAL_MAC_LO_REG         0x2000204
+#define PORT_2_OTHER_MAC_HI_REG         0x2000208
+#define PORT_2_OTHER_MAC_LO_REG         0x200020c
+#define PORT_2_ETHER_TYPE_REG           0x2000210
+#define PORT_2_NUM_FRAMES_GOOD_REG      0x2000214
+#define PORT_2_NUM_FRAMES_BAD_REG       0x2000218
+#define PORT_2_PIH_QOS_REG              0x200021c
+#define PORT_2_PIH_CAN_REG              0x2000220
+#define PORT_2_PIH_DSS_REG              0x2000224
+#define PORT_2_PIH_MGT_REG              0x2000228
+#define PORT_2_NUM_PHASES_REG           0x200022c
+#define PORT_2_PH_0_LENGTH_REG          0x2000230
+#define PORT_2_PH_1_LENGTH_REG          0x2000234
+#define PORT_2_PH_2_LENGTH_REG          0x2000238
+#define PORT_2_PH_3_LENGTH_REG          0x200023c
+#define PORT_2_PH_4_LENGTH_REG          0x2000240
+#define PORT_2_PH_5_LENGTH_REG          0x2000244
+#define PORT_2_PH_6_LENGTH_REG          0x2000248
+#define PORT_2_PH_7_LENGTH_REG          0x200024c
+#define PORT_2_PH_0_TYPE_REG            0x2000250
+#define PORT_2_PH_1_TYPE_REG            0x2000254
+#define PORT_2_PH_2_TYPE_REG            0x2000258
+#define PORT_2_PH_3_TYPE_REG            0x200025c
+#define PORT_2_PH_4_TYPE_REG            0x2000260
+#define PORT_2_PH_5_TYPE_REG            0x2000264
+#define PORT_2_PH_6_TYPE_REG            0x2000268
+#define PORT_2_PH_7_TYPE_REG            0x200026c
+#define PORT_2_PH_8_TYPE_REG            0x2000270
+#define PORT_2_FAME_OVERHAED_REG        0x2000274
+#define PORT_2_MINIMAL_FRAME_SIZE_REG   0x2000278
 
-// Name: port (PORT_3)
+// Name: _port (PORT_3)
 // Description: Registers for IIP system port
-// File: lib/verilog/contrib/iip/port/xml/port.xml
-#define PORT_3_LOCAL_MAC_HI_REG         0x2000400
-#define PORT_3_LOCAL_MAC_LO_REG         0x2000404
-#define PORT_3_OTHER_MAC_HI_REG         0x2000408
-#define PORT_3_OTHER_MAC_LO_REG         0x200040c
-#define PORT_3_ETHER_TYPE_REG           0x2000410
-#define PORT_3_NUM_FRAMES_GOOD_REG      0x2000414
-#define PORT_3_NUM_FRAMES_BAD_REG       0x2000418
-#define PORT_3_PIH_QOS_REG              0x200041c
-#define PORT_3_PIH_CAN_REG              0x2000420
-#define PORT_3_PIH_DSS_REG              0x2000424
-#define PORT_3_PIH_MGT_REG              0x2000428
-#define PORT_3_NUM_PHASES_REG           0x200042c
-#define PORT_3_PH_0_LENGTH_REG          0x2000430
-#define PORT_3_PH_1_LENGTH_REG          0x2000434
-#define PORT_3_PH_2_LENGTH_REG          0x2000438
-#define PORT_3_PH_3_LENGTH_REG          0x200043c
-#define PORT_3_PH_4_LENGTH_REG          0x2000440
-#define PORT_3_PH_5_LENGTH_REG          0x2000444
-#define PORT_3_PH_6_LENGTH_REG          0x2000448
-#define PORT_3_PH_7_LENGTH_REG          0x200044c
-#define PORT_3_PH_0_TYPE_REG            0x2000450
-#define PORT_3_PH_1_TYPE_REG            0x2000454
-#define PORT_3_PH_2_TYPE_REG            0x2000458
-#define PORT_3_PH_3_TYPE_REG            0x200045c
-#define PORT_3_PH_4_TYPE_REG            0x2000460
-#define PORT_3_PH_5_TYPE_REG            0x2000464
-#define PORT_3_PH_6_TYPE_REG            0x2000468
-#define PORT_3_PH_7_TYPE_REG            0x200046c
-#define PORT_3_PH_8_TYPE_REG            0x2000470
-#define PORT_3_FAME_OVERHAED_REG        0x2000474
-#define PORT_3_MINIMAL_FRAME_SIZE_REG   0x2000478
+// File: lib/verilog/contrib/iip/_port/xml/_port.xml
+#define PORT_3_LOCAL_MAC_HI_REG         0x2000300
+#define PORT_3_LOCAL_MAC_LO_REG         0x2000304
+#define PORT_3_OTHER_MAC_HI_REG         0x2000308
+#define PORT_3_OTHER_MAC_LO_REG         0x200030c
+#define PORT_3_ETHER_TYPE_REG           0x2000310
+#define PORT_3_NUM_FRAMES_GOOD_REG      0x2000314
+#define PORT_3_NUM_FRAMES_BAD_REG       0x2000318
+#define PORT_3_PIH_QOS_REG              0x200031c
+#define PORT_3_PIH_CAN_REG              0x2000320
+#define PORT_3_PIH_DSS_REG              0x2000324
+#define PORT_3_PIH_MGT_REG              0x2000328
+#define PORT_3_NUM_PHASES_REG           0x200032c
+#define PORT_3_PH_0_LENGTH_REG          0x2000330
+#define PORT_3_PH_1_LENGTH_REG          0x2000334
+#define PORT_3_PH_2_LENGTH_REG          0x2000338
+#define PORT_3_PH_3_LENGTH_REG          0x200033c
+#define PORT_3_PH_4_LENGTH_REG          0x2000340
+#define PORT_3_PH_5_LENGTH_REG          0x2000344
+#define PORT_3_PH_6_LENGTH_REG          0x2000348
+#define PORT_3_PH_7_LENGTH_REG          0x200034c
+#define PORT_3_PH_0_TYPE_REG            0x2000350
+#define PORT_3_PH_1_TYPE_REG            0x2000354
+#define PORT_3_PH_2_TYPE_REG            0x2000358
+#define PORT_3_PH_3_TYPE_REG            0x200035c
+#define PORT_3_PH_4_TYPE_REG            0x2000360
+#define PORT_3_PH_5_TYPE_REG            0x2000364
+#define PORT_3_PH_6_TYPE_REG            0x2000368
+#define PORT_3_PH_7_TYPE_REG            0x200036c
+#define PORT_3_PH_8_TYPE_REG            0x2000370
+#define PORT_3_FAME_OVERHAED_REG        0x2000374
+#define PORT_3_MINIMAL_FRAME_SIZE_REG   0x2000378
+
+// Name: pirouter (PIROUTER)
+// Description: Registers for example pi router
+// File: lib/verilog/contrib/iip/pi_router/xml/pi_router.xml
+#define PIROUTER_REGISTER_ONE_REG     0x2000400
+#define PIROUTER_REGISTER_TWO_REG     0x2000404
+#define PIROUTER_REGISTER_THREE_REG   0x2000408
+#define PIROUTER_REGISTER_FOUR_REG    0x200040c
+#define PIROUTER_REGISTER_FIVE_REG    0x2000410
+
+// Name: dt_queues (DT_QUEUES_0)
+// Description: Registers for drop tail queues
+// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
+#define DT_QUEUES_0_QUEUE_0_MAX_NUM_PKTS_REG   0x2000480
+#define DT_QUEUES_0_QUEUE_1_MAX_NUM_PKTS_REG   0x2000484
+#define DT_QUEUES_0_QUEUE_2_MAX_NUM_PKTS_REG   0x2000488
+#define DT_QUEUES_0_QUEUE_3_MAX_NUM_PKTS_REG   0x200048c
+#define DT_QUEUES_0_QUEUE_4_MAX_NUM_PKTS_REG   0x2000490
+#define DT_QUEUES_0_QUEUE_5_MAX_NUM_PKTS_REG   0x2000494
+
+// Name: dt_queues (DT_QUEUES_1)
+// Description: Registers for drop tail queues
+// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
+#define DT_QUEUES_1_QUEUE_0_MAX_NUM_PKTS_REG   0x2000500
+#define DT_QUEUES_1_QUEUE_1_MAX_NUM_PKTS_REG   0x2000504
+#define DT_QUEUES_1_QUEUE_2_MAX_NUM_PKTS_REG   0x2000508
+#define DT_QUEUES_1_QUEUE_3_MAX_NUM_PKTS_REG   0x200050c
+#define DT_QUEUES_1_QUEUE_4_MAX_NUM_PKTS_REG   0x2000510
+#define DT_QUEUES_1_QUEUE_5_MAX_NUM_PKTS_REG   0x2000514
+
+// Name: dt_queues (DT_QUEUES_2)
+// Description: Registers for drop tail queues
+// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
+#define DT_QUEUES_2_QUEUE_0_MAX_NUM_PKTS_REG   0x2000580
+#define DT_QUEUES_2_QUEUE_1_MAX_NUM_PKTS_REG   0x2000584
+#define DT_QUEUES_2_QUEUE_2_MAX_NUM_PKTS_REG   0x2000588
+#define DT_QUEUES_2_QUEUE_3_MAX_NUM_PKTS_REG   0x200058c
+#define DT_QUEUES_2_QUEUE_4_MAX_NUM_PKTS_REG   0x2000590
+#define DT_QUEUES_2_QUEUE_5_MAX_NUM_PKTS_REG   0x2000594
+
+// Name: dt_queues (DT_QUEUES_3)
+// Description: Registers for drop tail queues
+// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
+#define DT_QUEUES_3_QUEUE_0_MAX_NUM_PKTS_REG   0x2000600
+#define DT_QUEUES_3_QUEUE_1_MAX_NUM_PKTS_REG   0x2000604
+#define DT_QUEUES_3_QUEUE_2_MAX_NUM_PKTS_REG   0x2000608
+#define DT_QUEUES_3_QUEUE_3_MAX_NUM_PKTS_REG   0x200060c
+#define DT_QUEUES_3_QUEUE_4_MAX_NUM_PKTS_REG   0x2000610
+#define DT_QUEUES_3_QUEUE_5_MAX_NUM_PKTS_REG   0x2000614
 
 // Name: DRAM (DRAM)
 // Description: DRAM
