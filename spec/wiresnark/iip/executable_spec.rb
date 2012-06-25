@@ -7,7 +7,7 @@ module Wiresnark::IIP describe Executable do
       committer.expect :commit, nil, ['spec/fixtures/iip.conf.xml']
 
       stderr = capture_io do
-        Executable.new(['iip', 'commit', 'spec/fixtures/iip.conf.xml']).run committer: committer
+        Executable.new(['commit', 'spec/fixtures/iip.conf.xml']).run committer: committer
       end.last
 
       stderr.must_include 'BaseValue ignored'
@@ -21,7 +21,7 @@ module Wiresnark::IIP describe Executable do
       shower.expect :show, 'aa:bb:cc:dd:ee:ff', [['MACDA', 'eth0', 'v_1']]
 
       -> do
-        Executable.new(['iip', 'show', 'MACDA', 'eth0', 'v_1']).run shower: shower
+        Executable.new(['show', 'MACDA', 'eth0', 'v_1']).run shower: shower
       end.must_output "aa:bb:cc:dd:ee:ff\n"
 
       shower.verify
@@ -32,7 +32,7 @@ module Wiresnark::IIP describe Executable do
       getter.expect :get, 'XML with device configuration'
 
       -> do
-        Executable.new(['iip', 'get']).run getter: getter
+        Executable.new(['get']).run getter: getter
       end.must_output "XML with device configuration\n"
 
       getter.verify
