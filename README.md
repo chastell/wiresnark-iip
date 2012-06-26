@@ -15,17 +15,19 @@ it from your system’s package manager or from
 
 ## Wiresnark IIP
 
-Wiresnark IIP installation is a two-step process: installing
-the gem’s dependencies and installing the gem itself.
+Wiresnark IIP installation is a two-step process:
+installing a gem and compiling a C driver.
 
-### Install the gem’s dependencies
+### Install the gem and its dependencies
 
     gem install ffi nokogiri
-
-### Install the gem
-
     wget https://svn.man.poznan.pl/svnroot/iip-netfpga/system_iip/trunk/wiresnark-iip/wiresnark-iip.gem
     gem install --local wiresnark-iip.gem
+
+### Compile the C driver
+
+    cd $(dirname `gem which wiresnark/iip`)/../..
+    rake build_regset
 
 ### IIP
 
