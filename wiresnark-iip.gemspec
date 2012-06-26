@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name     = 'wiresnark-iip'
-  gem.version  = '0.0.2'
+  gem.version  = '0.0.3'
   gem.summary  = 'Wiresnark: IIP support'
   gem.homepage = 'http://github.com/chastell/wiresnark-iip'
   gem.author   = 'Piotr Szotkowski'
