@@ -8,6 +8,7 @@ module Wiresnark::IIP class NetFPGA
 
   def config= config
     config.each do |i, params|
+      next unless (0..3).include? i
       ports[i].ether_type = params[:ether_type]
       ports[i].local_mac  = params[:local]
       ports[i].other_mac  = params[:other]
@@ -21,7 +22,7 @@ module Wiresnark::IIP class NetFPGA
   end
 
   def ports
-    (0..3).map { |i| Port.new self, i }
+    @ports ||= (0..3).map { |i| Port.new self, i }
   end
 
   def set register, value
