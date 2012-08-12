@@ -8,7 +8,7 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    ffi (1.1.3)
+    ffi (1.1.5)
     minitest (3.3.0)
     nokogiri (1.5.5)
 
@@ -17,5 +17,5 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  minitest (>= 2.12)
+  minitest (~> 3.0)
   wiresnark-iip!
