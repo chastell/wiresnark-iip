@@ -6,7 +6,7 @@ module Wiresnark::IIP class Getter
   def get
     Nokogiri::XML::Builder.new do |xml|
       xml.interfaces do
-        @net_fpga.ports.each.with_index do |port, i|
+        net_fpga.ports.each.with_index do |port, i|
           xml.interface name: "eth#{i}" do
             port.type_map.each.with_index do |(type, value), i|
               xml.v_port name: "v_#{i+1}" do
@@ -32,4 +32,8 @@ module Wiresnark::IIP class Getter
       end
     end.to_xml
   end
+
+  private
+
+  attr_reader :net_fpga
 end end
