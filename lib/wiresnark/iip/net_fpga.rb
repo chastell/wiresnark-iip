@@ -18,7 +18,7 @@ module Wiresnark::IIP class NetFPGA
   end
 
   def get register
-    @regbridge.get_register @registers[register]
+    regbridge.get_register registers[register]
   end
 
   def ports
@@ -26,6 +26,10 @@ module Wiresnark::IIP class NetFPGA
   end
 
   def set register, value
-    @regbridge.set_register @registers[register], value
+    regbridge.set_register registers[register], value
   end
+
+  private
+
+  attr_reader :regbridge
 end end
