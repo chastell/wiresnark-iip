@@ -6,7 +6,7 @@ module Wiresnark::IIP class Shower
   def show opts
     param, iface, _, type = *opts
 
-    port = @net_fpga.ports[iface[/\d$/].to_i]
+    port = net_fpga.ports[iface[/\d$/].to_i]
 
     case param
     when 'CL'    then port.cycle_length
@@ -24,4 +24,8 @@ module Wiresnark::IIP class Shower
       warn "unknown parameter: #{param}"
     end
   end
+
+  private
+
+  attr_reader :net_fpga
 end end
