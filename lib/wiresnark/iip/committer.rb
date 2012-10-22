@@ -4,6 +4,10 @@ module Wiresnark::IIP class Committer
   end
 
   def commit config_path
-    @net_fpga.config = ConfigParser.new(config_path).parse
+    net_fpga.config = ConfigParser.new(config_path).parse
   end
+
+  private
+
+  attr_reader :net_fpga
 end end
