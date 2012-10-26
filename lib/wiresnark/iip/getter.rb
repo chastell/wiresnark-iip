@@ -8,8 +8,8 @@ module Wiresnark::IIP class Getter
       xml.interfaces do
         net_fpga.ports.each.with_index do |port, i|
           xml.interface name: "eth#{i}" do
-            port.type_map.each.with_index do |(type, value), i|
-              xml.v_port name: "v_#{i+1}" do
+            port.type_map.each.with_index do |(type, value), j|
+              xml.v_port name: "v_#{j+1}" do
                 xml.pi type: type do
                   xml.PIH value.to_s(2).rjust 3, '0'
                 end
