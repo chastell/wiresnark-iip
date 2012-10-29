@@ -16,7 +16,6 @@ module Wiresnark::IIP class RegParser
     end]
   end
 
-  private
-
   attr_reader :path
+  private     :path
 end end

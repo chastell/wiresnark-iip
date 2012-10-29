@@ -29,7 +29,6 @@ module Wiresnark::IIP class NetFPGA
     regbridge.set_register registers[register], value
   end
 
-  private
-
   attr_reader :regbridge
+  private     :regbridge
 end end

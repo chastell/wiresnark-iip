@@ -16,7 +16,6 @@ module Wiresnark::IIP class Executable
     end
   end
 
-  private
-
   attr_reader :args, :command
+  private     :args, :command
 end end

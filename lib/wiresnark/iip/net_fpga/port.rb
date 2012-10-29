@@ -80,9 +80,10 @@ module Wiresnark::IIP class NetFPGA::Port
     end
   end
 
-  private
-
   attr_reader :net_fpga, :port
+  private     :net_fpga, :port
+
+  private
 
   def get_mac locality
     hi = net_fpga.get "PORT_#{port}_#{locality}_MAC_HI_REG"

@@ -25,7 +25,6 @@ module Wiresnark::IIP class Shower
     end
   end
 
-  private
-
   attr_reader :net_fpga
+  private     :net_fpga
 end end

@@ -33,7 +33,6 @@ module Wiresnark::IIP class Getter
     end.to_xml
   end
 
-  private
-
   attr_reader :net_fpga
+  private     :net_fpga
 end end

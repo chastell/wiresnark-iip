@@ -38,9 +38,10 @@ module Wiresnark::IIP class ConfigParser
     private_methods.grep(/^warn_/).map { |meth| send meth }.flatten.compact
   end
 
-  private
-
   attr_reader :xml
+  private     :xml
+
+  private
 
   def mac_from_interface element, interface
     mac = interface.at_xpath("v_port/#{element}/text()").to_s
