@@ -6,7 +6,7 @@ PATH
       nokogiri
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     ffi (1.2.0)
     listen (0.6.0)
