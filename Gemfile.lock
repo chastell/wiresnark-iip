@@ -8,9 +8,9 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    ffi (1.2.0)
-    minitest (4.3.3)
-    nokogiri (1.5.6)
+    ffi (1.6.0)
+    minitest (4.7.0)
+    nokogiri (1.5.9)
 
 PLATFORMS
   ruby
