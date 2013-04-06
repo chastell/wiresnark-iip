@@ -8,7 +8,7 @@ module Wiresnark::IIP class NetFPGA::Port
   end
 
   def cycle_length
-    phases.map { |p| p[:length] }.inject :+
+    phases.map { |p| p[:length] }.reduce :+
   end
 
   def ether_type

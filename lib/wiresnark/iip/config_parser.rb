@@ -69,7 +69,7 @@ module Wiresnark::IIP class ConfigParser
     xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
       if scheduler.at_xpath 'Cyclelength'
         cl     = scheduler.at_xpath('Cyclelength/text()').to_s.to_i
-        pl_sum = scheduler.xpath('PhaseLength/text()').map { |pl| pl.to_s.to_i }.inject :+
+        pl_sum = scheduler.xpath('PhaseLength/text()').map { |pl| pl.to_s.to_i }.reduce :+
         "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
       end
     end
