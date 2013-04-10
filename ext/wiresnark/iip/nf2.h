@@ -12,7 +12,7 @@
 #ifndef _NF2_H
 #define _NF2_H	1
 
-#define NF2_DEV_NAME	"nf2"
+#define NF2_DEV_NAME	"pnf2"
 
 /* Include for socket IOCTLs */
 #include <linux/sockios.h>

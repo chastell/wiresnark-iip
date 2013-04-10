@@ -4,7 +4,7 @@ unsigned get_register(unsigned reg) {
   struct nf2device nf2;
   unsigned val;
 
-  nf2.device_name = "nf2c0";
+  nf2.device_name = "pnf2c0";
   check_iface(&nf2);
   openDescriptor(&nf2);
 
@@ -18,7 +18,7 @@ unsigned get_register(unsigned reg) {
 void set_register(unsigned reg, unsigned val) {
   struct nf2device nf2;
 
-  nf2.device_name = "nf2c0";
+  nf2.device_name = "pnf2c0";
   check_iface(&nf2);
   openDescriptor(&nf2);
 
