@@ -9,7 +9,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ffi (1.6.0)
-    minitest (4.7.0)
+    minitest (4.7.1)
     nokogiri (1.5.9)
 
 PLATFORMS
