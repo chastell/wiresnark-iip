@@ -87,7 +87,7 @@ module Wiresnark::IIP describe ConfigParser do
       warns.must_include 'bad Cyclelength: foo'
       warns.must_include 'bad MTU: bah'
       warns.must_include 'bad NumberPhases: bar'
-      warns.must_include 'bad PIH: 012'
+      warns.must_include 'bad PIH: foo'
       warns.must_include 'bad PhaseLength: baz'
       warns.must_include 'bad PhaseLength pi: QUX'
       warns.must_include 'bad interface name: ath0'

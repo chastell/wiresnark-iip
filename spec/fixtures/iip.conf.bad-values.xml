@@ -2,7 +2,7 @@
   <interface name="ath0">
     <v_port name="v_1">
       <pi type="CAN">
-        <PIH>012</PIH>
+        <PIH>foo</PIH>
       </pi>
       <MACSourceAddress>11:22:33:44:55</MACSourceAddress>
       <MACDestinationAddress>gg:hh:ii:jj:kk:ll</MACDestinationAddress>
