@@ -18,10 +18,10 @@ module Wiresnark::IIP describe Executable do
 
     it 'executes IIP show commands' do
       shower = MiniTest::Mock.new
-      shower.expect :show, 'aa:bb:cc:dd:ee:ff', [['MACDA', 'eth0', 'v_1']]
+      shower.expect :show, 'aa:bb:cc:dd:ee:ff', [['MACDA', 'pnf2c0', 'v_1']]
 
       -> do
-        Executable.new(['show', 'MACDA', 'eth0', 'v_1']).run shower: shower
+        Executable.new(['show', 'MACDA', 'pnf2c0', 'v_1']).run shower: shower
       end.must_output "aa:bb:cc:dd:ee:ff\n"
 
       shower.verify

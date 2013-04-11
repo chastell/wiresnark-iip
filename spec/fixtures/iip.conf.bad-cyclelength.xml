@@ -1,5 +1,5 @@
 <interfaces>
-  <interface name="eth0">
+  <interface name="pnf2c0">
     <Scheduler type="XenNet">
       <Cyclelength>900</Cyclelength>
       <NumberPhases>5</NumberPhases>

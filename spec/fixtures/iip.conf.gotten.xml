@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <interfaces>
-  <interface name="eth0">
+  <interface name="pnf2c0">
     <v_port name="v_1">
       <pi type="DSS">
         <PIH>001</PIH>

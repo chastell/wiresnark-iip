@@ -1,5 +1,5 @@
 <interfaces>
-  <interface name="eth0">
+  <interface name="pnf2c0">
     <v_port name="v_1">
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>

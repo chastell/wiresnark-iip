@@ -1,5 +1,5 @@
 <interfaces>
-  <interface name="eth0">
+  <interface name="pnf2c0">
     <v_port name="v_1">
       <pi type="CAN">
         <VLAN-TAG> value </VLAN-TAG>
@@ -25,7 +25,7 @@
       <PhaseLength pi="NIL">220</PhaseLength>
     </Scheduler>
   </interface>
-  <interface name="eth1">
+  <interface name="pnf2c1">
     <v_port name="v_1">
       <pi type="MGT">
         <VLAN-TAG>value</VLAN-TAG>

@@ -3,7 +3,7 @@ module Wiresnark::IIP class ConfigParser
   ValidBinary  = /\A[01]+\Z/
   ValidDecimal = /\A\d+\Z/
   ValidHex     = /\A0x\h\h\h\h\Z/
-  ValidIface   = /\Aeth\d\Z/
+  ValidIface   = /\Apnf2c\d\Z/
   ValidMAC     = /\A\h\h(:\h\h){5}\Z/
 
   ValidFormats = {

@@ -1,5 +1,5 @@
 <interfaces>
-  <interface name="eth0">
+  <interface name="pnf2c0">
     <v_port name="v_1">
       <pi type="CAN">
         <PIH>010</PIH>
