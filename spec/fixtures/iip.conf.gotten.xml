@@ -3,7 +3,7 @@
   <interface name="pnf2c0">
     <v_port name="v_1">
       <pi type="DSS">
-        <PIH>001</PIH>
+        <PIH>1</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
@@ -13,7 +13,7 @@
     </v_port>
     <v_port name="v_2">
       <pi type="CAN">
-        <PIH>010</PIH>
+        <PIH>2</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
@@ -23,7 +23,7 @@
     </v_port>
     <v_port name="v_3">
       <pi type="QOS">
-        <PIH>100</PIH>
+        <PIH>4</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
@@ -33,7 +33,7 @@
     </v_port>
     <v_port name="v_4">
       <pi type="MGT">
-        <PIH>111</PIH>
+        <PIH>7</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
