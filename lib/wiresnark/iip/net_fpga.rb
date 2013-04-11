@@ -3,7 +3,8 @@ module Wiresnark::IIP class NetFPGA
 
   def initialize regbridge = NetFPGA::Bridge.new
     @regbridge = regbridge
-    @registers = RegParser.new("#{File.dirname __FILE__}/../../../ext/wiresnark/iip/reg_defines_simple_system_iip.h").parse
+    path = "#{File.dirname __FILE__}/../../../ext/wiresnark/iip/reg_defines_ip_qos_iip_system.h"
+    @registers = RegParser.new(path).parse
   end
 
   def config= config

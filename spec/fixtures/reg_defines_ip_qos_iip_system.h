@@ -1,13 +1,13 @@
 /********************************************************
  *
  * C register defines file
- * Project: Simple System IIP (iip_simple_system)
+ * Project: IP QoS System IIP (ip_qos_iip_system)
  * Description: Test of simple system iip with static routing 
  *
  ********************************************************/
 
-#ifndef _REG_DEFINES_IIP_SIMPLE_SYSTEM_
-#define _REG_DEFINES_IIP_SIMPLE_SYSTEM_
+#ifndef _REG_DEFINES_IP_QOS_IIP_SYSTEM_
+#define _REG_DEFINES_IP_QOS_IIP_SYSTEM_
 
 /* ========= Version Information ========= */
 
@@ -15,8 +15,8 @@
 #define DEVICE_MAJOR       1
 #define DEVICE_MINOR       0
 #define DEVICE_REVISION    1
-#define DEVICE_PROJ_DIR    "iip_simple_system"
-#define DEVICE_PROJ_NAME   "Simple System IIP"
+#define DEVICE_PROJ_DIR    "ip_qos_iip_system"
+#define DEVICE_PROJ_NAME   "IP QoS System IIP"
 #define DEVICE_PROJ_DESC   "Test of simple system iip with static routing "
 
 
@@ -212,16 +212,17 @@
 #define PORT_2_BASE_ADDR       0x2000200
 #define PORT_3_BASE_ADDR       0x2000300
 #define PIROUTER_BASE_ADDR     0x2000400
-#define DT_QUEUES_0_BASE_ADDR  0x2000480
-#define DT_QUEUES_1_BASE_ADDR  0x2000500
-#define DT_QUEUES_2_BASE_ADDR  0x2000580
-#define DT_QUEUES_3_BASE_ADDR  0x2000600
+#define PKT_PROC_BASE_ADDR     0x2000500
+#define QOS_PROC_0_BASE_ADDR   0x2000600
+#define QOS_PROC_1_BASE_ADDR   0x2000700
+#define QOS_PROC_2_BASE_ADDR   0x2000800
+#define QOS_PROC_3_BASE_ADDR   0x2000900
 #define DRAM_BASE_ADDR         0x4000000
 
 #define CPU_QUEUE_OFFSET   0x0040000
-#define DT_QUEUES_OFFSET   0x0000080
 #define MAC_GRP_OFFSET     0x0040000
 #define PORT_OFFSET        0x0000100
+#define QOS_PROC_OFFSET    0x0000100
 
 
 /* ========== Registers ========== */
@@ -624,6 +625,7 @@
 #define PORT_0_PH_8_TYPE_REG            0x2000070
 #define PORT_0_FAME_OVERHAED_REG        0x2000074
 #define PORT_0_MINIMAL_FRAME_SIZE_REG   0x2000078
+#define PORT_0_BUFFER_SIZE_REG          0x200007c
 
 // Name: _port (PORT_1)
 // Description: Registers for IIP system port
@@ -659,6 +661,7 @@
 #define PORT_1_PH_8_TYPE_REG            0x2000170
 #define PORT_1_FAME_OVERHAED_REG        0x2000174
 #define PORT_1_MINIMAL_FRAME_SIZE_REG   0x2000178
+#define PORT_1_BUFFER_SIZE_REG          0x200017c
 
 // Name: _port (PORT_2)
 // Description: Registers for IIP system port
@@ -694,6 +697,7 @@
 #define PORT_2_PH_8_TYPE_REG            0x2000270
 #define PORT_2_FAME_OVERHAED_REG        0x2000274
 #define PORT_2_MINIMAL_FRAME_SIZE_REG   0x2000278
+#define PORT_2_BUFFER_SIZE_REG          0x200027c
 
 // Name: _port (PORT_3)
 // Description: Registers for IIP system port
@@ -729,6 +733,7 @@
 #define PORT_3_PH_8_TYPE_REG            0x2000370
 #define PORT_3_FAME_OVERHAED_REG        0x2000374
 #define PORT_3_MINIMAL_FRAME_SIZE_REG   0x2000378
+#define PORT_3_BUFFER_SIZE_REG          0x200037c
 
 // Name: pirouter (PIROUTER)
 // Description: Registers for example pi router
@@ -739,45 +744,106 @@
 #define PIROUTER_REGISTER_FOUR_REG    0x200040c
 #define PIROUTER_REGISTER_FIVE_REG    0x2000410
 
-// Name: dt_queues (DT_QUEUES_0)
-// Description: Registers for drop tail queues
-// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
-#define DT_QUEUES_0_QUEUE_0_MAX_NUM_PKTS_REG   0x2000480
-#define DT_QUEUES_0_QUEUE_1_MAX_NUM_PKTS_REG   0x2000484
-#define DT_QUEUES_0_QUEUE_2_MAX_NUM_PKTS_REG   0x2000488
-#define DT_QUEUES_0_QUEUE_3_MAX_NUM_PKTS_REG   0x200048c
-#define DT_QUEUES_0_QUEUE_4_MAX_NUM_PKTS_REG   0x2000490
-#define DT_QUEUES_0_QUEUE_5_MAX_NUM_PKTS_REG   0x2000494
+// Name: pkt_processor (PKT_PROC)
+// Description: Registers for pkt processor
+// File: lib/verilog/contrib/iip/ip_qos_router/xml/pkt_processor.xml
+#define PKT_PROC_IP_PATTERN_0H_REG    0x2000500
+#define PKT_PROC_IP_PATTERN_0L_REG    0x2000504
+#define PKT_PROC_IP_PATTERN_1H_REG    0x2000508
+#define PKT_PROC_IP_PATTERN_1L_REG    0x200050c
+#define PKT_PROC_IP_PATTERN_2H_REG    0x2000510
+#define PKT_PROC_IP_PATTERN_2L_REG    0x2000514
+#define PKT_PROC_IP_PATTERN_3H_REG    0x2000518
+#define PKT_PROC_IP_PATTERN_3L_REG    0x200051c
+#define PKT_PROC_IP_PATTERN_4H_REG    0x2000520
+#define PKT_PROC_IP_PATTERN_4L_REG    0x2000524
+#define PKT_PROC_IP_PATTERN_5H_REG    0x2000528
+#define PKT_PROC_IP_PATTERN_5L_REG    0x200052c
+#define PKT_PROC_IP_PATTERN_6H_REG    0x2000530
+#define PKT_PROC_IP_PATTERN_6L_REG    0x2000534
+#define PKT_PROC_IP_PATTERN_7H_REG    0x2000538
+#define PKT_PROC_IP_PATTERN_7L_REG    0x200053c
+#define PKT_PROC_IP_PATTERN_8H_REG    0x2000540
+#define PKT_PROC_IP_PATTERN_8L_REG    0x2000544
+#define PKT_PROC_IP_PATTERN_9H_REG    0x2000548
+#define PKT_PROC_IP_PATTERN_9L_REG    0x200054c
+#define PKT_PROC_IP_PATTERN_10H_REG   0x2000550
+#define PKT_PROC_IP_PATTERN_10L_REG   0x2000554
+#define PKT_PROC_IP_PATTERN_11H_REG   0x2000558
+#define PKT_PROC_IP_PATTERN_11L_REG   0x200055c
+#define PKT_PROC_IP_PATTERN_12H_REG   0x2000560
+#define PKT_PROC_IP_PATTERN_12L_REG   0x2000564
+#define PKT_PROC_IP_PATTERN_13H_REG   0x2000568
+#define PKT_PROC_IP_PATTERN_13L_REG   0x200056c
+#define PKT_PROC_IP_PATTERN_14H_REG   0x2000570
+#define PKT_PROC_IP_PATTERN_14L_REG   0x2000574
+#define PKT_PROC_IP_PATTERN_15H_REG   0x2000578
+#define PKT_PROC_IP_PATTERN_15L_REG   0x200057c
+#define PKT_PROC_IFACE_NUM_0_REG      0x2000580
+#define PKT_PROC_IFACE_NUM_1_REG      0x2000584
+#define PKT_PROC_IFACE_NUM_2_REG      0x2000588
+#define PKT_PROC_IFACE_NUM_3_REG      0x200058c
+#define PKT_PROC_IFACE_NUM_4_REG      0x2000590
+#define PKT_PROC_IFACE_NUM_5_REG      0x2000594
+#define PKT_PROC_IFACE_NUM_6_REG      0x2000598
+#define PKT_PROC_IFACE_NUM_7_REG      0x200059c
+#define PKT_PROC_IFACE_NUM_8_REG      0x20005a0
+#define PKT_PROC_IFACE_NUM_9_REG      0x20005a4
+#define PKT_PROC_IFACE_NUM_10_REG     0x20005a8
+#define PKT_PROC_IFACE_NUM_11_REG     0x20005ac
+#define PKT_PROC_IFACE_NUM_12_REG     0x20005b0
+#define PKT_PROC_IFACE_NUM_13_REG     0x20005b4
+#define PKT_PROC_IFACE_NUM_14_REG     0x20005b8
+#define PKT_PROC_IFACE_NUM_15_REG     0x20005bc
+#define PKT_PROC_IFACE_DEF_REG        0x20005c0
 
-// Name: dt_queues (DT_QUEUES_1)
-// Description: Registers for drop tail queues
-// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
-#define DT_QUEUES_1_QUEUE_0_MAX_NUM_PKTS_REG   0x2000500
-#define DT_QUEUES_1_QUEUE_1_MAX_NUM_PKTS_REG   0x2000504
-#define DT_QUEUES_1_QUEUE_2_MAX_NUM_PKTS_REG   0x2000508
-#define DT_QUEUES_1_QUEUE_3_MAX_NUM_PKTS_REG   0x200050c
-#define DT_QUEUES_1_QUEUE_4_MAX_NUM_PKTS_REG   0x2000510
-#define DT_QUEUES_1_QUEUE_5_MAX_NUM_PKTS_REG   0x2000514
+// Name: qos_processor (QOS_PROC_0)
+// Description: Registers for qos processor
+// File: lib/verilog/contrib/iip/ip_qos_router/xml/qos_processor.xml
+#define QOS_PROC_0_MAX_NUM_OF_PKTS_0_REG   0x2000600
+#define QOS_PROC_0_MAX_NUM_OF_PKTS_1_REG   0x2000604
+#define QOS_PROC_0_MAX_NUM_OF_PKTS_2_REG   0x2000608
+#define QOS_PROC_0_MAX_NUM_OF_PKTS_3_REG   0x200060c
+#define QOS_PROC_0_QUANTUM_0_REG           0x2000610
+#define QOS_PROC_0_QUANTUM_1_REG           0x2000614
+#define QOS_PROC_0_QUANTUM_2_REG           0x2000618
+#define QOS_PROC_0_QUANTUM_3_REG           0x200061c
 
-// Name: dt_queues (DT_QUEUES_2)
-// Description: Registers for drop tail queues
-// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
-#define DT_QUEUES_2_QUEUE_0_MAX_NUM_PKTS_REG   0x2000580
-#define DT_QUEUES_2_QUEUE_1_MAX_NUM_PKTS_REG   0x2000584
-#define DT_QUEUES_2_QUEUE_2_MAX_NUM_PKTS_REG   0x2000588
-#define DT_QUEUES_2_QUEUE_3_MAX_NUM_PKTS_REG   0x200058c
-#define DT_QUEUES_2_QUEUE_4_MAX_NUM_PKTS_REG   0x2000590
-#define DT_QUEUES_2_QUEUE_5_MAX_NUM_PKTS_REG   0x2000594
+// Name: qos_processor (QOS_PROC_1)
+// Description: Registers for qos processor
+// File: lib/verilog/contrib/iip/ip_qos_router/xml/qos_processor.xml
+#define QOS_PROC_1_MAX_NUM_OF_PKTS_0_REG   0x2000700
+#define QOS_PROC_1_MAX_NUM_OF_PKTS_1_REG   0x2000704
+#define QOS_PROC_1_MAX_NUM_OF_PKTS_2_REG   0x2000708
+#define QOS_PROC_1_MAX_NUM_OF_PKTS_3_REG   0x200070c
+#define QOS_PROC_1_QUANTUM_0_REG           0x2000710
+#define QOS_PROC_1_QUANTUM_1_REG           0x2000714
+#define QOS_PROC_1_QUANTUM_2_REG           0x2000718
+#define QOS_PROC_1_QUANTUM_3_REG           0x200071c
 
-// Name: dt_queues (DT_QUEUES_3)
-// Description: Registers for drop tail queues
-// File: lib/verilog/contrib/iip/drop_tail_fifo/xml/dt_queues.xml
-#define DT_QUEUES_3_QUEUE_0_MAX_NUM_PKTS_REG   0x2000600
-#define DT_QUEUES_3_QUEUE_1_MAX_NUM_PKTS_REG   0x2000604
-#define DT_QUEUES_3_QUEUE_2_MAX_NUM_PKTS_REG   0x2000608
-#define DT_QUEUES_3_QUEUE_3_MAX_NUM_PKTS_REG   0x200060c
-#define DT_QUEUES_3_QUEUE_4_MAX_NUM_PKTS_REG   0x2000610
-#define DT_QUEUES_3_QUEUE_5_MAX_NUM_PKTS_REG   0x2000614
+// Name: qos_processor (QOS_PROC_2)
+// Description: Registers for qos processor
+// File: lib/verilog/contrib/iip/ip_qos_router/xml/qos_processor.xml
+#define QOS_PROC_2_MAX_NUM_OF_PKTS_0_REG   0x2000800
+#define QOS_PROC_2_MAX_NUM_OF_PKTS_1_REG   0x2000804
+#define QOS_PROC_2_MAX_NUM_OF_PKTS_2_REG   0x2000808
+#define QOS_PROC_2_MAX_NUM_OF_PKTS_3_REG   0x200080c
+#define QOS_PROC_2_QUANTUM_0_REG           0x2000810
+#define QOS_PROC_2_QUANTUM_1_REG           0x2000814
+#define QOS_PROC_2_QUANTUM_2_REG           0x2000818
+#define QOS_PROC_2_QUANTUM_3_REG           0x200081c
+
+// Name: qos_processor (QOS_PROC_3)
+// Description: Registers for qos processor
+// File: lib/verilog/contrib/iip/ip_qos_router/xml/qos_processor.xml
+#define QOS_PROC_3_MAX_NUM_OF_PKTS_0_REG   0x2000900
+#define QOS_PROC_3_MAX_NUM_OF_PKTS_1_REG   0x2000904
+#define QOS_PROC_3_MAX_NUM_OF_PKTS_2_REG   0x2000908
+#define QOS_PROC_3_MAX_NUM_OF_PKTS_3_REG   0x200090c
+#define QOS_PROC_3_QUANTUM_0_REG           0x2000910
+#define QOS_PROC_3_QUANTUM_1_REG           0x2000914
+#define QOS_PROC_3_QUANTUM_2_REG           0x2000918
+#define QOS_PROC_3_QUANTUM_3_REG           0x200091c
 
 // Name: DRAM (DRAM)
 // Description: DRAM
@@ -797,6 +863,18 @@
 // Part 2: masks/values
 #define DMA_IFACE_CTRL_DISABLE       0x001
 #define DMA_IFACE_CTRL_RESET         0x002
+
+// Type: cpu_queue_control
+// Description: DMA queue control register
+// File: lib/verilog/core/io_queues/cpu_dma_queue/xml/cpu_dma_queue.xml
+
+// Part 1: bit positions
+#define CPU_QUEUE_CONTROL_TX_QUEUE_DISABLE_POS   0
+#define CPU_QUEUE_CONTROL_RX_QUEUE_DISABLE_POS   1
+
+// Part 2: masks/values
+#define CPU_QUEUE_CONTROL_TX_QUEUE_DISABLE       0x001
+#define CPU_QUEUE_CONTROL_RX_QUEUE_DISABLE       0x002
 
 // Type: mii_ctrl
 // Description: MII control register
@@ -863,18 +941,6 @@
 #define MII_STATUS_LINK_STATUS                       0x0004
 #define MII_STATUS_JABBER_DETECT                     0x0002
 #define MII_STATUS_EXTENDED_CAPABILITY               0x0001
-
-// Type: cpu_queue_control
-// Description: DMA queue control register
-// File: lib/verilog/core/io_queues/cpu_dma_queue/xml/cpu_dma_queue.xml
-
-// Part 1: bit positions
-#define CPU_QUEUE_CONTROL_TX_QUEUE_DISABLE_POS   0
-#define CPU_QUEUE_CONTROL_RX_QUEUE_DISABLE_POS   1
-
-// Part 2: masks/values
-#define CPU_QUEUE_CONTROL_TX_QUEUE_DISABLE       0x001
-#define CPU_QUEUE_CONTROL_RX_QUEUE_DISABLE       0x002
 
 // Type: mac_grp_control
 // Description: MAC group control register
