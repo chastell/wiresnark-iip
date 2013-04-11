@@ -6,9 +6,9 @@ Wiresnark IIP requires Ruby 1.9 – you can install
 it from your system’s package manager or from
 [ruby-lang.org](http://www.ruby-lang.org/en/downloads):
 
-    wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz
-    tar xf ruby-1.9.3-p194.tar.gz
-    cd ruby-1.9.3-p194
+    wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p392.tar.gz
+    tar xf ruby-1.9.3-p392.tar.gz
+    cd ruby-1.9.3-p392
     ./configure
     make
     make install
