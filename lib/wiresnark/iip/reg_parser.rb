@@ -1,9 +1,5 @@
 module Wiresnark::IIP class RegParser
-  def initialize path
-    @path = path
-  end
-
-  def parse
+  def parse path
     Hash[File.read(path).scan(/^#define\s+(\S+)\s+(\S+)$/).map do |reg, val|
       [
         reg,
@@ -15,7 +11,4 @@ module Wiresnark::IIP class RegParser
       ]
     end]
   end
-
-  attr_reader :path
-  private     :path
 end end
