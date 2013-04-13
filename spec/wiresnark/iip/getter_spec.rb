@@ -22,12 +22,13 @@ module Wiresnark::IIP describe Getter do
         { type: 'MGT', length: 208 },
         { type: 'NIL', length: 216 },
       ]
-      port.expect :type_map, { 'DSS' => 1, 'CAN' => 2, 'QOS' => 4, 'MGT' => 7 }
+      port.expect :type_map, { 'QOS' => 1, 'CAN' => 2, 'DSS' => 4, 'MGT' => 7 }
 
       net_fpga = MiniTest::Mock.new
       net_fpga.expect :ports, [port]
 
-      Getter.new(net_fpga).get.must_equal File.read 'spec/fixtures/iip.conf.gotten.xml'
+      xml = File.read 'spec/fixtures/iip.conf.gotten.xml'
+      Getter.new(net_fpga).get.must_equal xml
 
       port.verify
       net_fpga.verify

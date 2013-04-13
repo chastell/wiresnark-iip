@@ -2,7 +2,7 @@
 <interfaces>
   <interface name="pnf2c0">
     <v_port name="v_1">
-      <pi type="DSS">
+      <pi type="QOS">
         <PIH>1</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
@@ -22,7 +22,7 @@
       <ifgap>24</ifgap>
     </v_port>
     <v_port name="v_3">
-      <pi type="QOS">
+      <pi type="DSS">
         <PIH>4</PIH>
       </pi>
       <MACSourceAddress>ad:e3:3e:a4:23:aa</MACSourceAddress>
