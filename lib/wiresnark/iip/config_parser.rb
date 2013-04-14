@@ -75,12 +75,12 @@ module Wiresnark::IIP class ConfigParser
     end
   end
 
-  def warn_daf_different_than_macda
+  def warn_saf_different_than_macda
     xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      if v_port.at_xpath 'DestinationAddressfiltering'
-        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
+      if v_port.at_xpath 'SourceAddressfiltering'
+        saf   = v_port.at_xpath('SourceAddressfiltering/text()').to_s
         macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
-        "DestinationAddressfiltering (#{daf}) =/= MACDestinationAddress (#{macda})" unless daf == macda
+        "SourceAddressfiltering (#{saf}) =/= MACDestinationAddress (#{macda})" unless saf == macda
       end
     end
   end

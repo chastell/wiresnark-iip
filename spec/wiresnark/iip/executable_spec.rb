@@ -11,7 +11,7 @@ module Wiresnark::IIP describe Executable do
       end.last
 
       stderr.must_include 'BaseValue ignored'
-      stderr.must_include 'DestinationAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
+      stderr.must_include 'SourceAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
 
       committer.verify
     end

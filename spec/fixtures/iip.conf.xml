@@ -9,8 +9,8 @@
       <MACDestinationAddress>a3:a3:45:23:34:aa</MACDestinationAddress>
       <MACType>0xabcd</MACType>
       <MACVLAN-tag>0xabc</MACVLAN-tag>
-      <SourceAddressfiltering>bd:e3:3e:a4:23:aa</SourceAddressfiltering>
-      <DestinationAddressfiltering>ad:e3:3e:a4:24:aa</DestinationAddressfiltering>
+      <SourceAddressfiltering>ad:e3:3e:a4:24:aa</SourceAddressfiltering>
+      <DestinationAddressfiltering>bd:e3:3e:a4:23:aa</DestinationAddressfiltering>
       <VLAN-tagfiltering>ab</VLAN-tagfiltering>
       <MTU>Tx_MTU</MTU>
       <ifgap> value </ifgap>
