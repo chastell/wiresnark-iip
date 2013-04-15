@@ -82,6 +82,18 @@ module Wiresnark::IIP class ConfigParser
     end
   end
 
+  def warn_daf_different_than_macsa
+    xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      if v_port.at_xpath 'DestinationAddressfiltering'
+        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
+        macsa = v_port.at_xpath('MACSourceAddress/text()').to_s
+        unless daf == macsa
+          "DestinationAddressfiltering (#{daf}) =/= MACSourceAddress (#{macsa})"
+        end
+      end
+    end
+  end
+
   def warn_saf_different_than_macda
     xml.xpath('/interfaces/interface/v_port').map do |v_port|
       if v_port.at_xpath 'SourceAddressfiltering'

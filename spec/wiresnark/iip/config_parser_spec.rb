@@ -49,6 +49,10 @@ module Wiresnark::IIP describe ConfigParser do
         'ifgap'].each { |elem| parser.warnings.must_include "#{elem} ignored" }
     end
 
+    it 'warns on DAF not matching MACSA' do
+      parser.warnings.must_include 'DestinationAddressfiltering (bd:e3:3e:a4:23:aa) =/= MACSourceAddress (ad:e3:3e:a4:23:aa)'
+    end
+
     it 'warns on SAF not matching MACDA' do
       parser.warnings.must_include 'SourceAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
     end
