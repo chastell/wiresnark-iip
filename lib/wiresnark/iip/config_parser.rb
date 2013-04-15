@@ -14,8 +14,10 @@ module Wiresnark::IIP class ConfigParser
     'MTU'                   => { text: -> text { text =~ ValidDecimal } },
     'NumberPhases'          => { text: -> text { text =~ ValidDecimal } },
     'PIH'                   => { text: -> text { text =~ ValidDecimal } },
-    'PhaseLength'           => { text: -> text { text =~ ValidDecimal }, attr: { 'pi'   => -> pi   { NetFPGA::Port::PhaseTypes.values.include? pi } } },
-    'interface'             => {                                         attr: { 'name' => -> name { name =~ ValidIface } } },
+    'PhaseLength'           => { text: -> text { text =~ ValidDecimal },
+      attr: { 'pi' => -> pi { NetFPGA::Port::PhaseTypes.values.include? pi } } },
+    'interface'             => {
+      attr: { 'name' => -> name { name =~ ValidIface } } },
   }
 
   def initialize path
@@ -49,7 +51,9 @@ module Wiresnark::IIP class ConfigParser
   end
 
   def phases_from_interface interface
-    interface.xpath('Scheduler[@type = "XenNet"]/PhaseLength').map { |p| { type: p.attr('pi'), length: p.text.to_i } }
+    interface.xpath('Scheduler[@type="XenNet"]/PhaseLength').map do |p|
+      { type: p.attr('pi'), length: p.text.to_i }
+    end
   end
 
   def type_map_from_interface interface
@@ -61,16 +65,19 @@ module Wiresnark::IIP class ConfigParser
   def warn_attrless_elements
     attr = { 'interface' => 'name', 'Scheduler' => 'type', 'PhaseLength' => 'pi' }
     xml.xpath('//interface | //Scheduler | //PhaseLength').map do |element|
-      "#{attr[element.name]}less #{element.name}" unless element.attr attr[element.name]
+      unless element.attr attr[element.name]
+        "#{attr[element.name]}less #{element.name}"
+      end
     end
   end
 
   def warn_cl_different_than_sum_of_pl
-    xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
-      if scheduler.at_xpath 'Cyclelength'
-        cl     = scheduler.at_xpath('Cyclelength/text()').to_s.to_i
-        pl_sum = scheduler.xpath('PhaseLength/text()').map { |pl| pl.to_s.to_i }.reduce :+
-        "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pl_sum})" unless cl == pl_sum
+    xpath = '/interfaces/interface/Scheduler[@type="XenNet"]'
+    xml.xpath(xpath).map do |sched|
+      if sched.at_xpath 'Cyclelength'
+        cl  = sched.at_xpath('Cyclelength/text()').to_s.to_i
+        pls = sched.xpath('PhaseLength/text()').map { |pl| pl.to_s.to_i }.reduce :+
+        "Cyclelength (#{cl}) =/= sum of PhaseLength (#{pls})" unless cl == pls
       end
     end
   end
@@ -80,7 +87,9 @@ module Wiresnark::IIP class ConfigParser
       if v_port.at_xpath 'SourceAddressfiltering'
         saf   = v_port.at_xpath('SourceAddressfiltering/text()').to_s
         macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
-        "SourceAddressfiltering (#{saf}) =/= MACDestinationAddress (#{macda})" unless saf == macda
+        unless saf == macda
+          "SourceAddressfiltering (#{saf}) =/= MACDestinationAddress (#{macda})"
+        end
       end
     end
   end
@@ -91,7 +100,7 @@ module Wiresnark::IIP class ConfigParser
       'MACSourceAddress', 'MACType', 'NumberPhases', 'PIH', 'PhaseLength',
       'Scheduler', 'interface', 'interfaces', 'pi', 'v_port',
     ]
-    (xml.xpath('//*').map(&:name) - parsed).map { |element| "#{element} ignored" }
+    (xml.xpath('//*').map(&:name) - parsed).map { |elem| "#{elem} ignored" }
   end
 
   def warn_mac_is_missing
@@ -103,20 +112,24 @@ module Wiresnark::IIP class ConfigParser
   end
 
   def warn_np_different_than_number_of_pl
-    xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]').map do |scheduler|
-      if scheduler.at_xpath 'NumberPhases'
-        np     = scheduler.at_xpath('NumberPhases/text()').to_s.to_i
-        pl_num = scheduler.xpath('PhaseLength').size
-        "NumberPhases (#{np}) =/= number of PhaseLengths (#{pl_num})" unless np == pl_num
+    xpath = '/interfaces/interface/Scheduler[@type="XenNet"]'
+    xml.xpath(xpath).map do |sched|
+      if sched.at_xpath 'NumberPhases'
+        np  = sched.at_xpath('NumberPhases/text()').to_s.to_i
+        pls = sched.xpath('PhaseLength').size
+        unless np == pls
+          "NumberPhases (#{np}) =/= number of PhaseLengths (#{pls})"
+        end
       end
     end
   end
 
   def warn_pl_will_be_rounded
-    xml.xpath('/interfaces/interface/Scheduler[@type = "XenNet"]/PhaseLength/text()').map do |pl|
-      pl      = pl.to_s.to_i
-      rounded = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
-      "PhaseLength of #{pl} ns will be rounded to #{rounded} ns" unless pl == rounded
+    xpath = '/interfaces/interface/Scheduler[@type="XenNet"]/PhaseLength/text()'
+    xml.xpath(xpath).map do |pl|
+      pl  = pl.to_s.to_i
+      rnd = pl / NetFPGA::Port::LengthUnit * NetFPGA::Port::LengthUnit
+      "PhaseLength of #{pl} ns will be rounded to #{rnd} ns" unless pl == rnd
     end
   end
 
@@ -130,7 +143,9 @@ module Wiresnark::IIP class ConfigParser
             "bad #{name}: #{element.text}" unless value.call element.text
           when :attr
             value.map do |attr, validator|
-              "bad #{name} #{attr}: #{element.attr attr}" unless validator.call element.attr attr
+              unless validator.call element.attr attr
+                "bad #{name} #{attr}: #{element.attr attr}"
+              end
             end
           end
         end
