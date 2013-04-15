@@ -82,30 +82,6 @@ module Wiresnark::IIP class ConfigParser
     end
   end
 
-  def warn_daf_different_than_macsa
-    xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      if v_port.at_xpath 'DestinationAddressfiltering'
-        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
-        macsa = v_port.at_xpath('MACSourceAddress/text()').to_s
-        unless daf == macsa
-          "DestinationAddressfiltering (#{daf}) =/= MACSourceAddress (#{macsa})"
-        end
-      end
-    end
-  end
-
-  def warn_saf_different_than_macda
-    xml.xpath('/interfaces/interface/v_port').map do |v_port|
-      if v_port.at_xpath 'SourceAddressfiltering'
-        saf   = v_port.at_xpath('SourceAddressfiltering/text()').to_s
-        macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
-        unless saf == macda
-          "SourceAddressfiltering (#{saf}) =/= MACDestinationAddress (#{macda})"
-        end
-      end
-    end
-  end
-
   def warn_ignored_elements_exist
     parsed = [
       'Cyclelength', 'DestinationAddressfiltering', 'MACDestinationAddress',
@@ -119,6 +95,30 @@ module Wiresnark::IIP class ConfigParser
     xml.xpath('/interfaces/interface/v_port').map do |v_port|
       ['MACDestinationAddress', 'MACSourceAddress'].map do |mac|
         "#{mac} set to #{DefaultMAC}" unless v_port.at_xpath mac
+      end
+    end
+  end
+
+  def warn_mismatch_between_daf_and_macsa
+    xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      if v_port.at_xpath 'DestinationAddressfiltering'
+        daf   = v_port.at_xpath('DestinationAddressfiltering/text()').to_s
+        macsa = v_port.at_xpath('MACSourceAddress/text()').to_s
+        unless daf == macsa
+          "DestinationAddressfiltering (#{daf}) =/= MACSourceAddress (#{macsa})"
+        end
+      end
+    end
+  end
+
+  def warn_mismatch_between_saf_and_macda
+    xml.xpath('/interfaces/interface/v_port').map do |v_port|
+      if v_port.at_xpath 'SourceAddressfiltering'
+        saf   = v_port.at_xpath('SourceAddressfiltering/text()').to_s
+        macda = v_port.at_xpath('MACDestinationAddress/text()').to_s
+        unless saf == macda
+          "SourceAddressfiltering (#{saf}) =/= MACDestinationAddress (#{macda})"
+        end
       end
     end
   end
