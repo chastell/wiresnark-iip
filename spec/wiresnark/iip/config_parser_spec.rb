@@ -20,12 +20,14 @@ module Wiresnark::IIP describe ConfigParser do
     end
 
     it 'parses empty(ish) config files' do
-      empty = {
-        0 => { ether_type: 0, local: '00:00:00:00:00:00', other: '00:00:00:00:00:00', phases: [], type_map: {} }
-      }
-      ConfigParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml').parse.must_equal empty
-      ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml').parse.must_equal empty
-      ConfigParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').parse.must_equal({})
+      empty = { 0 => { ether_type: 0, local: '00:00:00:00:00:00',
+        other: '00:00:00:00:00:00', phases: [], type_map: {} } }
+      ConfigParser.new('spec/fixtures/iip.conf.empty-v_port+scheduler.xml')
+        .parse.must_equal empty
+      ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml')
+        .parse.must_equal empty
+      ConfigParser.new('spec/fixtures/iip.conf.empty-interfaces.xml')
+        .parse.must_equal({})
     end
 
     it 'zeroes bad MAC addresses' do
@@ -35,39 +37,40 @@ module Wiresnark::IIP describe ConfigParser do
     end
 
     it 'parses type_map from subequent v_ports' do
-      config = ConfigParser.new('spec/fixtures/iip.conf.multiple-v_ports.xml').parse
-      config[0][:type_map].must_equal({ 'CAN' => 2, 'MGT' => 7 })
+      ConfigParser.new('spec/fixtures/iip.conf.multiple-v_ports.xml')
+        .parse[0][:type_map].must_equal({ 'CAN' => 2, 'MGT' => 7 })
     end
   end
 
   describe '#warnings' do
     it 'warns about ignored elements' do
-      warns = parser.warnings
-      [
-        'BaseValue', 'CBS', 'CIR', 'MACVLAN-tag', 'MTU', 'SourceAddressfiltering',
-        'VLAN-TAG', 'VLAN-tagfiltering', 'WFQ', 'ifgap',
-      ].each { |elem| warns.must_include "#{elem} ignored" }
+      ['BaseValue', 'CBS', 'CIR', 'MACVLAN-tag', 'MTU',
+        'SourceAddressfiltering', 'VLAN-TAG', 'VLAN-tagfiltering', 'WFQ',
+        'ifgap'].each { |elem| parser.warnings.must_include "#{elem} ignored" }
     end
 
     it 'warns on SAF not matching MACDA' do
-      warns = parser.warnings
-      warns.must_include 'SourceAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
+      parser.warnings.must_include 'SourceAddressfiltering (ad:e3:3e:a4:24:aa) =/= MACDestinationAddress (a3:a3:45:23:34:aa)'
     end
 
-    it 'warns on Cyclelength and NumberPhases being out of sync with PhaseLength entries' do
-      warns = ConfigParser.new('spec/fixtures/iip.conf.bad-cyclelength.xml').warnings
-      warns.must_include 'Cyclelength (900) =/= sum of PhaseLength (1000)'
+    it 'warns on Cyclelength being out of sync with sum of PhaseLengths' do
+      ConfigParser.new('spec/fixtures/iip.conf.bad-cyclelength.xml').warnings
+        .must_include 'Cyclelength (900) =/= sum of PhaseLength (1000)'
+    end
 
-      warns = ConfigParser.new('spec/fixtures/iip.conf.bad-numberphases.xml').warnings
-      warns.must_include 'NumberPhases (4) =/= number of PhaseLengths (5)'
+    it 'warns on NumberPhases being out of sync with number of PhaseLengths' do
+      ConfigParser.new('spec/fixtures/iip.conf.bad-numberphases.xml').warnings
+        .must_include 'NumberPhases (4) =/= number of PhaseLengths (5)'
     end
 
     it 'warns on PhaseLengths not being multiples of 8' do
-      parser.warnings.must_include 'PhaseLength of 180 ns will be rounded to 176 ns'
+      parser.warnings
+        .must_include 'PhaseLength of 180 ns will be rounded to 176 ns'
     end
 
     it 'returns no warnings on a minimal, valid XML' do
-      ConfigParser.new('spec/fixtures/iip.conf.minimal.xml').warnings.must_be :empty?
+      ConfigParser.new('spec/fixtures/iip.conf.minimal.xml').warnings
+        .must_be :empty?
     end
 
     it 'verifies empty(ish) config files' do
@@ -75,8 +78,10 @@ module Wiresnark::IIP describe ConfigParser do
       warns.must_include 'MACSourceAddress set to 00:00:00:00:00:00'
       warns.must_include 'MACDestinationAddress set to 00:00:00:00:00:00'
 
-      ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml').warnings.must_be :empty?
-      ConfigParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').warnings.must_be :empty?
+      ConfigParser.new('spec/fixtures/iip.conf.empty-interface.xml').warnings
+        .must_be :empty?
+      ConfigParser.new('spec/fixtures/iip.conf.empty-interfaces.xml').warnings
+        .must_be :empty?
     end
 
     it 'verfies value formats' do
