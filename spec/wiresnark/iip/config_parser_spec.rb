@@ -10,11 +10,11 @@ module Wiresnark::IIP describe ConfigParser do
       hash[0][:local].must_equal 'ad:e3:3e:a4:23:aa'
       hash[1][:other].must_equal 'a3:aa:45:23:34:aa'
       hash[0][:phases].must_equal [
-        { type: 'QOS', length: 180 },
-        { type: 'CAN', length: 190 },
+        { type: 'QOS', length: 176 },
+        { type: 'CAN', length: 184 },
         { type: 'DSS', length: 200 },
-        { type: 'MGT', length: 210 },
-        { type: 'NIL', length: 220 },
+        { type: 'MGT', length: 208 },
+        { type: 'NIL', length: 216 },
       ]
       hash[0][:type_map].must_equal({ 'CAN' => 2 })
     end
@@ -68,7 +68,7 @@ module Wiresnark::IIP describe ConfigParser do
     end
 
     it 'warns on PhaseLengths not being multiples of 8' do
-      parser.warnings
+      ConfigParser.new('spec/fixtures/iip.conf.bad-cyclelength.xml').warnings
         .must_include 'PhaseLength of 180 ns will be rounded to 176 ns'
     end
 

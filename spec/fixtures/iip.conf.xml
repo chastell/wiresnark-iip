@@ -16,13 +16,13 @@
       <ifgap> value </ifgap>
     </v_port>
     <Scheduler type="XenNet">
-      <Cyclelength>1000</Cyclelength>
+      <Cyclelength>984</Cyclelength>
       <NumberPhases>5</NumberPhases>
-      <PhaseLength pi="QOS">180</PhaseLength>
-      <PhaseLength pi="CAN">190</PhaseLength>
+      <PhaseLength pi="QOS">176</PhaseLength>
+      <PhaseLength pi="CAN">184</PhaseLength>
       <PhaseLength pi="DSS">200</PhaseLength>
-      <PhaseLength pi="MGT">210</PhaseLength>
-      <PhaseLength pi="NIL">220</PhaseLength>
+      <PhaseLength pi="MGT">208</PhaseLength>
+      <PhaseLength pi="NIL">216</PhaseLength>
     </Scheduler>
   </interface>
   <interface name="pnf2c1">
