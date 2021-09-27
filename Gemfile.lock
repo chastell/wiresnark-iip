@@ -9,10 +9,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     ffi (1.11.1)
-    mini_portile2 (2.5.1)
+    mini_portile2 (2.6.1)
     minitest (4.7.2)
-    nokogiri (1.11.4)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.12.5)
+      mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     racc (1.5.2)
 
